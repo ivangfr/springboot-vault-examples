@@ -30,7 +30,7 @@ export ROLE_ID=...
 
 ## Examples
 
-### [# springboot-vault-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/stringboot-vault-mysql)
+### [# springboot-vault-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/springboot-vault-mysql)
 
 ## Shutdown
 
