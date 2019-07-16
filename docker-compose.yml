@@ -1,0 +1,42 @@
+version: "3.5"
+services:
+
+  mysql:
+    image: mysql:5.7.26
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=studentdb
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: "mysqladmin ping -u root -p$${MYSQL_ROOT_PASSWORD}"
+      start_period: 10s
+
+  vault:
+    image: vault:1.1.3
+    container_name: vault
+    restart: unless-stopped
+    ports:
+      - "8200:8200"
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - ./vault:/my/vault
+    healthcheck:
+      test: "nc -z -v localhost 8200"
+      start_period: 10s
+    command: "vault server -config=/my/vault/config/config.hcl"
+
+  consul:
+    image: consul:1.5.2
+    container_name: consul
+    restart: unless-stopped
+    ports:
+      - "8400:8400"
+      - "8500:8500"
+      - "8600:53/udp"
+    healthcheck:
+      test: "curl -f http://localhost:8500/v1/status/leader || exit 1"
+      start_period: 10s

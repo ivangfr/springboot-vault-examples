@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: student-service
+  cloud:
+    vault:
+      authentication: APPROLE
+      app-role:
+        role-id: ${ROLE_ID}
+      scheme: http
+      host: ${VAULT_ADDR:localhost}
+      port: ${VAULT_PORT:8200}
+      generic:
+        enabled: false
+      database:
+        enabled: true
+        role: ${DATABASE_ROLE:studentdb}
+      config:
+        order: -10
