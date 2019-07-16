@@ -1,8 +1,6 @@
 # `springboot-vault-examples`
 
-The goal of this project is play with [`Vault`](https://www.vaultproject.io). For it, we will implement some
-examples. The credentials to access databases are generated dynamically by [`Vault`](https://www.vaultproject.io)
-that uses [`Consul`](https://www.consul.io) as backend. `AppRole` is the `Vault` authentication method used. 
+The goal of this project is play with [`Vault`](https://www.vaultproject.io). For it, we will implement some applications that relies on `Vault` to store/retrieve secrets. The credentials to access databases are generated dynamically by [`Vault`](https://www.vaultproject.io) that uses [`Consul`](https://www.consul.io) as backend. `AppRole` is the `Vault` authentication method used. 
 
 ## Start Environment
 
@@ -16,9 +14,9 @@ docker-compose up -d
 docker-compose ps
 ```
 
-- Unseal `Vault` by running the script below
+- Unseal `Vault` and enable `AppRole` by running the script below
 ```
-./unseal-vault.sh
+./unseal-vault-enable-approle.sh
 ```
 
 - Copy the environment variables shown at the end of the script execution and export them into every terminal you
