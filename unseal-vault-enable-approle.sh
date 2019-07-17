@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source vault.env
+VAULT_ADDR=http://localhost:8200
 
 echo "================"
 echo "-- Initializing Vault"
@@ -25,19 +25,12 @@ echo
 echo "--> enabling the AppRole auth method ..."
 curl -X POST -i -H "X-Vault-Token: ${VAULT_ROOT_TOKEN}" -d '{"type": "approle"}' ${VAULT_ADDR}/v1/sys/auth/approle
 
-echo "--> creating AppRole '${STUDENT_USER}' with policy '${DATABASE_ROLE_POLICY}' ..."
-curl -X POST -i -H "X-Vault-Token: ${VAULT_ROOT_TOKEN}" -d '{"policies": ["'${DATABASE_ROLE_POLICY}'"], "bound_cidr_list": "0.0.0.0/0", "bind_secret_id": false}' ${VAULT_ADDR}/v1/auth/approle/role/${STUDENT_USER}
-
-echo "--> fetching the identifier of the AppRole '${STUDENT_USER}' ..."
-ROLE_ID=$(curl -s -H "X-Vault-Token: ${VAULT_ROOT_TOKEN}" ${VAULT_ADDR}/v1/auth/approle/role/${STUDENT_USER}/role-id | jq -r .data.role_id)
-echo "ROLE_ID=$ROLE_ID"
-
-echo "--> getting client token ..."
-CLIENT_TOKEN=$(curl -X POST -s -d '{"role_id":"'${ROLE_ID}'"}' ${VAULT_ADDR}/v1/auth/approle/login | jq -r .auth.client_token)
-echo "CLIENT_TOKEN=$CLIENT_TOKEN"
-
 echo
+echo "================"
+echo "-- Mounting Database ..."
+curl -X POST -i -H "X-Vault-Token:${VAULT_ROOT_TOKEN}" -d '{"type": "database"}' ${VAULT_ADDR}/v1/sys/mounts/database
+
 echo "************************************************************"
 echo "export VAULT_ROOT_TOKEN=${VAULT_ROOT_TOKEN}"
-echo "export ROLE_ID=${ROLE_ID}"
 echo "************************************************************"
+echo

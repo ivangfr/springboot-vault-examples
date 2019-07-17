@@ -1,9 +1,9 @@
-package com.mycompany.studentservice.rest;
+package com.mycompany.bookservice.rest;
 
-import com.mycompany.studentservice.model.Student;
-import com.mycompany.studentservice.rest.dto.CreateStudentDto;
-import com.mycompany.studentservice.rest.dto.StudentDto;
-import com.mycompany.studentservice.service.StudentService;
+import com.mycompany.bookservice.model.Book;
+import com.mycompany.bookservice.rest.dto.BookDto;
+import com.mycompany.bookservice.rest.dto.CreateBookDto;
+import com.mycompany.bookservice.service.BookService;
 import lombok.extern.slf4j.Slf4j;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,8 +21,8 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/students")
-public class StudentController {
+@RequestMapping("/api/books")
+public class BookController {
 
     @Value("${spring.datasource.username}")
     private String username;
@@ -30,11 +30,11 @@ public class StudentController {
     @Value("${spring.datasource.password}")
     private String password;
 
-    private final StudentService studentService;
+    private final BookService bookService;
     private final MapperFacade mapperFacade;
 
-    public StudentController(StudentService studentService, MapperFacade mapperFacade) {
-        this.studentService = studentService;
+    public BookController(BookService bookService, MapperFacade mapperFacade) {
+        this.bookService = bookService;
         this.mapperFacade = mapperFacade;
     }
 
@@ -46,24 +46,24 @@ public class StudentController {
     }
 
     @GetMapping
-    public List<StudentDto> getStudents() {
-        log.info("Get students");
+    public List<BookDto> getBooks() {
+        log.info("Get books");
 
-        return studentService.getStudents()
+        return bookService.getBooks()
                 .stream()
-                .map(student -> mapperFacade.map(student, StudentDto.class))
+                .map(book -> mapperFacade.map(book, BookDto.class))
                 .collect(Collectors.toList());
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public StudentDto createStudent(@Valid @RequestBody CreateStudentDto createStudentDto) {
-        log.info("Post request to create student: {}", createStudentDto);
+    public BookDto createBook(@Valid @RequestBody CreateBookDto createBookDto) {
+        log.info("Post request to create book: {}", createBookDto);
 
-        Student student = mapperFacade.map(createStudentDto, Student.class);
-        student = studentService.saveStudent(student);
+        Book book = mapperFacade.map(createBookDto, Book.class);
+        book = bookService.saveBook(book);
 
-        return mapperFacade.map(student, StudentDto.class);
+        return mapperFacade.map(book, BookDto.class);
     }
 
 }

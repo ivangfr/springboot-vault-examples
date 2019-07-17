@@ -1,10 +1,13 @@
 # `springboot-vault-examples`
 
-The goal of this project is play with [`Vault`](https://www.vaultproject.io). For it, we will implement some applications that rely on `Vault` to store/retrieve secrets. The credentials to access databases are generated dynamically by [`Vault`](https://www.vaultproject.io) that uses [`Consul`](https://www.consul.io) as backend. `AppRole` is the `Vault` authentication method used. 
+The goal of this project is play with [`Vault`](https://www.vaultproject.io). For it, we will implement some
+applications that rely on `Vault` to store/retrieve secrets. The credentials to access databases are generated
+dynamically by [`Vault`](https://www.vaultproject.io) that uses [`Consul`](https://www.consul.io) as backend.
+`AppRole` is the `Vault` authentication method used. 
 
 ## Start Environment
 
-- Open one terminal and inside `springboot-mysql-vault` root folder run
+- Open one terminal and inside `springboot-vault-examples` root folder run
 ```
 docker-compose up -d
 ```
@@ -19,16 +22,16 @@ docker-compose ps
 ./unseal-vault-enable-approle.sh
 ```
 
-- Copy the environment variables shown at the end of the script execution and export them into every terminal you
-open to run the examples of this project.
+- Copy the environment variable shown in the end of the script execution and export it into every terminal it is needed.
 ```
 export VAULT_ROOT_TOKEN=...
-export ROLE_ID=...
 ```
 
 ## Examples
 
 ### [# springboot-vault-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/springboot-vault-mysql)
+
+### [# springboot-vault-cassandra](https://github.com/ivangfr/springboot-vault-examples/tree/master/springboot-vault-cassandra)
 
 ## Shutdown
 

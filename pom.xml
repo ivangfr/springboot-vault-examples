@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.mycompany</groupId>
-    <artifactId>springboot-mysql-vault</artifactId>
+    <artifactId>springboot-vault-examples</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
-    <name>springboot-mysql-vault</name>
+    <name>springboot-vault-examples</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
@@ -20,6 +20,7 @@
 
     <modules>
         <module>springboot-vault-mysql/student-service</module>
+        <module>springboot-vault-cassandra/book-service</module>
     </modules>
 
     <properties>

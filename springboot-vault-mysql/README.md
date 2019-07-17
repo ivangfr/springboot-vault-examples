@@ -4,28 +4,30 @@ The goal of this project is to implement a [Spring-Boot](https://spring.io/proje
 manage students, called `student-service`. `student-service` uses [`MySQL`](https://www.mysql.com/) database as storage.
 The credentials to access `MySQL` is generated dynamically by [`Vault`](https://www.vaultproject.io).
 
+**Note. before running this example, all the steps described at "Start Environment" in the main README should be
+executed previously.**
+
 ## Setup Vault-MySQL
 
-> Note: before running the script below, the services present in `docker-compose.yml` file must be up and running and
-> `Vault` must be unsealed as explained in the main `README`.
-
-Open one terminal and inside `springboot-mysql-vault` root folder run
+Open one terminal and inside `springboot-vault-examples` root folder run
 ```
 ./setup-vault-mysql.sh
 ```
+
+The `ROLE_ID` printed in the end of the script execution will be used to start `student-service`.
 
 ## Start student-service
 
 ### Running with Maven Wrapper
 
-Inside `springboot-mysql-vault` root folder, run the following command
+Inside `springboot-vault-examples` root folder, run the following command
 ```
-./mvnw clean spring-boot:run --projects springboot-vault-mysql/student-service
+./mvnw clean spring-boot:run --projects springboot-vault-mysql/student-service -Dspring-boot.run.jvmArguments="-Dserver.port=9080"
 ```
 
 ### Running as Docker Container
 
-- Go to the `springboot-mysql-vault` root folder and build the docker image
+- Go to the `springboot-vault-examples` root folder and build the docker image
 ```
 ./mvnw clean package dockerfile:build -DskipTests --projects springboot-vault-mysql/student-service
 ```
@@ -33,11 +35,11 @@ Inside `springboot-mysql-vault` root folder, run the following command
 | -------------------- | ----------------------------------------------------------------------- |
 | `ROLE_ID`            | Specify the role id generated while unsealing `Vault`                   |
 | `DATABASE_ROLE`      | Specify the database role used by the application (default `studentdb`) |
-| `VAULT_ADDR`         | Specify host of the `Vault` to use (default `vault`)                    |
+| `VAULT_HOST`         | Specify host of the `Vault` to use (default `vault`)                    |
 | `VAULT_PORT`         | Specify port of the `Vault` to use (default `8200`)                     |
-| `CONSUL_ADDR`        | Specify host of the `Consul` to use (default `consul`)                  |
+| `CONSUL_HOST`        | Specify host of the `Consul` to use (default `consul`)                  |
 | `CONSUL_PORT`        | Specify port of the `Consul` to use (default `8500`)                    |
-| `MYSQL_ADDR`         | Specify host of the `MySQL` to use (default `mysql`)                    |
+| `MYSQL_HOST`         | Specify host of the `MySQL` to use (default `mysql`)                    |
 | `MYSQL_PORT`         | Specify port of the `MySQL` to use (default `3306`)                     |
 
 - Run the docker container
@@ -45,7 +47,7 @@ Inside `springboot-mysql-vault` root folder, run the following command
 docker run -d --rm \
   --name student-service \
   --network springboot-vault-examples_default \
-  -p 8080:8080 \
+  -p 9080:8080 \
   -e ROLE_ID=$ROLE_ID \
   docker.mycompany.com/student-service:1.0.0
 ```
@@ -58,13 +60,13 @@ docker run -d --rm \
 
 ## Using student-service
 
-You can access `student-service` Swagger website at: http://localhost:8080/swagger-ui.html
+You can access `student-service` Swagger website at: http://localhost:9080/swagger-ui.html
 
 ## Useful Links/Commands
 
 ### Vault
 
-***Note. In order to run some commands, you must have [`jq`](https://stedolan.github.io/jq) installed on you machine***
+**Note. In order to run some commands, you must have [`jq`](https://stedolan.github.io/jq) installed on you machine**
 
 - List of active leases for `database/creds/studentdb`
 ```

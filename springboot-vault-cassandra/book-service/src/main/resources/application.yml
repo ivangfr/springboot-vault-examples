@@ -1,0 +1,26 @@
+spring:
+  data:
+    cassandra:
+      keyspace-name: mycompany
+      contact-points: ${CASSANDRA_HOST:localhost}
+      port: ${CASSANDRA_PORT:9042}
+      schema-action: CREATE_IF_NOT_EXISTS
+  cloud:
+    consul:
+      host: ${CONSUL_HOST:localhost}
+      port: ${CONSUL_PORT:8500}
+
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    org.springframework.vault: DEBUG

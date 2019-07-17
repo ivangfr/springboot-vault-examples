@@ -1,6 +1,6 @@
 spring:
   application:
-    name: student-service
+    name: book-service
   cloud:
     vault:
       authentication: APPROLE
@@ -13,6 +13,6 @@ spring:
         enabled: false
       database:
         enabled: true
-        role: ${DATABASE_ROLE:studentdb}
+        role: ${DATABASE_ROLE:bookdb}
       config:
         order: -10
