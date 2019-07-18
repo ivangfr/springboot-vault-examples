@@ -19,8 +19,8 @@
     </parent>
 
     <modules>
-        <module>springboot-vault-mysql/student-service</module>
-        <module>springboot-vault-cassandra/book-service</module>
+        <module>vault-approle-mysql/student-service</module>
+        <module>vault-approle-cassandra/book-service</module>
     </modules>
 
     <properties>

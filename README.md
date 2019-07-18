@@ -29,9 +29,9 @@ export VAULT_ROOT_TOKEN=...
 
 ## Examples
 
-### [# springboot-vault-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/springboot-vault-mysql)
+### [# vault-approle-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/vault-approle-mysql)
 
-### [# springboot-vault-cassandra](https://github.com/ivangfr/springboot-vault-examples/tree/master/springboot-vault-cassandra)
+### [# vault-approle-cassandra](https://github.com/ivangfr/springboot-vault-examples/tree/master/vault-approle-cassandra)
 
 ## Shutdown
 

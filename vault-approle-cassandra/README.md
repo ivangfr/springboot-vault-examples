@@ -1,4 +1,4 @@
-# `springboot-vault-cassandra`
+# `vault-approle-cassandra`
 
 The goal of this project is to implement a [Spring-Boot](https://spring.io/projects/spring-boot) application that
 manage books, called `book-service`. `book-service` uses [`Cassandra`](https://cassandra.apache.org/) database as
@@ -22,14 +22,14 @@ The `ROLE_ID` printed in the end of the script execution will be used to start `
 
 Inside `springboot-vault-examples` root folder, run the following command
 ```
-./mvnw clean spring-boot:run --projects springboot-vault-cassandra/book-service -Dspring-boot.run.jvmArguments="-Dserver.port=9081"
+./mvnw spring-boot:run --projects vault-approle-cassandra/book-service -Dspring-boot.run.jvmArguments="-Dserver.port=9081"
 ```
 
 ### Running as Docker Container
 
 - Go to the `springboot-vault-examples` root folder and build the docker image
 ```
-./mvnw clean package dockerfile:build -DskipTests --projects springboot-vault-cassandra/book-service
+./mvnw package dockerfile:build -DskipTests --projects vault-approle-cassandra/book-service
 ```
 | Environment Variable | Description                                                          |
 | -------------------- | -------------------------------------------------------------------- |
@@ -129,11 +129,4 @@ Connect to `Cassandra` inside docker container and list books
 docker exec -it cassandra cqlsh -ucassandra -pcassandra
 USE mycompany;
 SELECT * FROM books;
-```
-
-## Shutdown
-
-To stop and remove containers, networks and volumes
-```
-docker-compose down -v
 ```

@@ -1,4 +1,4 @@
-# `springboot-vault-mysql`
+# `vault-approle-mysql`
 
 The goal of this project is to implement a [Spring-Boot](https://spring.io/projects/spring-boot) application that
 manage students, called `student-service`. `student-service` uses [`MySQL`](https://www.mysql.com/) database as storage.
@@ -22,14 +22,14 @@ The `ROLE_ID` printed in the end of the script execution will be used to start `
 
 Inside `springboot-vault-examples` root folder, run the following command
 ```
-./mvnw clean spring-boot:run --projects springboot-vault-mysql/student-service -Dspring-boot.run.jvmArguments="-Dserver.port=9080"
+./mvnw spring-boot:run --projects vault-approle-mysql/student-service -Dspring-boot.run.jvmArguments="-Dserver.port=9080"
 ```
 
 ### Running as Docker Container
 
 - Go to the `springboot-vault-examples` root folder and build the docker image
 ```
-./mvnw clean package dockerfile:build -DskipTests --projects springboot-vault-mysql/student-service
+./mvnw package dockerfile:build -DskipTests --projects vault-approle-mysql/student-service
 ```
 | Environment Variable | Description                                                             |
 | -------------------- | ----------------------------------------------------------------------- |
@@ -153,11 +153,4 @@ CREATE USER 'newuser'@'%' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'%';
 
 DROP USER 'newuser'@'%';
-```
-
-## Shutdown
-
-To stop and remove containers, networks and volumes
-```
-docker-compose down -v
 ```
