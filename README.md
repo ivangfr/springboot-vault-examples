@@ -3,7 +3,6 @@
 The goal of this project is play with [`Vault`](https://www.vaultproject.io). For it, we will implement some
 applications that rely on `Vault` to store/retrieve secrets. The credentials to access databases are generated
 dynamically by [`Vault`](https://www.vaultproject.io) that uses [`Consul`](https://www.consul.io) as backend.
-`AppRole` is the `Vault` authentication method used. 
 
 ## Start Environment
 

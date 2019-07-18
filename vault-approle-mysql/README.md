@@ -1,8 +1,10 @@
 # `vault-approle-mysql`
 
-The goal of this project is to implement a [Spring-Boot](https://spring.io/projects/spring-boot) application that
-manage students, called `student-service`. `student-service` uses [`MySQL`](https://www.mysql.com/) database as storage.
-The credentials to access `MySQL` is generated dynamically by [`Vault`](https://www.vaultproject.io).
+- [Spring-Boot](https://spring.io/projects/spring-boot) application that manages students, called `student-service`.
+- It uses [`MySQL`](https://www.mysql.com/) database as storage.
+- Credentials to access `MySQL` is generated dynamically by [`Vault`](https://www.vaultproject.io).
+- `AppRole` is the `Vault` authentication method used.
+- `Role Id` generated automatically by `Vault`.
 
 **Note. before running this example, all the steps described at "Start Environment" in the main README should be
 executed previously.**
@@ -14,7 +16,7 @@ Open one terminal and inside `springboot-vault-examples` root folder run
 ./setup-vault-mysql.sh
 ```
 
-The `ROLE_ID` printed in the end of the script execution will be used to start `student-service`.
+The `ROLE_ID` is printed in the end of the script execution. Export it in the terminal that you will start `student-service`.
 
 ## Start student-service
 
@@ -33,7 +35,7 @@ Inside `springboot-vault-examples` root folder, run the following command
 ```
 | Environment Variable | Description                                                             |
 | -------------------- | ----------------------------------------------------------------------- |
-| `ROLE_ID`            | Specify the role id generated while unsealing `Vault`                   |
+| `ROLE_ID`            | Specify the role id generated while running `./setup-vault-mysql.sh`    |
 | `DATABASE_ROLE`      | Specify the database role used by the application (default `studentdb`) |
 | `VAULT_HOST`         | Specify host of the `Vault` to use (default `vault`)                    |
 | `VAULT_PORT`         | Specify port of the `Vault` to use (default `8200`)                     |
@@ -154,3 +156,7 @@ GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'%';
 
 DROP USER 'newuser'@'%';
 ```
+
+### Consul
+
+Consul can be accessed at http://localhost:8500

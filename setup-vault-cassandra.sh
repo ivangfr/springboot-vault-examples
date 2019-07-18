@@ -40,6 +40,7 @@ echo
 echo "================"
 echo "-- AppRole (login without secret-id)"
 
+echo
 echo "--> creating AppRole '${BOOK_USER}' with policy '${DATABASE_ROLE_POLICY}' ..."
 curl -X POST -i -H "X-Vault-Token: ${VAULT_ROOT_TOKEN}" -d '{"policies": ["'${DATABASE_ROLE_POLICY}'"], "bound_cidr_list": "0.0.0.0/0", "bind_secret_id": false}' ${VAULT_ADDR}/v1/auth/approle/role/${BOOK_USER}
 

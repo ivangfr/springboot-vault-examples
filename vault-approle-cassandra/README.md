@@ -1,8 +1,10 @@
 # `vault-approle-cassandra`
 
-The goal of this project is to implement a [Spring-Boot](https://spring.io/projects/spring-boot) application that
-manage books, called `book-service`. `book-service` uses [`Cassandra`](https://cassandra.apache.org/) database as
-storage. The credentials to access `Cassandra` is generated dynamically by [`Vault`](https://www.vaultproject.io).
+- [Spring-Boot](https://spring.io/projects/spring-boot) application that manages books, called `book-service`.
+- It uses [`Cassandra`](https://cassandra.apache.org/) database as storage.
+- Credentials to access `Cassandra` is generated dynamically by [`Vault`](https://www.vaultproject.io).
+- `AppRole` is the `Vault` authentication method used.
+- `Role Id` generated automatically by `Vault`.
 
 **Note. before running this example, all the steps described at "Start Environment" in the main README should be
 executed previously.**
@@ -14,7 +16,7 @@ Open one terminal and inside `springboot-vault-examples` root folder run
 ./setup-vault-cassandra.sh
 ```
 
-The `ROLE_ID` printed in the end of the script execution will be used to start `book-service`.
+The `ROLE_ID` is printed in the end of the script execution. Export it in the terminal that you will start `book-service`.
 
 ## Start book-service
 
@@ -31,16 +33,16 @@ Inside `springboot-vault-examples` root folder, run the following command
 ```
 ./mvnw package dockerfile:build -DskipTests --projects vault-approle-cassandra/book-service
 ```
-| Environment Variable | Description                                                          |
-| -------------------- | -------------------------------------------------------------------- |
-| `ROLE_ID`            | Specify the role id generated while unsealing `Vault`                |
-| `DATABASE_ROLE`      | Specify the database role used by the application (default `bookdb`) |
-| `VAULT_HOST`         | Specify host of the `Vault` to use (default `vault`)                 |
-| `VAULT_PORT`         | Specify port of the `Vault` to use (default `8200`)                  |
-| `CONSUL_HOST`        | Specify host of the `Consul` to use (default `consul`)               |
-| `CONSUL_PORT`        | Specify port of the `Consul` to use (default `8500`)                 |
-| `CASSANDRA_HOST`     | Specify host of the `Cassandra` to use (default `cassandra`)         |
-| `CASSANDRA_PORT`     | Specify port of the `Cassandra` to use (default `9042`)              |
+| Environment Variable | Description                                                              |
+| -------------------- | ------------------------------------------------------------------------ |
+| `ROLE_ID`            | Specify the role id generated while running `./setup-vault-cassandra.sh` |
+| `DATABASE_ROLE`      | Specify the database role used by the application (default `bookdb`)     |
+| `VAULT_HOST`         | Specify host of the `Vault` to use (default `vault`)                     |
+| `VAULT_PORT`         | Specify port of the `Vault` to use (default `8200`)                      |
+| `CONSUL_HOST`        | Specify host of the `Consul` to use (default `consul`)                   |
+| `CONSUL_PORT`        | Specify port of the `Consul` to use (default `8500`)                     |
+| `CASSANDRA_HOST`     | Specify host of the `Cassandra` to use (default `cassandra`)             |
+| `CASSANDRA_PORT`     | Specify port of the `Cassandra` to use (default `9042`)                  |
 
 - Run the docker container
 ```
@@ -130,3 +132,7 @@ docker exec -it cassandra cqlsh -ucassandra -pcassandra
 USE mycompany;
 SELECT * FROM books;
 ```
+
+### Consul
+
+Consul can be accessed at http://localhost:8500
