@@ -18,7 +18,7 @@ docker-compose ps
 
 - Unseal `Vault` and enable `AppRole` by running the script below
 ```
-./unseal-vault-enable-approle.sh
+./unseal-vault-enable-approle-databases.sh
 ```
 
 - Copy the environment variable shown in the end of the script execution and export it into every terminal it is needed.
@@ -28,9 +28,11 @@ export VAULT_ROOT_TOKEN=...
 
 ## Examples
 
-### [# vault-approle-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/vault-approle-mysql)
+### [# spring-cloud-vault-approle-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-cloud-vault-approle-mysql)
 
-### [# vault-approle-cassandra](https://github.com/ivangfr/springboot-vault-examples/tree/master/vault-approle-cassandra)
+### [# spring-cloud-vault-approle-cassandra](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-cloud-vault-approle-cassandra)
+
+### [# spring-vault-approle-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-vault-approle-mysql)
 
 ## Shutdown
 
@@ -38,3 +40,7 @@ To stop and remove containers, networks and volumes
 ```
 docker-compose down -v
 ```
+
+## TODO
+
+- Try to implement Lease rotation https://github.com/spring-cloud/spring-cloud-vault/issues/85

@@ -8,6 +8,6 @@ listener "tcp" {
   tls_disable = 1
 }
 
-max_lease_ttl = "15m"
+max_lease_ttl = "5m"
 
-default_lease_ttl = "5m"
+default_lease_ttl = "2m"
