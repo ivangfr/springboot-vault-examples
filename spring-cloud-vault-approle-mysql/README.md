@@ -1,11 +1,11 @@
 # `spring-cloud-vault-approle-mysql`
 
-- [Spring-Boot](https://spring.io/projects/spring-boot) application that manages students, called `student-service`.
-- It uses [`MySQL`](https://www.mysql.com/) database as storage.
+- [Spring-Boot](https://spring.io/projects/spring-boot) application that manages students, called `student-service`
+- It uses [`MySQL`](https://www.mysql.com/) database as storage
 - It uses [`Spring Cloud Vault`](https://cloud.spring.io/spring-cloud-vault/spring-cloud-vault.html)
-- Credentials to access `MySQL` is generated dynamically by [`Vault`](https://www.vaultproject.io).
-- `AppRole` is the `Vault` authentication method used.
-- `Role Id` generated automatically by `Vault`.
+- Credentials to access `MySQL` is generated dynamically by [`Vault`](https://www.vaultproject.io)
+- **Credentials are renewed but lease DOES NOT rotate**
+- `AppRole` is the `Vault` authentication method used
 
 **Note. before running this example, all the steps described at "Start Environment" in the main README should be
 executed previously.**
@@ -134,12 +134,12 @@ docker exec -it mysql mysql -uroot -psecret
 
 - List users
 ```
-SELECT User, Host, password_expired, password_last_changed, account_locked FROM mysql.user;
+SELECT User, Host FROM mysql.user;
 ```
 
 - Show running process
 ```
-SELECT * FROM information_schema.processlist;
+SELECT * FROM information_schema.processlist ORDER BY user;
 ```
 
 - Log all queries

@@ -1,6 +1,5 @@
 package com.mycompany.movieservice.config;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.vault.annotation.VaultPropertySource;
 import org.springframework.vault.annotation.VaultPropertySource.Renewal;
@@ -12,9 +11,11 @@ import org.springframework.vault.config.AbstractVaultConfiguration;
 
 import java.net.URI;
 
-@Slf4j
 @Configuration
-@VaultPropertySource(value = "database/creds/movie-role", propertyNamePrefix = "database.", renewal = Renewal.ROTATE)
+@VaultPropertySource(
+        value = "${datasource.vault-creds-path}",
+        propertyNamePrefix = "datasource.",
+        renewal = Renewal.ROTATE)
 public class VaultConfig extends AbstractVaultConfiguration {
 
     @Override

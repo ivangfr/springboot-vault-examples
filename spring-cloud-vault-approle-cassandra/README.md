@@ -1,11 +1,11 @@
 # `spring-cloud-vault-approle-cassandra`
 
-- [Spring-Boot](https://spring.io/projects/spring-boot) application that manages books, called `book-service`.
-- It uses [`Cassandra`](https://cassandra.apache.org/) database as storage.
+- [Spring-Boot](https://spring.io/projects/spring-boot) application that manages books, called `book-service`
+- It uses [`Cassandra`](https://cassandra.apache.org/) database as storage
 - It uses [`Spring Cloud Vault`](https://cloud.spring.io/spring-cloud-vault/spring-cloud-vault.html)
-- Credentials to access `Cassandra` is generated dynamically by [`Vault`](https://www.vaultproject.io).
-- `AppRole` is the `Vault` authentication method used.
-- `Role Id` generated automatically by `Vault`.
+- Credentials to access `Cassandra` is generated dynamically by [`Vault`](https://www.vaultproject.io)
+- **Credentials are renewed but lease DOES NOT rotate**
+- `AppRole` is the `Vault` authentication method used
 
 **Note. before running this example, all the steps described at "Start Environment" in the main README should be
 executed previously.**

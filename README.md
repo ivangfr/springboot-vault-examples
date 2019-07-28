@@ -32,7 +32,7 @@ export VAULT_ROOT_TOKEN=...
 
 ### [# spring-cloud-vault-approle-cassandra](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-cloud-vault-approle-cassandra)
 
-### [# spring-vault-approle-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-vault-approle-mysql)
+### [# spring-vault-approle-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-vault-approle-mysql) **(with lease rotation)**
 
 ## Shutdown
 
@@ -40,7 +40,3 @@ To stop and remove containers, networks and volumes
 ```
 docker-compose down -v
 ```
-
-## TODO
-
-- Try to implement Lease rotation https://github.com/spring-cloud/spring-cloud-vault/issues/85

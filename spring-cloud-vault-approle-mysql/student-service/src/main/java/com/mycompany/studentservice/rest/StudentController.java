@@ -4,7 +4,6 @@ import com.mycompany.studentservice.model.Student;
 import com.mycompany.studentservice.rest.dto.CreateStudentDto;
 import com.mycompany.studentservice.rest.dto.StudentDto;
 import com.mycompany.studentservice.service.StudentService;
-import lombok.extern.slf4j.Slf4j;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -19,7 +18,6 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Slf4j
 @RestController
 @RequestMapping("/api/students")
 public class StudentController {
@@ -40,15 +38,11 @@ public class StudentController {
 
     @GetMapping("/dbcredentials")
     public String getDBCredentials() {
-        log.info("Get database credentials");
-
         return String.format("%s/%s", username, password);
     }
 
     @GetMapping
     public List<StudentDto> getStudents() {
-        log.info("Get students");
-
         return studentService.getStudents()
                 .stream()
                 .map(student -> mapperFacade.map(student, StudentDto.class))
@@ -58,11 +52,8 @@ public class StudentController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public StudentDto createStudent(@Valid @RequestBody CreateStudentDto createStudentDto) {
-        log.info("Post request to create student: {}", createStudentDto);
-
         Student student = mapperFacade.map(createStudentDto, Student.class);
         student = studentService.saveStudent(student);
-
         return mapperFacade.map(student, StudentDto.class);
     }
 

@@ -4,7 +4,6 @@ import com.mycompany.bookservice.model.Book;
 import com.mycompany.bookservice.rest.dto.BookDto;
 import com.mycompany.bookservice.rest.dto.CreateBookDto;
 import com.mycompany.bookservice.service.BookService;
-import lombok.extern.slf4j.Slf4j;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -19,7 +18,6 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Slf4j
 @RestController
 @RequestMapping("/api/books")
 public class BookController {
@@ -40,15 +38,11 @@ public class BookController {
 
     @GetMapping("/dbcredentials")
     public String getDBCredentials() {
-        log.info("Get database credentials");
-
         return String.format("%s/%s", username, password);
     }
 
     @GetMapping
     public List<BookDto> getBooks() {
-        log.info("Get books");
-
         return bookService.getBooks()
                 .stream()
                 .map(book -> mapperFacade.map(book, BookDto.class))
@@ -58,11 +52,8 @@ public class BookController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public BookDto createBook(@Valid @RequestBody CreateBookDto createBookDto) {
-        log.info("Post request to create book: {}", createBookDto);
-
         Book book = mapperFacade.map(createBookDto, Book.class);
         book = bookService.saveBook(book);
-
         return mapperFacade.map(book, BookDto.class);
     }
 
