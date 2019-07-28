@@ -6,12 +6,13 @@ dynamically by [`Vault`](https://www.vaultproject.io) that uses [`Consul`](https
 
 ## Lease Rotation
 
-One of the problem faced by many people when using `Vault` is the rotation of the lease obtained for some backend database.
-When the application request a lease for `Vault` using, for instance, [`Spring Cloud Vault`](https://cloud.spring.io/spring-cloud-vault/spring-cloud-vault.html),
-the library is able to automatically renew the lease from time to time (`default_lease_ttl`). However when
-the maximum expiration time is reached (`max_lease_ttl`), the lease cannot be rotated, leaving the application
-without connection to database. In order to solve this problem, I have implemented some solutions for applications
-that uses `Spring Cloud Vault` or [`Spring Vault`](https://docs.spring.io/spring-vault/docs/2.1.3.RELEASE/reference/html/#_document_structure).
+One of the problem faced by many people when using `Vault` is about rotating the lease obtained for some backend database.
+When a `Spring-Boot` application requests a lease for `Vault` using, for instance, the library [`Spring Cloud Vault`](https://cloud.spring.io/spring-cloud-vault/spring-cloud-vault.html),
+the library itself is able to automatically renew the lease from time to time (`default_lease_ttl`). However, when
+the maximum expiration time of a lease is reached (`max_lease_ttl`), it means that the lease cannot be renewed anymore
+and a new lease is required. In this situation, `Spring Cloud Vault` library cannot rotated it, leaving the application
+without connection to database. In order to solve this problem, I have implemented some solutions for applications that
+uses `Spring Cloud Vault` or [`Spring Vault`](https://docs.spring.io/spring-vault/docs/2.1.3.RELEASE/reference/html/#_document_structure).
 Please, have a look at the examples below.  
 
 ## Start Environment
