@@ -4,7 +4,7 @@
 - It uses [`Cassandra`](https://cassandra.apache.org/) database as storage
 - It uses [`Spring Cloud Vault`](https://cloud.spring.io/spring-cloud-vault/spring-cloud-vault.html)
 - Credentials to access `Cassandra` is generated dynamically by [`Vault`](https://www.vaultproject.io)
-- **Credentials are renewed but lease DOES NOT rotate**
+- **Leases are renewed but NOT rotated**
 - `AppRole` is the `Vault` authentication method used
 
 **Note. before running this example, all the steps described at "Start Environment" in the main README should be
@@ -34,16 +34,15 @@ Go to the `springboot-vault-examples` root folder and build the docker image
 ```
 ./mvnw package dockerfile:build -DskipTests --projects spring-cloud-vault-approle-cassandra/book-service
 ```
-| Environment Variable | Description                                                             |
-| -------------------- | ----------------------------------------------------------------------- |
-| `ROLE_ID`            | Specify the role id generated while running setup script                |
-| `DATABASE_ROLE`      | Specify the database role used by the application (default `book-role`) |
-| `VAULT_HOST`         | Specify host of the `Vault` to use (default `vault`)                    |
-| `VAULT_PORT`         | Specify port of the `Vault` to use (default `8200`)                     |
-| `CONSUL_HOST`        | Specify host of the `Consul` to use (default `consul`)                  |
-| `CONSUL_PORT`        | Specify port of the `Consul` to use (default `8500`)                    |
-| `CASSANDRA_HOST`     | Specify host of the `Cassandra` to use (default `cassandra`)            |
-| `CASSANDRA_PORT`     | Specify port of the `Cassandra` to use (default `9042`)                 |
+| Environment Variable | Description                                                  |
+| -------------------- | -------------------------------------------------------------|
+| `ROLE_ID`            | Specify the role id generated while running setup script     |
+| `VAULT_HOST`         | Specify host of the `Vault` to use (default `vault`)         |
+| `VAULT_PORT`         | Specify port of the `Vault` to use (default `8200`)          |
+| `CONSUL_HOST`        | Specify host of the `Consul` to use (default `consul`)       |
+| `CONSUL_PORT`        | Specify port of the `Consul` to use (default `8500`)         |
+| `CASSANDRA_HOST`     | Specify host of the `Cassandra` to use (default `cassandra`) |
+| `CASSANDRA_PORT`     | Specify port of the `Cassandra` to use (default `9042`)      |
 
 Run the docker container
 ```

@@ -13,4 +13,4 @@ spring:
         enabled: false
       database:
         enabled: true
-        role: ${DATABASE_ROLE:student-role}
+        role: student-role

@@ -4,6 +4,16 @@ The goal of this project is play with [`Vault`](https://www.vaultproject.io). Fo
 applications that rely on `Vault` to store/retrieve secrets. The credentials to access databases are generated
 dynamically by [`Vault`](https://www.vaultproject.io) that uses [`Consul`](https://www.consul.io) as backend.
 
+## Lease Rotation
+
+One of the problem faced by many people when using `Vault` is the rotation of the lease obtained for some backend database.
+When the application request a lease for `Vault` using, for instance, [`Spring Cloud Vault`](https://cloud.spring.io/spring-cloud-vault/spring-cloud-vault.html),
+the library is able to automatically renew the lease from time to time (`default_lease_ttl`). However when
+the maximum expiration time is reached (`max_lease_ttl`), the lease cannot be rotated, leaving the application
+without connection to database. In order to solve this problem, I have implemented some solutions for applications
+that uses `Spring Cloud Vault` or [`Spring Vault`](https://docs.spring.io/spring-vault/docs/2.1.3.RELEASE/reference/html/#_document_structure).
+Please, have a look at the examples below.  
+
 ## Start Environment
 
 - Open one terminal and inside `springboot-vault-examples` root folder run
@@ -28,7 +38,7 @@ export VAULT_ROOT_TOKEN=...
 
 ## Examples
 
-### [# spring-cloud-vault-approle-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-cloud-vault-approle-mysql)
+### [# spring-cloud-vault-approle-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-cloud-vault-approle-mysql) **(with lease rotation)**
 
 ### [# spring-cloud-vault-approle-cassandra](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-cloud-vault-approle-cassandra)
 
@@ -40,3 +50,7 @@ To stop and remove containers, networks and volumes
 ```
 docker-compose down -v
 ```
+
+## References
+
+- https://github.com/spring-cloud/spring-cloud-vault/issues/85

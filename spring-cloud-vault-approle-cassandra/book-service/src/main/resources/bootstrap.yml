@@ -13,4 +13,4 @@ spring:
         enabled: false
       database:
         enabled: true
-        role: ${DATABASE_ROLE:book-role}
+        role: book-role

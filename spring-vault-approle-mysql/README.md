@@ -3,8 +3,9 @@
 - [Spring-Boot](https://spring.io/projects/spring-boot) application that manages students, called `movie-service`
 - It uses [`MySQL`](https://www.mysql.com/) database as storage
 - It uses [`Spring Vault`](https://docs.spring.io/spring-vault/docs/2.1.3.RELEASE/reference/html/#_document_structure)
+- It uses [`Hikari`](https://github.com/brettwooldridge/HikariCP) JDBC connection pool
 - Credentials to access `MySQL` is generated dynamically by [`Vault`](https://www.vaultproject.io)
-- **Credentials are renewed and LEASE ROTATES**
+- **Leases are renewed and rotated**
 - `AppRole` is the `Vault` authentication method used
 
 **Note. before running this example, all the steps described at "Start Environment" in the main README should be
@@ -34,16 +35,15 @@ Inside `springboot-vault-examples` root folder, run the following command
 ```
 ./mvnw package dockerfile:build -DskipTests --projects spring-vault-approle-mysql/movie-service
 ```
-| Environment Variable | Description                                                              |
-| -------------------- | ------------------------------------------------------------------------ |
-| `ROLE_ID`            | Specify the role id generated while running setup script                 |
-| `DATABASE_ROLE`      | Specify the database role used by the application (default `movie-role`) |
-| `VAULT_HOST`         | Specify host of the `Vault` to use (default `vault`)                     |
-| `VAULT_PORT`         | Specify port of the `Vault` to use (default `8200`)                      |
-| `CONSUL_HOST`        | Specify host of the `Consul` to use (default `consul`)                   |
-| `CONSUL_PORT`        | Specify port of the `Consul` to use (default `8500`)                     |
-| `MYSQL_HOST`         | Specify host of the `MySQL` to use (default `mysql`)                     |
-| `MYSQL_PORT`         | Specify port of the `MySQL` to use (default `3306`)                      |
+| Environment Variable | Description                                              |
+| -------------------- | ---------------------------------------------------------|
+| `ROLE_ID`            | Specify the role id generated while running setup script |
+| `VAULT_HOST`         | Specify host of the `Vault` to use (default `vault`)     |
+| `VAULT_PORT`         | Specify port of the `Vault` to use (default `8200`)      |
+| `CONSUL_HOST`        | Specify host of the `Consul` to use (default `consul`)   |
+| `CONSUL_PORT`        | Specify port of the `Consul` to use (default `8500`)     |
+| `MYSQL_HOST`         | Specify host of the `MySQL` to use (default `mysql`)     |
+| `MYSQL_PORT`         | Specify port of the `MySQL` to use (default `3306`)      |
 
 - Run the docker container
 ```
@@ -147,7 +147,7 @@ SELECT * FROM information_schema.processlist ORDER BY user;
 SET GLOBAL general_log = 'ON';
 SET global log_output = 'table';
 
-SELECT event_time, SUBSTRING(user_host,1,20) as user_host, thread_id, command_type, SUBSTRING(argument,1,70) FROM mysql.general_log WHERE user_host LIKE 'v-approle-movie-role-%';
+SELECT event_time, SUBSTRING(user_host,1,20) as user_host, thread_id, command_type, SUBSTRING(argument,1,70) FROM mysql.general_log WHERE user_host LIKE 'v-approle-movie-%';
 ```
 
 - Create/Remove user
