@@ -4,6 +4,7 @@ import com.mycompany.movieservice.model.Movie;
 import com.mycompany.movieservice.rest.dto.CreateMovieDto;
 import com.mycompany.movieservice.rest.dto.MovieDto;
 import com.mycompany.movieservice.service.MovieService;
+import lombok.RequiredArgsConstructor;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/movies")
 public class MovieController {
@@ -26,17 +28,11 @@ public class MovieController {
     private final Environment environment;
     private final MapperFacade mapperFacade;
 
-    public MovieController(MovieService movieService, Environment environment, MapperFacade mapperFacade) {
-        this.movieService = movieService;
-        this.environment = environment;
-        this.mapperFacade = mapperFacade;
-    }
-
     @GetMapping("/dbcredentials")
     public String getDBCredentials() {
         return String.format("%s/%s",
-                environment.getProperty("database.username"),
-                environment.getProperty("database.password"));
+                environment.getProperty("datasource.username"),
+                environment.getProperty("datasource.password"));
     }
 
     @GetMapping

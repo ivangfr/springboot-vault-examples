@@ -9,7 +9,7 @@ public class CreateBookDto {
     @ApiModelProperty(example = "Spring-boot in a Nutshell")
     private String title;
 
-    @ApiModelProperty(position = 2, example = "Ivan Franchin")
+    @ApiModelProperty(position = 1, example = "Ivan Franchin")
     private String author;
 
 }

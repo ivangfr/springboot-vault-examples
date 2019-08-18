@@ -2,19 +2,17 @@ package com.mycompany.bookservice.service;
 
 import com.mycompany.bookservice.model.Book;
 import com.mycompany.bookservice.repository.BookRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
+@RequiredArgsConstructor
 @Service
 public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
-
-    public BookServiceImpl(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-    }
 
     @Override
     public List<Book> getBooks() {

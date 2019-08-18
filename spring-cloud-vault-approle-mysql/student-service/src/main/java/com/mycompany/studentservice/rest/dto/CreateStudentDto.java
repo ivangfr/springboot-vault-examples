@@ -12,11 +12,11 @@ public class CreateStudentDto {
     @NotBlank
     private String firstName;
 
-    @ApiModelProperty(position = 2, example = "Franchin")
+    @ApiModelProperty(position = 1, example = "Franchin")
     @NotBlank
     private String lastName;
 
-    @ApiModelProperty(position = 3, example = "ivan.franchin@test.com")
+    @ApiModelProperty(position = 2, example = "ivan.franchin@test.com")
     @NotBlank
     private String email;
 

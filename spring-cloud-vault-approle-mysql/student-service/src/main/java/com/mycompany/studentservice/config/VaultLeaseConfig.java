@@ -3,6 +3,7 @@ package com.mycompany.studentservice.config;
 import com.zaxxer.hikari.HikariConfigMXBean;
 import com.zaxxer.hikari.HikariDataSource;
 import com.zaxxer.hikari.HikariPoolMXBean;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
@@ -14,6 +15,7 @@ import org.springframework.vault.core.lease.event.SecretLeaseExpiredEvent;
 
 import javax.annotation.PostConstruct;
 
+@RequiredArgsConstructor
 @Slf4j
 @Configuration
 public class VaultLeaseConfig {
@@ -23,11 +25,6 @@ public class VaultLeaseConfig {
 
     private final ApplicationContext applicationContext;
     private final SecretLeaseContainer leaseContainer;
-
-    public VaultLeaseConfig(ApplicationContext applicationContext, SecretLeaseContainer leaseContainer) {
-        this.applicationContext = applicationContext;
-        this.leaseContainer = leaseContainer;
-    }
 
     @PostConstruct
     private void postConstruct() {

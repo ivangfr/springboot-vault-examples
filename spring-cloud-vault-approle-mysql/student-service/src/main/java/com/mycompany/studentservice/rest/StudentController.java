@@ -4,8 +4,8 @@ import com.mycompany.studentservice.model.Student;
 import com.mycompany.studentservice.rest.dto.CreateStudentDto;
 import com.mycompany.studentservice.rest.dto.StudentDto;
 import com.mycompany.studentservice.service.StudentService;
+import lombok.RequiredArgsConstructor;
 import ma.glasnost.orika.MapperFacade;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +19,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/students")
 public class StudentController {
@@ -26,12 +27,6 @@ public class StudentController {
     private final StudentService studentService;
     private final Environment environment;
     private final MapperFacade mapperFacade;
-
-    public StudentController(StudentService studentService, Environment environment, MapperFacade mapperFacade) {
-        this.studentService = studentService;
-        this.environment = environment;
-        this.mapperFacade = mapperFacade;
-    }
 
     @GetMapping("/dbcredentials")
     public String getDBCredentials() {

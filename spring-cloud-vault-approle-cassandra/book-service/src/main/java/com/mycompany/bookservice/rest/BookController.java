@@ -4,6 +4,7 @@ import com.mycompany.bookservice.model.Book;
 import com.mycompany.bookservice.rest.dto.BookDto;
 import com.mycompany.bookservice.rest.dto.CreateBookDto;
 import com.mycompany.bookservice.service.BookService;
+import lombok.RequiredArgsConstructor;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/books")
 public class BookController {
@@ -25,12 +27,6 @@ public class BookController {
     private final BookService bookService;
     private final Environment environment;
     private final MapperFacade mapperFacade;
-
-    public BookController(BookService bookService, Environment environment, MapperFacade mapperFacade) {
-        this.bookService = bookService;
-        this.environment = environment;
-        this.mapperFacade = mapperFacade;
-    }
 
     @GetMapping("/dbcredentials")
     public String getDBCredentials() {
