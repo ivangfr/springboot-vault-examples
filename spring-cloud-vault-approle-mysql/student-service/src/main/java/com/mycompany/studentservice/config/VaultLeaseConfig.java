@@ -36,10 +36,10 @@ public class VaultLeaseConfig {
         leaseContainer.addLeaseListener(event -> {
             if (vaultCredsPath.equals(event.getSource().getPath())) {
                 if (event instanceof SecretLeaseExpiredEvent && event.getSource().getMode() == RequestedSecret.Mode.RENEW) {
-                    log.info("Received event: {} ; Replace RENEW lease by a ROTATE one.", event);
+                    log.info("==> Received event: {} ; Replace RENEW lease by a ROTATE one.", event);
                     leaseContainer.requestRotatingSecret(vaultCredsPath);
                 } else if (event instanceof SecretLeaseCreatedEvent && event.getSource().getMode() == RequestedSecret.Mode.ROTATE) {
-                    log.info("Received event: {}", event);
+                    log.info("==> Received event: {}", event);
 
                     SecretLeaseCreatedEvent secretLeaseCreatedEvent = (SecretLeaseCreatedEvent) event;
                     String username = (String) secretLeaseCreatedEvent.getSecrets().get("username");
@@ -59,13 +59,13 @@ public class VaultLeaseConfig {
     private void updateDataSource(String username, String password) {
         HikariDataSource hikariDataSource = (HikariDataSource) applicationContext.getBean("dataSource");
 
-        log.info("Soft evict database connections");
+        log.info("==> Soft evict database connections");
         HikariPoolMXBean hikariPoolMXBean = hikariDataSource.getHikariPoolMXBean();
         if (hikariPoolMXBean != null) {
             hikariPoolMXBean.softEvictConnections();
         }
 
-        log.info("Update database credentials");
+        log.info("==> Update database credentials");
         HikariConfigMXBean hikariConfigMXBean = hikariDataSource.getHikariConfigMXBean();
         hikariConfigMXBean.setUsername(username);
         hikariConfigMXBean.setPassword(password);

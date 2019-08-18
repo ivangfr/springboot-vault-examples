@@ -5,7 +5,7 @@ import com.mycompany.bookservice.rest.dto.BookDto;
 import com.mycompany.bookservice.rest.dto.CreateBookDto;
 import com.mycompany.bookservice.service.BookService;
 import ma.glasnost.orika.MapperFacade;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,23 +22,21 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/books")
 public class BookController {
 
-    @Value("${spring.datasource.username}")
-    private String username;
-
-    @Value("${spring.datasource.password}")
-    private String password;
-
     private final BookService bookService;
+    private final Environment environment;
     private final MapperFacade mapperFacade;
 
-    public BookController(BookService bookService, MapperFacade mapperFacade) {
+    public BookController(BookService bookService, Environment environment, MapperFacade mapperFacade) {
         this.bookService = bookService;
+        this.environment = environment;
         this.mapperFacade = mapperFacade;
     }
 
     @GetMapping("/dbcredentials")
     public String getDBCredentials() {
-        return String.format("%s/%s", username, password);
+        return String.format("%s/%s",
+                environment.getProperty("spring.datasource.username"),
+                environment.getProperty("spring.datasource.password"));
     }
 
     @GetMapping
