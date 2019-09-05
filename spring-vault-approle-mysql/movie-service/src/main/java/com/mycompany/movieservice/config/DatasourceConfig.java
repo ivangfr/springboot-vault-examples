@@ -33,9 +33,9 @@ public class DatasourceConfig {
     @PostConstruct
     private void postConstruct() {
         leaseContainer.addLeaseListener(event -> {
-            if (event instanceof SecretLeaseCreatedEvent && vaultCredsPath.equals(event.getSource().getPath())) {
-                log.info("==> Received event: {}", event);
+            log.info("==> Received event: {}", event);
 
+            if (event instanceof SecretLeaseCreatedEvent && vaultCredsPath.equals(event.getSource().getPath())) {
                 String username = environment.getProperty("datasource.username");
                 String password = environment.getProperty("datasource.password");
 
@@ -47,6 +47,8 @@ public class DatasourceConfig {
     }
 
     private void updateDataSource(String username, String password) {
+        log.info("==> Update datasource username & password");
+
         HikariDataSource hikariDataSource = (HikariDataSource) applicationContext.getBean("dataSource");
 
         log.info("==> Soft evict database connections");

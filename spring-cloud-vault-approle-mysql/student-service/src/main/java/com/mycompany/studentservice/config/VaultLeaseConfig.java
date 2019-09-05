@@ -31,17 +31,18 @@ public class VaultLeaseConfig {
         final String vaultCredsPath = String.format("database/creds/%s", databaseRole);
 
         leaseContainer.addLeaseListener(event -> {
+            log.info("==> Received event: {}", event);
+
             if (vaultCredsPath.equals(event.getSource().getPath())) {
                 if (event instanceof SecretLeaseExpiredEvent && event.getSource().getMode() == RequestedSecret.Mode.RENEW) {
-                    log.info("==> Received event: {} ; Replace RENEW lease by a ROTATE one.", event);
+                    log.info("==> Replace RENEW lease by a ROTATE one.");
                     leaseContainer.requestRotatingSecret(vaultCredsPath);
                 } else if (event instanceof SecretLeaseCreatedEvent && event.getSource().getMode() == RequestedSecret.Mode.ROTATE) {
-                    log.info("==> Received event: {}", event);
-
                     SecretLeaseCreatedEvent secretLeaseCreatedEvent = (SecretLeaseCreatedEvent) event;
                     String username = (String) secretLeaseCreatedEvent.getSecrets().get("username");
                     String password = (String) secretLeaseCreatedEvent.getSecrets().get("password");
 
+                    log.info("==> Update System properties username & password");
                     System.setProperty("spring.datasource.username", username);
                     System.setProperty("spring.datasource.password", password);
 
