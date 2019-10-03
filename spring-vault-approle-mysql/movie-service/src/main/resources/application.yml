@@ -4,6 +4,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
+    database-platform: org.hibernate.dialect.MySQL57Dialect
   cloud:
     consul:
       host: ${CONSUL_HOST:localhost}
@@ -19,8 +20,6 @@ vault:
     role-id: ${ROLE_ID}
 
 management:
-  security:
-    enabled: false
   endpoints:
     web:
       exposure.include: "*"

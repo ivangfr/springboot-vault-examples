@@ -2,6 +2,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
+    database-platform: org.hibernate.dialect.MySQL57Dialect
   datasource:
     url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/exampledb?autoReconnect=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8&useLegacyDatetimeCode=false&serverTimezone=UTC
   cloud:
@@ -10,8 +11,6 @@ spring:
       port: ${CONSUL_PORT:8500}
 
 management:
-  security:
-    enabled: false
   endpoints:
     web:
       exposure.include: "*"

@@ -11,8 +11,6 @@ spring:
       port: ${CONSUL_PORT:8500}
 
 management:
-  security:
-    enabled: false
   endpoints:
     web:
       exposure:
