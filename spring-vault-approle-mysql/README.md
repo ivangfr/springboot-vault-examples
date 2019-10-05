@@ -1,6 +1,6 @@
 # `spring-vault-approle-mysql`
 
-- [Spring-Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages students, called `movie-service`
+- [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages students, called `movie-service`
 - It uses [`MySQL`](https://www.mysql.com/) database as storage
 - It uses [`Spring Vault`](https://docs.spring.io/spring-vault/docs/2.1.3.RELEASE/reference/html/#_document_structure)
 - It uses [`Hikari`](https://github.com/brettwooldridge/HikariCP) JDBC connection pool

@@ -1,6 +1,6 @@
 # `spring-cloud-vault-approle-cassandra`
 
-- [Spring-Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages books, called `book-service`
+- [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages books, called `book-service`
 - It uses [`Cassandra`](https://cassandra.apache.org/) database as storage
 - It uses [`Spring Cloud Vault`](https://cloud.spring.io/spring-cloud-vault/spring-cloud-vault.html)
 - Credentials to access `Cassandra` is generated dynamically by [`Vault`](https://www.vaultproject.io)

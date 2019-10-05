@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class CreateBookDto {
 
-    @ApiModelProperty(example = "Spring-boot in a Nutshell")
+    @ApiModelProperty(example = "Spring Boot in a Nutshell")
     private String title;
 
     @ApiModelProperty(position = 1, example = "Ivan Franchin")

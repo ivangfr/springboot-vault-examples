@@ -1,6 +1,6 @@
 # `spring-cloud-vault-approle-mysql`
 
-- [Spring-Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages students, called `student-service`
+- [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages students, called `student-service`
 - It uses [`MySQL`](https://www.mysql.com/) database as storage
 - It uses [`Spring Cloud Vault`](https://cloud.spring.io/spring-cloud-vault/spring-cloud-vault.html)
 - It uses [`Hikari`](https://github.com/brettwooldridge/HikariCP) JDBC connection pool
