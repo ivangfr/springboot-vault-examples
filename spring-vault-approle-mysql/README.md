@@ -1,6 +1,7 @@
 # `spring-vault-approle-mysql`
 
-- [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages students, called `movie-service`
+- [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages
+`movies`, called `movie-service`
 - It uses [`MySQL`](https://www.mysql.com/) database as storage
 - It uses [`Spring Vault`](https://docs.spring.io/spring-vault/docs/2.1.3.RELEASE/reference/html/#_document_structure)
 - It uses [`Hikari`](https://github.com/brettwooldridge/HikariCP) JDBC connection pool
@@ -8,8 +9,8 @@
 - **Leases are renewed and rotated**
 - `AppRole` is the `Vault` authentication method used
 
-**Note. before running this example, all the steps described at "Start Environment" in the main README should be
-executed previously.**
+> Note. before running this example, all the steps described at "Start Environment" in the main README should be
+executed previously.
 
 ## Setup Vault-MySQL
 
@@ -18,9 +19,7 @@ Open one terminal and inside `springboot-vault-examples` root folder run
 ./setup-spring-vault-approle-mysql.sh
 ```
 
-The `ROLE_ID` is printed in the end of the script execution. Export it in the terminal that you will start `movie-service`.
-
-## Start student-service
+## Start movie-service
 
 ### Running with Maven Wrapper
 
@@ -37,7 +36,6 @@ Inside `springboot-vault-examples` root folder, run the following command
 ```
 | Environment Variable | Description                                              |
 | -------------------- | ---------------------------------------------------------|
-| `ROLE_ID`            | Specify the role id generated while running setup script |
 | `VAULT_HOST`         | Specify host of the `Vault` to use (default `vault`)     |
 | `VAULT_PORT`         | Specify port of the `Vault` to use (default `8200`)      |
 | `CONSUL_HOST`        | Specify host of the `Consul` to use (default `consul`)   |
@@ -51,7 +49,6 @@ docker run -d --rm \
   --name movie-service \
   --network springboot-vault-examples_default \
   -p 9082:8080 \
-  -e ROLE_ID=$ROLE_ID \
   docker.mycompany.com/movie-service:1.0.0
 ```
 > Note. the command uses the default network created by docker-compose, `springboot-vault-examples_default`.
@@ -69,7 +66,7 @@ You can access `movie-service` Swagger website at: http://localhost:9082/swagger
 
 ### Vault
 
-**Note. In order to run some commands, you must have [`jq`](https://stedolan.github.io/jq) installed on you machine**
+> Note. In order to run some commands, you must have [`jq`](https://stedolan.github.io/jq) installed on you machine
 
 1. List of active leases for `database/creds/movie-role`
 ```
@@ -157,3 +154,7 @@ GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'%';
 
 DROP USER 'newuser'@'%';
 ```
+
+### Consul
+
+Consul can be accessed at http://localhost:8500

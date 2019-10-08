@@ -25,6 +25,8 @@ have a look at the examples below.
 
 ### [# spring-vault-approle-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-vault-approle-mysql) **(with lease rotation)**
 
+### [# spring-vault-approle-multi-datasources-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-vault-approle-multi-datasources-mysql) **(with lease rotation)**
+
 ## Start Environment
 
 Open one terminal and inside `springboot-vault-examples` root folder run
@@ -57,3 +59,4 @@ docker-compose down -v
 ## References
 
 - https://github.com/spring-cloud/spring-cloud-vault/issues/85
+- https://blog.ruanbekker.com/blog/2019/05/07/use-the-vault-api-to-provision-app-keys-and-create-kv-pairs/

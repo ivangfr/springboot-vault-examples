@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: restaurant-service
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL57Dialect
+  cloud:
+    consul:
+      host: ${CONSUL_HOST:localhost}
+      port: ${CONSUL_PORT:8500}
+
+datasource:
+  customer:
+    jdbc-url: jdbc:mysql://${CUSTOMER_MYSQL_HOST:localhost}:${CUSTOMER_MYSQL_PORT:3306}/exampledb?autoReconnect=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8&useLegacyDatetimeCode=false&serverTimezone=UTC
+    vault-creds-path: database/creds/customer-role
+  dish:
+    jdbc-url: jdbc:mysql://${DISH_MYSQL_HOST:localhost}:${DISH_MYSQL_PORT:3307}/exampledb?autoReconnect=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8&useLegacyDatetimeCode=false&serverTimezone=UTC
+    vault-creds-path: database/creds/dish-role
+
+app:
+  vault-secret-path: secret/restaurant-service
+
+vault:
+  uri: ${VAULT_URI:http://localhost:8200}
+  app-role:
+    role-id: restaurant-service-role-id
+
+management:
+  endpoints:
+    web:
+      exposure.include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    org.springframework.vault: DEBUG

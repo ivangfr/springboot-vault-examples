@@ -1,14 +1,15 @@
 # `spring-cloud-vault-approle-cassandra`
 
-- [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages books, called `book-service`
+- [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages
+`books`, called `book-service`
 - It uses [`Cassandra`](https://cassandra.apache.org/) database as storage
 - It uses [`Spring Cloud Vault`](https://cloud.spring.io/spring-cloud-vault/spring-cloud-vault.html)
 - Credentials to access `Cassandra` is generated dynamically by [`Vault`](https://www.vaultproject.io)
 - **Leases are renewed but NOT rotated**
 - `AppRole` is the `Vault` authentication method used
 
-**Note. before running this example, all the steps described at "Start Environment" in the main README should be
-executed previously.**
+> Note. before running this example, all the steps described at "Start Environment" in the main README should be
+executed previously.
 
 ## Setup Vault-Cassandra
 
@@ -16,8 +17,6 @@ Open one terminal and inside `springboot-vault-examples` root folder run
 ```
 ./setup-spring-cloud-vault-approle-cassandra.sh
 ```
-
-The `ROLE_ID` is printed in the end of the script execution. Export it in the terminal that you will start `book-service`.
 
 ## Start book-service
 
@@ -36,7 +35,6 @@ Go to the `springboot-vault-examples` root folder and build the docker image
 ```
 | Environment Variable | Description                                                  |
 | -------------------- | -------------------------------------------------------------|
-| `ROLE_ID`            | Specify the role id generated while running setup script     |
 | `VAULT_HOST`         | Specify host of the `Vault` to use (default `vault`)         |
 | `VAULT_PORT`         | Specify port of the `Vault` to use (default `8200`)          |
 | `CONSUL_HOST`        | Specify host of the `Consul` to use (default `consul`)       |
@@ -50,7 +48,6 @@ docker run -d --rm \
   --name book-service \
   --network springboot-vault-examples_default \
   -p 9081:8080 \
-  -e ROLE_ID=$ROLE_ID \
   docker.mycompany.com/book-service:1.0.0
 ```
 > Note. the command uses the default network created by docker-compose, `springboot-vault-examples_default`.
@@ -68,7 +65,7 @@ You can access `book-service` Swagger website at: http://localhost:9081/swagger-
 
 ### Vault
 
-**Note. In order to run some commands, you must have [`jq`](https://stedolan.github.io/jq) installed on you machine**
+> Note. In order to run some commands, you must have [`jq`](https://stedolan.github.io/jq) installed on you machine
 
 1. List of active leases for `database/creds/book-role`
 ```

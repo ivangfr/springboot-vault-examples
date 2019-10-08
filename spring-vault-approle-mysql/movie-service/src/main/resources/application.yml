@@ -3,7 +3,8 @@ spring:
     name: movie-service
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
+    show-sql: true
     database-platform: org.hibernate.dialect.MySQL57Dialect
   cloud:
     consul:
@@ -17,7 +18,7 @@ datasource:
 vault:
   uri: ${VAULT_URI:http://localhost:8200}
   app-role:
-    role-id: ${ROLE_ID}
+    role-id: movie-service-role-id
 
 management:
   endpoints:

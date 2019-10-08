@@ -5,7 +5,7 @@ spring:
     vault:
       authentication: APPROLE
       app-role:
-        role-id: ${ROLE_ID}
+        role-id: student-service-role-id
       scheme: http
       host: ${VAULT_HOST:localhost}
       port: ${VAULT_PORT:8200}
