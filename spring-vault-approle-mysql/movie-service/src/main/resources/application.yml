@@ -15,6 +15,9 @@ datasource:
   jdbc-url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/exampledb?autoReconnect=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8&useLegacyDatetimeCode=false&serverTimezone=UTC
   vault-creds-path: database/creds/movie-role
 
+app:
+  vault-kv-secret-path: secret/movie-service
+
 vault:
   uri: ${VAULT_URI:http://localhost:8200}
   app-role:

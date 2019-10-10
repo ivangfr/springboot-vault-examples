@@ -35,6 +35,11 @@ public class MovieController {
                 environment.getProperty("datasource.password"));
     }
 
+    @GetMapping("/secretMessage")
+    public String getSecretMessage() {
+        return environment.getProperty("secret.movie-service.message");
+    }
+
     @GetMapping
     public List<MovieDto> getMovies() {
         return movieService.getMovies()

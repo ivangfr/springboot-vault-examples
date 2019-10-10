@@ -94,6 +94,6 @@ echo
 echo "--> testing MySQL-2 role '${DISH_DATABASE_ROLE}' with CLIENT_TOKEN ..."
 curl -i -H "X-Vault-Token:${CLIENT_TOKEN}" ${VAULT_ADDR}/v1/database/creds/${DISH_DATABASE_ROLE}
 
-echo "testing message KV secret ..."
+echo "--> testing message KV secret ..."
 curl -i -H "X-Vault-Token:${CLIENT_TOKEN}" ${VAULT_ADDR}/v1/secret/restaurant-service
 echo

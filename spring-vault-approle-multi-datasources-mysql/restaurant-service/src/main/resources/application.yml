@@ -20,7 +20,7 @@ datasource:
     vault-creds-path: database/creds/dish-role
 
 app:
-  vault-secret-path: secret/restaurant-service
+  vault-kv-secret-path: secret/restaurant-service
 
 vault:
   uri: ${VAULT_URI:http://localhost:8200}

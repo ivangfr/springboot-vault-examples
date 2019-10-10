@@ -21,7 +21,7 @@ import java.net.URI;
         propertyNamePrefix = "datasource.dish.",
         renewal = Renewal.ROTATE)
 @VaultPropertySource(
-        value = "${app.vault-secret-path}",
+        value = "${app.vault-kv-secret-path}",
         propertyNamePrefix = "secret.restaurant-service.")
 public class VaultConfig extends AbstractVaultConfiguration {
 
