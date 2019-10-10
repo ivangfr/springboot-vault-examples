@@ -35,6 +35,11 @@ public class BookController {
                 environment.getProperty("spring.datasource.password"));
     }
 
+    @GetMapping("/secretMessage")
+    public String getSecretMessage() {
+        return environment.getProperty("message");
+    }
+
     @GetMapping
     public List<BookDto> getBooks() {
         return bookService.getBooks()

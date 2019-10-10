@@ -35,6 +35,11 @@ public class StudentController {
                 environment.getProperty("spring.datasource.password"));
     }
 
+    @GetMapping("/secretMessage")
+    public String getSecretMessage() {
+        return environment.getProperty("message");
+    }
+
     @GetMapping
     public List<StudentDto> getStudents() {
         return studentService.getStudents()

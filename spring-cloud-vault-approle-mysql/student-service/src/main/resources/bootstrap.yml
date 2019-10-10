@@ -10,7 +10,7 @@ spring:
       host: ${VAULT_HOST:localhost}
       port: ${VAULT_PORT:8200}
       generic:
-        enabled: false
+        enabled: true
       database:
         enabled: true
         role: student-role
