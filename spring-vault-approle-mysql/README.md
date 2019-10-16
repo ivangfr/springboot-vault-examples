@@ -1,4 +1,5 @@
-# `spring-vault-approle-mysql`
+# `springboot-vault-examples`
+## `> spring-vault-approle-mysql`
 
 - [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages
 `movies`, called `movie-service`
@@ -62,7 +63,7 @@ docker run -d --rm \
 
 You can access `movie-service` Swagger website at: http://localhost:9082/swagger-ui.html
 
-## Useful Links/Commands
+## Useful Links & Commands
 
 ### Vault
 

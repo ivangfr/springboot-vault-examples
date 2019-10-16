@@ -1,4 +1,5 @@
-# `spring-cloud-vault-approle-mysql`
+# `springboot-vault-examples`
+## `> spring-cloud-vault-approle-mysql`
 
 - [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages
 `students`, called `student-service`
@@ -62,7 +63,7 @@ docker run -d --rm \
 
 You can access `student-service` Swagger website at: http://localhost:9080/swagger-ui.html
 
-## Useful Links/Commands
+## Useful Links & Commands
 
 ### Vault
 

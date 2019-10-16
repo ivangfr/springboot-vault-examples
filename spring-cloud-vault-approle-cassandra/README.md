@@ -1,4 +1,5 @@
-# `spring-cloud-vault-approle-cassandra`
+# `springboot-vault-examples`
+## `> spring-cloud-vault-approle-cassandra`
 
 - [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages
 `books`, called `book-service`
@@ -61,7 +62,7 @@ docker run -d --rm \
 
 You can access `book-service` Swagger website at: http://localhost:9081/swagger-ui.html
 
-## Useful Links/Commands
+## Useful Links & Commands
 
 ### Vault
 

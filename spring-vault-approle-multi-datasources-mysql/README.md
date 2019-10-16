@@ -1,4 +1,5 @@
-# `spring-vault-approle-multi-datasources-mysql`
+# `springboot-vault-examples`
+# `> spring-vault-approle-multi-datasources-mysql`
 
 - [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages `dishes`
 and `customers`, called `restaurant-service`
@@ -65,7 +66,7 @@ docker run -d --rm \
 
 You can access `restaurant-service` Swagger website at: http://localhost:9083/swagger-ui.html
 
-## Useful Links/Commands
+## Useful Links & Commands
 
 ### Vault
 
