@@ -1,8 +1,11 @@
 # `springboot-vault-examples`
-# `> spring-vault-approle-multi-datasources-mysql`
+## `> spring-vault-approle-multi-datasources-mysql`
 
-- [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages `dishes`
-and `customers`, called `restaurant-service`
+## Application
+
+### restaurant-service
+
+- [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages `dishes` and `customers`
 - It uses [`MySQL`](https://www.mysql.com/) database as storage
 - It connects to two `MySQL` instances. One stores `dishes` information and another `customers`
 - It uses [`Spring Vault`](https://docs.spring.io/spring-vault/docs/2.1.3.RELEASE/reference/html/#_document_structure)
@@ -11,8 +14,7 @@ and `customers`, called `restaurant-service`
 - **Leases are renewed and rotated**
 - `AppRole` is the `Vault` authentication method used
 
-> Note. before running this example, all the steps described at "Start Environment" in the main README should be
-executed previously.
+> Note. before running this example, all the steps described at [Start Environment](https://github.com/ivangfr/springboot-vault-examples#start-environment) should be previously executed.
 
 ## Setup Vault-MySQL
 

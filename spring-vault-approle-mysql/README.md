@@ -1,8 +1,11 @@
 # `springboot-vault-examples`
 ## `> spring-vault-approle-mysql`
 
-- [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages
-`movies`, called `movie-service`
+## Application
+
+### movie-service
+
+- [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages `movies`
 - It uses [`MySQL`](https://www.mysql.com/) database as storage
 - It uses [`Spring Vault`](https://docs.spring.io/spring-vault/docs/2.1.3.RELEASE/reference/html/#_document_structure)
 - It uses [`Hikari`](https://github.com/brettwooldridge/HikariCP) JDBC connection pool
@@ -10,8 +13,7 @@
 - **Leases are renewed and rotated**
 - `AppRole` is the `Vault` authentication method used
 
-> Note. before running this example, all the steps described at "Start Environment" in the main README should be
-executed previously.
+> Note. before running this example, all the steps described at [Start Environment](https://github.com/ivangfr/springboot-vault-examples#start-environment) should be previously executed.
 
 ## Setup Vault-MySQL
 
