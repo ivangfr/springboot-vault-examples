@@ -5,15 +5,13 @@
 
 ### student-service
 
-- [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages `students`
+- [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages `students`
 - It uses [`MySQL`](https://www.mysql.com/) database as storage
 - It uses [`Spring Cloud Vault`](https://cloud.spring.io/spring-cloud-vault/spring-cloud-vault.html)
 - It uses [`Hikari`](https://github.com/brettwooldridge/HikariCP) JDBC connection pool
 - Credentials to access `MySQL` is generated dynamically by [`Vault`](https://www.vaultproject.io)
 - **Leases are renewed and rotated**
 - `AppRole` is the `Vault` authentication method used
-
-> Note. before running this example, all the steps described at [Start Environment](https://github.com/ivangfr/springboot-vault-examples#start-environment) should be previously executed.
 
 ## Setup Vault-MySQL
 
@@ -23,6 +21,8 @@ Open one terminal and inside `springboot-vault-examples` root folder run
 ```
 
 ## Start student-service
+
+> Note. before running this example, all the steps described at [Start Environment](https://github.com/ivangfr/springboot-vault-examples#start-environment) should be previously executed.
 
 ### Running with Maven Wrapper
 

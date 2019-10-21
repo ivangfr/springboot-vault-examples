@@ -5,14 +5,12 @@
 
 ### book-service
 
-- [Spring Boot](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages `books`
+- [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages `books`
 - It uses [`Cassandra`](https://cassandra.apache.org/) database as storage
 - It uses [`Spring Cloud Vault`](https://cloud.spring.io/spring-cloud-vault/spring-cloud-vault.html)
 - Credentials to access `Cassandra` is generated dynamically by [`Vault`](https://www.vaultproject.io)
 - **Leases are renewed but NOT rotated**
 - `AppRole` is the `Vault` authentication method used
-
-> Note. before running this example, all the steps described at [Start Environment](https://github.com/ivangfr/springboot-vault-examples#start-environment) should be previously executed.
 
 ## Setup Vault-Cassandra
 
@@ -22,6 +20,8 @@ Open one terminal and inside `springboot-vault-examples` root folder run
 ```
 
 ## Start book-service
+
+> Note. before running this example, all the steps described at [Start Environment](https://github.com/ivangfr/springboot-vault-examples#start-environment) should be previously executed.
 
 ### Running with Maven Wrapper
 
