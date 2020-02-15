@@ -40,10 +40,7 @@ public class DbConfig {
 
         log.info("==> datasource.username: {}", username);
 
-        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
-        dataSourceBuilder.username(username);
-        dataSourceBuilder.password(password);
-        return dataSourceBuilder.build();
+        return DataSourceBuilder.create().username(username).password(password).build();
     }
 
     @Bean

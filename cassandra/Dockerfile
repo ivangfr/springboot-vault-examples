@@ -1,4 +1,4 @@
-FROM cassandra:3.11.4
+FROM cassandra:3.11.5
 
 RUN echo "authenticator: PasswordAuthenticator" >> /etc/cassandra/cassandra.yaml
 RUN echo "authorizer: org.apache.cassandra.auth.CassandraAuthorizer" >> /etc/cassandra/cassandra.yaml

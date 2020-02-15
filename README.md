@@ -20,13 +20,10 @@ have a look at the examples below.
 
 ## Examples
 
-### [spring-cloud-vault-approle-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-cloud-vault-approle-mysql#springboot-vault-examples) **(with lease rotation)**
-
-### [spring-cloud-vault-approle-cassandra](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-cloud-vault-approle-cassandra#springboot-vault-examples)
-
-### [spring-vault-approle-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-vault-approle-mysql#springboot-vault-examples) **(with lease rotation)**
-
-### [spring-vault-approle-multi-datasources-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-vault-approle-multi-datasources-mysql#springboot-vault-examples) **(with lease rotation)**
+- ### [spring-cloud-vault-approle-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-cloud-vault-approle-mysql#springboot-vault-examples) **(with lease rotation)**
+- ### [spring-cloud-vault-approle-cassandra](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-cloud-vault-approle-cassandra#springboot-vault-examples)
+- ### [spring-vault-approle-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-vault-approle-mysql#springboot-vault-examples) **(with lease rotation)**
+- ### [spring-vault-approle-multi-datasources-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-vault-approle-multi-datasources-mysql#springboot-vault-examples) **(with lease rotation)**
 
 ## Start Environment
 

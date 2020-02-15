@@ -2,7 +2,7 @@ version: "3.7"
 services:
 
   mysql:
-    image: mysql:5.7.28
+    image: mysql:5.7.29
     container_name: mysql
     restart: unless-stopped
     environment:
@@ -15,7 +15,7 @@ services:
       start_period: 10s
 
   mysql-2:
-    image: mysql:5.7.28
+    image: mysql:5.7.29
     container_name: mysql-2
     restart: unless-stopped
     environment:
@@ -29,7 +29,7 @@ services:
 
   cassandra:
     build: cassandra
-    image: docker.mycompany.com/cassandra:3.11.4
+    image: docker.mycompany.com/cassandra:3.11.5
     container_name: cassandra
     restart: unless-stopped
     ports:
@@ -41,7 +41,7 @@ services:
       start_period: 10s
 
   vault:
-    image: vault:1.2.3
+    image: vault:1.3.2
     container_name: vault
     restart: unless-stopped
     ports:
@@ -56,7 +56,7 @@ services:
     command: "vault server -config=/my/vault/config/config.hcl"
 
   consul:
-    image: consul:1.6.1
+    image: consul:1.7.0
     container_name: consul
     restart: unless-stopped
     ports:
