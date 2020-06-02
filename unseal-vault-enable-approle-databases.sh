@@ -47,6 +47,7 @@ echo
 echo "--> configuring MySQL-2 plugin and connection ..."
 curl -X POST -i -H "X-Vault-Token: ${VAULT_ROOT_TOKEN}" -d "{\"plugin_name\": \"mysql-database-plugin\", \"allowed_roles\": \"*\", \"connection_url\": \"root:secret@tcp(mysql-2:3306)/\"}" ${VAULT_ADDR}/v1/database/config/mysql-2
 
+echo
 echo "************************************************************"
 echo "export VAULT_ROOT_TOKEN=${VAULT_ROOT_TOKEN}"
 echo "************************************************************"

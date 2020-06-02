@@ -16,11 +16,11 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
+        <spring-cloud.version>Hoxton.SR5</spring-cloud.version>
         <springfox.version>2.9.2</springfox.version>
         <orika.version>1.5.4</orika.version>
         <docker.image.prefix>docker.mycompany.com</docker.image.prefix>
-        <dockerfile.maven.plugin.version>1.4.10</dockerfile.maven.plugin.version>
+        <dockerfile.maven.plugin.version>1.4.13</dockerfile.maven.plugin.version>
     </properties>
 
     <dependencies>

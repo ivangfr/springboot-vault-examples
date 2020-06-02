@@ -41,11 +41,10 @@ public class CustomerDbConfig {
     @ConfigurationProperties(prefix = "datasource.customer")
     DataSource dataSource() {
         String username = environment.getProperty("datasource.customer.username");
-        String password = environment.getProperty("datasource.customer.password");
-
         log.info("==> datasource.customer.username: {}", username);
 
-        return DataSourceBuilder.create().username(username).password(password).build();
+        // jdbcUrl, username and password are set implicitly in the create below
+        return DataSourceBuilder.create().build();
     }
 
     @Primary

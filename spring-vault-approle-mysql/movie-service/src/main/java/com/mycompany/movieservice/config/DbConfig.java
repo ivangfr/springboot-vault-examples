@@ -35,12 +35,14 @@ public class DbConfig {
     @Bean
     @ConfigurationProperties(prefix = "datasource")
     DataSource dataSource() {
+        String url = environment.getProperty("datasource.jdbc-url");
         String username = environment.getProperty("datasource.username");
         String password = environment.getProperty("datasource.password");
 
+        log.info("==> datasource.jdbc-url: {}", url);
         log.info("==> datasource.username: {}", username);
 
-        return DataSourceBuilder.create().username(username).password(password).build();
+        return DataSourceBuilder.create().url(url).username(username).password(password).build();
     }
 
     @Bean

@@ -11,14 +11,14 @@ spring:
       port: ${CONSUL_PORT:8500}
 
 datasource:
-  jdbc-url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/exampledb?autoReconnect=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8&useLegacyDatetimeCode=false&serverTimezone=UTC
+  jdbc-url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/exampledb?autoReconnect=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8&useLegacyDatetimeCode=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
   vault-creds-path: database/creds/movie-role
 
 app:
   vault-kv-secret-path: secret/movie-service
 
 vault:
-  uri: ${VAULT_URI:http://localhost:8200}
+  uri: http://${VAULT_HOST:localhost}:${VAULT_POST:8200}
   app-role:
     role-id: movie-service-role-id
 

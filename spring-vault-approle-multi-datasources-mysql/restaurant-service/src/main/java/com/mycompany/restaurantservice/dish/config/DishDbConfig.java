@@ -39,11 +39,10 @@ public class DishDbConfig {
     @ConfigurationProperties(prefix = "datasource.dish")
     DataSource dataSource() {
         String username = environment.getProperty("datasource.dish.username");
-        String password = environment.getProperty("datasource.dish.password");
-
         log.info("==> datasource.dish.username: {}", username);
 
-        return DataSourceBuilder.create().username(username).password(password).build();
+        // jdbcUrl, username and password are set implicitly in the create below
+        return DataSourceBuilder.create().build();
     }
 
     @Bean(name = "dishEntityManagerFactory")

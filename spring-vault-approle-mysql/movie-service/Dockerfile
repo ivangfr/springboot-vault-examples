@@ -5,7 +5,7 @@ LABEL maintainer="ivangfr@yahoo.com.br"
 ARG JAR_FILE
 COPY ${JAR_FILE} /app.jar
 
-ENV VAULT_URI="http://vault:8200" CONSUL_HOST=consul MYSQL_HOST=mysql
+ENV VAULT_HOST=vault CONSUL_HOST=consul MYSQL_HOST=mysql
 
 CMD ["java", "-jar", "/app.jar"]
 

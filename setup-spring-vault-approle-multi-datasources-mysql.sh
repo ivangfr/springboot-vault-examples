@@ -66,7 +66,6 @@ curl -X POST -i -H "X-Vault-Token: ${VAULT_ROOT_TOKEN}" -d '{"message": "Hello f
 echo "--> setting KV secret policy '${KV_ROLE_POLICY}' ..."
 curl -X POST -i -H "X-Vault-Token:${VAULT_ROOT_TOKEN}" -d '{"policy":"path \"secret/*\" {policy=\"read\"}"}' ${VAULT_ADDR}/v1/sys/policy/${KV_ROLE_POLICY}
 
-echo
 echo "================"
 echo "-- AppRole (login without secret-id)"
 
