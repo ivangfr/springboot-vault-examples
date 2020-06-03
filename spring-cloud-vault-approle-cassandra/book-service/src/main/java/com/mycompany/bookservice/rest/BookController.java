@@ -1,11 +1,11 @@
 package com.mycompany.bookservice.rest;
 
+import com.mycompany.bookservice.mapper.BookMapper;
 import com.mycompany.bookservice.model.Book;
 import com.mycompany.bookservice.rest.dto.BookDto;
 import com.mycompany.bookservice.rest.dto.CreateBookDto;
 import com.mycompany.bookservice.service.BookService;
 import lombok.RequiredArgsConstructor;
-import ma.glasnost.orika.MapperFacade;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +26,7 @@ public class BookController {
 
     private final BookService bookService;
     private final Environment environment;
-    private final MapperFacade mapperFacade;
+    private final BookMapper bookMapper;
 
     @GetMapping("/dbcredentials")
     public String getDBCredentials() {
@@ -44,16 +44,16 @@ public class BookController {
     public List<BookDto> getBooks() {
         return bookService.getBooks()
                 .stream()
-                .map(book -> mapperFacade.map(book, BookDto.class))
+                .map(bookMapper::toBookDto)
                 .collect(Collectors.toList());
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public BookDto createBook(@Valid @RequestBody CreateBookDto createBookDto) {
-        Book book = mapperFacade.map(createBookDto, Book.class);
+        Book book = bookMapper.toBook(createBookDto);
         book = bookService.saveBook(book);
-        return mapperFacade.map(book, BookDto.class);
+        return bookMapper.toBookDto(book);
     }
 
 }

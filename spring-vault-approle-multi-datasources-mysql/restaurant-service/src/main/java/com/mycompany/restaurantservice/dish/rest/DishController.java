@@ -1,11 +1,11 @@
 package com.mycompany.restaurantservice.dish.rest;
 
+import com.mycompany.restaurantservice.dish.mapper.DishMapper;
 import com.mycompany.restaurantservice.dish.model.Dish;
 import com.mycompany.restaurantservice.dish.rest.dto.CreateDishDto;
 import com.mycompany.restaurantservice.dish.rest.dto.DishDto;
 import com.mycompany.restaurantservice.dish.service.DishService;
 import lombok.RequiredArgsConstructor;
-import ma.glasnost.orika.MapperFacade;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +26,7 @@ public class DishController {
 
     private final DishService dishService;
     private final Environment environment;
-    private final MapperFacade mapperFacade;
+    private final DishMapper dishMapper;
 
     @GetMapping("/dbcredentials")
     public String getDBCredentials() {
@@ -44,16 +44,16 @@ public class DishController {
     public List<DishDto> getDishes() {
         return dishService.getDishes()
                 .stream()
-                .map(dish -> mapperFacade.map(dish, DishDto.class))
+                .map(dishMapper::toDishDto)
                 .collect(Collectors.toList());
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public DishDto createDish(@Valid @RequestBody CreateDishDto createDishDto) {
-        Dish dish = mapperFacade.map(createDishDto, Dish.class);
+        Dish dish = dishMapper.toDish(createDishDto);
         dish = dishService.saveDish(dish);
-        return mapperFacade.map(dish, DishDto.class);
+        return dishMapper.toDishDto(dish);
     }
 
 }

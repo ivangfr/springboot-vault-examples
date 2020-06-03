@@ -15,7 +15,7 @@
 
 ## Prerequisite
 
-Before running this example, all the steps described at [Start Environment](https://github.com/ivangfr/springboot-vault-examples#start-environment) should be previously executed.
+Before running this example, all the steps described at [Start Environment](https://github.com/ivangfr/springboot-vault-examples#start-environment) section in the main README should be previously executed.
 
 ## Setup Vault-MySQL
 
@@ -34,7 +34,8 @@ Before running this example, all the steps described at [Start Environment](http
 
 - Run the following command
   ```
-  ./mvnw spring-boot:run --projects spring-vault-approle-mysql/movie-service \
+  ./mvnw clean spring-boot:run \
+    --projects spring-vault-approle-mysql/movie-service \
     -Dspring-boot.run.jvmArguments="-Dserver.port=9082"
   ```
 
@@ -42,29 +43,24 @@ Before running this example, all the steps described at [Start Environment](http
 
 - Go to the `springboot-vault-examples` root folder and build the docker image
   ```
-  ./mvnw clean package dockerfile:build -DskipTests --projects spring-vault-approle-mysql/movie-service
+  ./mvnw clean spring-boot:build-image -DskipTests --projects spring-vault-approle-mysql/movie-service
   ```
-  | Environment Variable | Description                                            |
-  | -------------------- | ------------------------------------------------------ |
-  | `VAULT_HOST`         | Specify host of the `Vault` to use (default `vault`)   |
-  | `VAULT_PORT`         | Specify port of the `Vault` to use (default `8200`)    |
-  | `CONSUL_HOST`        | Specify host of the `Consul` to use (default `consul`) |
-  | `CONSUL_PORT`        | Specify port of the `Consul` to use (default `8500`)   |
-  | `MYSQL_HOST`         | Specify host of the `MySQL` to use (default `mysql`)   |
-  | `MYSQL_PORT`         | Specify port of the `MySQL` to use (default `3306`)    |
+  | Environment Variable | Description                                               |
+  | -------------------- | --------------------------------------------------------- |
+  | `VAULT_HOST`         | Specify host of the `Vault` to use (default `localhost`)  |
+  | `VAULT_PORT`         | Specify port of the `Vault` to use (default `8200`)       |
+  | `CONSUL_HOST`        | Specify host of the `Consul` to use (default `localhost`) |
+  | `CONSUL_PORT`        | Specify port of the `Consul` to use (default `8500`)      |
+  | `MYSQL_HOST`         | Specify host of the `MySQL` to use (default `localhost`)  |
+  | `MYSQL_PORT`         | Specify port of the `MySQL` to use (default `3306`)       |
 
 - Run the docker container
   ```
   docker run -d --rm --name movie-service -p 9082:8080 \
+    -e VAULT_HOST=vault -e CONSUL_HOST=consul -e MYSQL_HOST=mysql \
     --network springboot-vault-examples_default \
     docker.mycompany.com/movie-service:1.0.0
   ```
-  > **Note:** the command uses the default network created by docker-compose, `springboot-vault-examples_default`.
-  >
-  > In order to stop `movie-service` docker container, run
-  > ```
-  > docker stop movie-service 
-  > ```
 
 ## Using movie-service
 
@@ -166,3 +162,14 @@ You can access `movie-service` Swagger website at: http://localhost:9082/swagger
 - **Consul**
 
   `Consul` can be accessed at http://localhost:8500
+
+## Shutdown
+
+- Stop application
+  - If the application was started with `Maven`, go to the terminals where it is running and press `Ctrl+C`
+  - If the application was started as a Docker container, run the command below
+    ```
+    docker stop movie-service
+    ```
+    
+- Stop docker-compose containers by following the instruction in [Shutdown](https://github.com/ivangfr/springboot-vault-examples#shutdown) section in the main README.

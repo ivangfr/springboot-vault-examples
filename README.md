@@ -2,6 +2,12 @@
 
 The goal of this project is play with [`Vault`](https://www.vaultproject.io). For it, we will implement some applications that rely on `Vault` to store/retrieve secrets. The credentials to access databases are generated dynamically by [`Vault`](https://www.vaultproject.io) that uses [`Consul`](https://www.consul.io) as backend.
 
+## Prerequisites
+
+- `Java 11+`
+- `Docker`
+- `Docker-Compose`
+
 ## Lease Rotation
 
 One of the problems faced by many people when using `Vault` is about rotating the lease obtained for some backend databases. When a [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application requests a lease from `Vault` using, for instance, the library [`Spring Cloud Vault`](https://cloud.spring.io/spring-cloud-vault/spring-cloud-vault.html), the library itself **is able to automatically renew** the lease from time to time (`default_lease_ttl`).

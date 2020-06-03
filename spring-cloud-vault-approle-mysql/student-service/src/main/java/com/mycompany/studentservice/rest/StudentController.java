@@ -1,11 +1,11 @@
 package com.mycompany.studentservice.rest;
 
+import com.mycompany.studentservice.mapper.StudentMapper;
 import com.mycompany.studentservice.model.Student;
 import com.mycompany.studentservice.rest.dto.CreateStudentDto;
 import com.mycompany.studentservice.rest.dto.StudentDto;
 import com.mycompany.studentservice.service.StudentService;
 import lombok.RequiredArgsConstructor;
-import ma.glasnost.orika.MapperFacade;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +26,7 @@ public class StudentController {
 
     private final StudentService studentService;
     private final Environment environment;
-    private final MapperFacade mapperFacade;
+    private final StudentMapper studentMapper;
 
     @GetMapping("/dbcredentials")
     public String getDBCredentials() {
@@ -44,16 +44,16 @@ public class StudentController {
     public List<StudentDto> getStudents() {
         return studentService.getStudents()
                 .stream()
-                .map(student -> mapperFacade.map(student, StudentDto.class))
+                .map(studentMapper::toStudentDto)
                 .collect(Collectors.toList());
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public StudentDto createStudent(@Valid @RequestBody CreateStudentDto createStudentDto) {
-        Student student = mapperFacade.map(createStudentDto, Student.class);
+        Student student = studentMapper.toStudent(createStudentDto);
         student = studentService.saveStudent(student);
-        return mapperFacade.map(student, StudentDto.class);
+        return studentMapper.toStudentDto(student);
     }
 
 }

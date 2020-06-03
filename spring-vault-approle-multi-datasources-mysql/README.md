@@ -16,7 +16,7 @@
 
 ## Prerequisite
 
-Before running this example, all the steps described at [Start Environment](https://github.com/ivangfr/springboot-vault-examples#start-environment) should be previously executed.
+Before running this example, all the steps described at [Start Environment](https://github.com/ivangfr/springboot-vault-examples#start-environment) section in the main README should be previously executed.
 
 ## Setup Vault-MySQL
 
@@ -36,7 +36,8 @@ Before running this example, all the steps described at [Start Environment](http
 - Run the following commands
   ```
   export DISH_MYSQL_PORT=3307 && \
-  ./mvnw spring-boot:run --projects spring-vault-approle-multi-datasources-mysql/restaurant-service \
+  ./mvnw clean spring-boot:run \
+    --projects spring-vault-approle-multi-datasources-mysql/restaurant-service \
     -Dspring-boot.run.jvmArguments="-Dserver.port=9083"
   ```
 
@@ -44,31 +45,26 @@ Before running this example, all the steps described at [Start Environment](http
 
 - Go to the `springboot-vault-examples` root folder and build the docker image
   ```
-  ./mvnw clean package dockerfile:build -DskipTests --projects spring-vault-approle-multi-datasources-mysql/restaurant-service
+  ./mvnw clean spring-boot:build-image -DskipTests --projects spring-vault-approle-multi-datasources-mysql/restaurant-service
   ```
-  | Environment Variable  | Description                                            |
-  | --------------------- | ------------------------------------------------------ |
-  | `VAULT_HOST`          | Specify host of the `Vault` to use (default `vault`)   |
-  | `VAULT_PORT`          | Specify port of the `Vault` to use (default `8200`)    |
-  | `CONSUL_HOST`         | Specify host of the `Consul` to use (default `consul`) |
-  | `CONSUL_PORT`         | Specify port of the `Consul` to use (default `8500`)   |
-  | `CUSTOMER_MYSQL_HOST` | Specify host of the `MySQL` to use (default `mysql`)   |
-  | `CUSTOMER_MYSQL_PORT` | Specify port of the `MySQL` to use (default `3306`)    |
-  | `DISH_MYSQL_HOST`     | Specify host of the `MySQL` to use (default `mysql-2`) |
-  | `DISH_MYSQL_PORT`     | Specify port of the `MySQL` to use (default `3306`)    |
+  | Environment Variable  | Description                                               |
+  | --------------------- | --------------------------------------------------------- |
+  | `VAULT_HOST`          | Specify host of the `Vault` to use (default `localhost`)  |
+  | `VAULT_PORT`          | Specify port of the `Vault` to use (default `8200`)       |
+  | `CONSUL_HOST`         | Specify host of the `Consul` to use (default `localhost`) |
+  | `CONSUL_PORT`         | Specify port of the `Consul` to use (default `8500`)      |
+  | `CUSTOMER_MYSQL_HOST` | Specify host of the `MySQL` to use (default `localhost`)  |
+  | `CUSTOMER_MYSQL_PORT` | Specify port of the `MySQL` to use (default `3306`)       |
+  | `DISH_MYSQL_HOST`     | Specify host of the `MySQL` to use (default `localhost`)  |
+  | `DISH_MYSQL_PORT`     | Specify port of the `MySQL` to use (default `3306`)       |
 
 - Run the docker container
   ```
   docker run -d --rm --name restaurant-service -p 9083:8080 \
+    -e VAULT_HOST=vault -e CONSUL_HOST=consul -e CUSTOMER_MYSQL_HOST=mysql -e DISH_MYSQL_HOST=mysql-2 \
     --network springboot-vault-examples_default \
     docker.mycompany.com/restaurant-service:1.0.0
   ```
-  > **Note:** the command uses the default network created by docker-compose, `springboot-vault-examples_default`.
-  >
-  > In order to stop `restaurant-service` docker container, run
-  > ```
-  > docker stop restaurant-service 
-  > ```
 
 ## Using restaurant-service
 
@@ -172,3 +168,14 @@ You can access `restaurant-service` Swagger website at: http://localhost:9083/sw
 - **Consul**
 
   `Consul` can be accessed at http://localhost:8500
+  
+## Shutdown
+
+- Stop application
+  - If the application was started with `Maven`, go to the terminals where it is running and press `Ctrl+C`
+  - If the application was started as a Docker container, run the command below
+    ```
+    docker stop restaurant-service
+    ```
+    
+- Stop docker-compose containers by following the instruction in [Shutdown](https://github.com/ivangfr/springboot-vault-examples#shutdown) section in the main README.

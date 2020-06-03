@@ -1,11 +1,11 @@
 package com.mycompany.movieservice.rest;
 
+import com.mycompany.movieservice.mapper.MovieMapper;
 import com.mycompany.movieservice.model.Movie;
 import com.mycompany.movieservice.rest.dto.CreateMovieDto;
 import com.mycompany.movieservice.rest.dto.MovieDto;
 import com.mycompany.movieservice.service.MovieService;
 import lombok.RequiredArgsConstructor;
-import ma.glasnost.orika.MapperFacade;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +26,7 @@ public class MovieController {
 
     private final MovieService movieService;
     private final Environment environment;
-    private final MapperFacade mapperFacade;
+    private final MovieMapper movieMapper;
 
     @GetMapping("/dbcredentials")
     public String getDBCredentials() {
@@ -44,16 +44,16 @@ public class MovieController {
     public List<MovieDto> getMovies() {
         return movieService.getMovies()
                 .stream()
-                .map(student -> mapperFacade.map(student, MovieDto.class))
+                .map(movieMapper::toMovieDto)
                 .collect(Collectors.toList());
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public MovieDto createMovie(@Valid @RequestBody CreateMovieDto createMovieDto) {
-        Movie movie = mapperFacade.map(createMovieDto, Movie.class);
+        Movie movie = movieMapper.toMovie(createMovieDto);
         movie = movieService.saveMovie(movie);
-        return mapperFacade.map(movie, MovieDto.class);
+        return movieMapper.toMovieDto(movie);
     }
 
 }
