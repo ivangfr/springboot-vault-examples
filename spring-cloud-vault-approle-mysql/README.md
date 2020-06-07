@@ -43,7 +43,7 @@ Before running this example, all the steps described at [Start Environment](http
 
 - Go to the `springboot-vault-examples` root folder and build the docker image
   ```
-  ./mvnw clean spring-boot:build-image -DskipTests --projects spring-cloud-vault-approle-mysql/student-service
+  ./mvnw clean compile jib:dockerBuild -DskipTests --projects spring-cloud-vault-approle-mysql/student-service
   ```
   | Environment Variable | Description                                               |
   | -------------------- | --------------------------------------------------------- |
