@@ -42,7 +42,7 @@ Before running this example, all the steps described at [Start Environment](http
 
 - Go to the `springboot-vault-examples` root folder and build the docker image
   ```
-  ./mvnw clean compile jib:dockerBuild -DskipTests --projects spring-cloud-vault-approle-cassandra/book-service
+  ./mvnw clean compile jib:dockerBuild --projects spring-cloud-vault-approle-cassandra/book-service
   ```
   | Environment Variable | Description                                                  |
   | -------------------- | ------------------------------------------------------------ |
@@ -153,57 +153,3 @@ You can access `book-service` Swagger website at: http://localhost:9081/swagger-
     ```
     
 - Stop docker-compose containers by following the instruction in [Shutdown](https://github.com/ivangfr/springboot-vault-examples#shutdown) section in the main README.
-
-## Issues
-
-- Sometimes, the following exception happens, and the application doesn't start
-  ```
-  WARN 39360 --- [           main] LeaseEventPublisher$LoggingErrorListener : [RequestedSecret [path='database/creds/book-role', mode=RENEW]] Lease [leaseId='null', leaseDuration=PT0S, renewable=false] Status 500 Internal Server Error [database/creds/book-role]: 1 error occurred:
-  	* read tcp 172.23.0.6:60742->172.23.0.3:9042: i/o timeout
-  
-  ; nested exception is org.springframework.web.client.HttpServerErrorException$InternalServerError: 500 Internal Server Error: [{"errors":["1 error occurred:\n\t* read tcp 172.23.0.6:60742-\u003e172.23.0.3:9042: i/o timeout\n\n"]}
-  ]
-  
-  org.springframework.vault.VaultException: Status 500 Internal Server Error [database/creds/book-role]: 1 error occurred:
-  	* read tcp 172.23.0.6:60742->172.23.0.3:9042: i/o timeout
-  
-  ; nested exception is org.springframework.web.client.HttpServerErrorException$InternalServerError: 500 Internal Server Error: [{"errors":["1 error occurred:\n\t* read tcp 172.23.0.6:60742-\u003e172.23.0.3:9042: i/o timeout\n\n"]}
-  ]
-  	at org.springframework.vault.client.VaultResponses.buildException(VaultResponses.java:86) ~[spring-vault-core-2.2.0.RELEASE.jar:2.2.0.RELEASE]
-  	at org.springframework.vault.core.VaultTemplate.lambda$doRead$5(VaultTemplate.java:409) ~[spring-vault-core-2.2.0.RELEASE.jar:2.2.0.RELEASE]
-  	at org.springframework.vault.core.VaultTemplate.doWithSession(VaultTemplate.java:388) ~[spring-vault-core-2.2.0.RELEASE.jar:2.2.0.RELEASE]
-  	at org.springframework.vault.core.VaultTemplate.doRead(VaultTemplate.java:398) ~[spring-vault-core-2.2.0.RELEASE.jar:2.2.0.RELEASE]
-  	at org.springframework.vault.core.VaultTemplate.read(VaultTemplate.java:290) ~[spring-vault-core-2.2.0.RELEASE.jar:2.2.0.RELEASE]
-  	at org.springframework.vault.core.lease.SecretLeaseContainer.doGetSecrets(SecretLeaseContainer.java:662) ~[spring-vault-core-2.2.0.RELEASE.jar:2.2.0.RELEASE]
-  	at org.springframework.vault.core.lease.SecretLeaseContainer.start(SecretLeaseContainer.java:396) ~[spring-vault-core-2.2.0.RELEASE.jar:2.2.0.RELEASE]
-  	at org.springframework.vault.core.lease.SecretLeaseContainer.addRequestedSecret(SecretLeaseContainer.java:355) ~[spring-vault-core-2.2.0.RELEASE.jar:2.2.0.RELEASE]
-  	at org.springframework.vault.core.env.LeaseAwareVaultPropertySource.loadProperties(LeaseAwareVaultPropertySource.java:184) ~[spring-vault-core-2.2.0.RELEASE.jar:2.2.0.RELEASE]
-  	at org.springframework.vault.core.env.LeaseAwareVaultPropertySource.<init>(LeaseAwareVaultPropertySource.java:169) ~[spring-vault-core-2.2.0.RELEASE.jar:2.2.0.RELEASE]
-  	at org.springframework.vault.core.env.LeaseAwareVaultPropertySource.<init>(LeaseAwareVaultPropertySource.java:122) ~[spring-vault-core-2.2.0.RELEASE.jar:2.2.0.RELEASE]
-  	at org.springframework.cloud.vault.config.LeasingVaultPropertySourceLocator.createVaultPropertySource(LeasingVaultPropertySourceLocator.java:157) ~[spring-cloud-vault-config-2.2.3.RELEASE.jar:2.2.3.RELEASE]
-  	at org.springframework.cloud.vault.config.LeasingVaultPropertySourceLocator.createVaultPropertySource(LeasingVaultPropertySourceLocator.java:89) ~[spring-cloud-vault-config-2.2.3.RELEASE.jar:2.2.3.RELEASE]
-  	at org.springframework.cloud.vault.config.VaultPropertySourceLocatorSupport.doCreatePropertySources(VaultPropertySourceLocatorSupport.java:162) ~[spring-cloud-vault-config-2.2.3.RELEASE.jar:2.2.3.RELEASE]
-  	at org.springframework.cloud.vault.config.VaultPropertySourceLocatorSupport.createCompositePropertySource(VaultPropertySourceLocatorSupport.java:138) ~[spring-cloud-vault-config-2.2.3.RELEASE.jar:2.2.3.RELEASE]
-  	at org.springframework.cloud.vault.config.VaultPropertySourceLocatorSupport.locate(VaultPropertySourceLocatorSupport.java:111) ~[spring-cloud-vault-config-2.2.3.RELEASE.jar:2.2.3.RELEASE]
-  	at org.springframework.cloud.bootstrap.config.PropertySourceLocator.locateCollection(PropertySourceLocator.java:52) ~[spring-cloud-context-2.2.3.RELEASE.jar:2.2.3.RELEASE]
-  	at org.springframework.cloud.bootstrap.config.PropertySourceLocator.locateCollection(PropertySourceLocator.java:47) ~[spring-cloud-context-2.2.3.RELEASE.jar:2.2.3.RELEASE]
-  	at org.springframework.cloud.bootstrap.config.PropertySourceBootstrapConfiguration.initialize(PropertySourceBootstrapConfiguration.java:98) ~[spring-cloud-context-2.2.3.RELEASE.jar:2.2.3.RELEASE]
-  	at org.springframework.boot.SpringApplication.applyInitializers(SpringApplication.java:626) ~[spring-boot-2.3.0.RELEASE.jar:2.3.0.RELEASE]
-  	at org.springframework.boot.SpringApplication.prepareContext(SpringApplication.java:370) ~[spring-boot-2.3.0.RELEASE.jar:2.3.0.RELEASE]
-  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:314) ~[spring-boot-2.3.0.RELEASE.jar:2.3.0.RELEASE]
-  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1237) ~[spring-boot-2.3.0.RELEASE.jar:2.3.0.RELEASE]
-  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) ~[spring-boot-2.3.0.RELEASE.jar:2.3.0.RELEASE]
-  	at com.mycompany.bookservice.BookServiceApplication.main(BookServiceApplication.java:12) ~[classes/:na]
-  Caused by: org.springframework.web.client.HttpServerErrorException$InternalServerError: 500 Internal Server Error: [{"errors":["1 error occurred:\n\t* read tcp 172.23.0.6:60742-\u003e172.23.0.3:9042: i/o timeout\n\n"]}
-  ]
-  	at org.springframework.web.client.HttpServerErrorException.create(HttpServerErrorException.java:100) ~[spring-web-5.2.6.RELEASE.jar:5.2.6.RELEASE]
-  	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:172) ~[spring-web-5.2.6.RELEASE.jar:5.2.6.RELEASE]
-  	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:112) ~[spring-web-5.2.6.RELEASE.jar:5.2.6.RELEASE]
-  	at org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63) ~[spring-web-5.2.6.RELEASE.jar:5.2.6.RELEASE]
-  	at org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:782) ~[spring-web-5.2.6.RELEASE.jar:5.2.6.RELEASE]
-  	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:740) ~[spring-web-5.2.6.RELEASE.jar:5.2.6.RELEASE]
-  	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:674) ~[spring-web-5.2.6.RELEASE.jar:5.2.6.RELEASE]
-  	at org.springframework.web.client.RestTemplate.getForObject(RestTemplate.java:315) ~[spring-web-5.2.6.RELEASE.jar:5.2.6.RELEASE]
-  	at org.springframework.vault.core.VaultTemplate.lambda$doRead$5(VaultTemplate.java:401) ~[spring-vault-core-2.2.0.RELEASE.jar:2.2.0.RELEASE]
-  	... 23 common frames omitted
-  ```

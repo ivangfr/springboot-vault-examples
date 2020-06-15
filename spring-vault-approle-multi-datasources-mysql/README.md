@@ -45,7 +45,7 @@ Before running this example, all the steps described at [Start Environment](http
 
 - Go to the `springboot-vault-examples` root folder and build the docker image
   ```
-  ./mvnw clean compile jib:dockerBuild -DskipTests --projects spring-vault-approle-multi-datasources-mysql/restaurant-service
+  ./mvnw clean compile jib:dockerBuild --projects spring-vault-approle-multi-datasources-mysql/restaurant-service
   ```
   | Environment Variable  | Description                                               |
   | --------------------- | --------------------------------------------------------- |

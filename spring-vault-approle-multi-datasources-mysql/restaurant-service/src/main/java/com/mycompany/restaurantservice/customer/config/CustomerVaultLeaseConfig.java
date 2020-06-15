@@ -14,8 +14,8 @@ import org.springframework.vault.core.lease.event.SecretLeaseCreatedEvent;
 
 import javax.annotation.PostConstruct;
 
-@RequiredArgsConstructor
 @Slf4j
+@RequiredArgsConstructor
 @Configuration
 public class CustomerVaultLeaseConfig {
 

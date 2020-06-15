@@ -15,8 +15,8 @@ import org.springframework.vault.core.lease.event.SecretLeaseExpiredEvent;
 
 import javax.annotation.PostConstruct;
 
-@RequiredArgsConstructor
 @Slf4j
+@RequiredArgsConstructor
 @Configuration
 public class VaultLeaseConfig {
 
