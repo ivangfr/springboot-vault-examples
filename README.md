@@ -2,12 +2,6 @@
 
 The goal of this project is play with [`Vault`](https://www.vaultproject.io). For it, we will implement some applications that rely on `Vault` to store/retrieve secrets. The credentials to access databases are generated dynamically by [`Vault`](https://www.vaultproject.io) that uses [`Consul`](https://www.consul.io) as backend.
 
-## Prerequisites
-
-- `Java 11+`
-- `Docker`
-- `Docker-Compose`
-
 ## Lease Rotation
 
 One of the problems faced by many people when using `Vault` is about rotating the lease obtained for some backend databases. When a [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application requests a lease from `Vault` using, for instance, the library [`Spring Cloud Vault`](https://cloud.spring.io/spring-cloud-vault/spring-cloud-vault.html), the library itself **is able to automatically renew** the lease from time to time (`default_lease_ttl`).
@@ -23,6 +17,12 @@ In order to solve this problem, I have implemented some solutions for applicatio
 - ### [spring-vault-approle-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-vault-approle-mysql#springboot-vault-examples) **(with lease rotation)**
 - ### [spring-vault-approle-multi-datasources-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-vault-approle-multi-datasources-mysql#springboot-vault-examples) **(with lease rotation)**
 
+## Prerequisites
+
+- [`Java 11+`](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
+- [`Docker`](https://www.docker.com/)
+- [`Docker-Compose`](https://docs.docker.com/compose/install/)
+
 ## Start Environment
 
 - Open one terminal and inside `springboot-vault-examples` root folder run
@@ -30,7 +30,7 @@ In order to solve this problem, I have implemented some solutions for applicatio
   docker-compose up -d
   ```
 
-- Wait a little bit until the containers are `Up (healthy)`. In order to check the status of the containers run the command
+- Wait a little bit until the containers are `Up (healthy)`. In order to check the status of the containers run
   ```
   docker-compose ps
   ```
