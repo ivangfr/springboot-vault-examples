@@ -12,10 +12,10 @@ spring:
 
 datasource:
   customer:
-    jdbc-url: jdbc:mysql://${CUSTOMER_MYSQL_HOST:localhost}:${CUSTOMER_MYSQL_PORT:3306}/exampledb?autoReconnect=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8&useLegacyDatetimeCode=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    jdbc-url: jdbc:mysql://${CUSTOMER_MYSQL_HOST:localhost}:${CUSTOMER_MYSQL_PORT:3306}/exampledb?characterEncoding=UTF-8&serverTimezone=UTC
     vault-creds-path: database/creds/customer-role
   dish:
-    jdbc-url: jdbc:mysql://${DISH_MYSQL_HOST:localhost}:${DISH_MYSQL_PORT:3306}/exampledb?autoReconnect=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8&useLegacyDatetimeCode=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    jdbc-url: jdbc:mysql://${DISH_MYSQL_HOST:localhost}:${DISH_MYSQL_PORT:3306}/exampledb?characterEncoding=UTF-8&serverTimezone=UTC
     vault-creds-path: database/creds/dish-role
 
 app:
