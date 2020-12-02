@@ -3,7 +3,7 @@
 
 ## Application
 
-- **movie-service**
+- ### movie-service
 
   - [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages `movies`
   - It uses [`MySQL`](https://www.mysql.com/) database as storage
@@ -64,7 +64,7 @@ Before running this example, all the steps described at [Start Environment](http
 
 ## Using movie-service
 
-You can access `movie-service` Swagger website at: http://localhost:9082/swagger-ui.html
+You can access `movie-service` Swagger website at http://localhost:9082/swagger-ui.html
 
 ## Useful Links & Commands
 

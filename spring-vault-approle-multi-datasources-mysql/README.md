@@ -3,7 +3,7 @@
 
 ## Application
 
-- **restaurant-service**
+- ### restaurant-service
 
   - [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages `dishes` and `customers`
   - It uses [`MySQL`](https://www.mysql.com/) database as storage
@@ -68,7 +68,7 @@ Before running this example, all the steps described at [Start Environment](http
 
 ## Using restaurant-service
 
-You can access `restaurant-service` Swagger website at: http://localhost:9083/swagger-ui.html
+You can access `restaurant-service` Swagger website at http://localhost:9083/swagger-ui.html
 
 ## Useful Links & Commands
 

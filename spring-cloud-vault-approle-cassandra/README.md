@@ -3,7 +3,7 @@
 
 ## Application
 
-- **book-service**
+- ### book-service
 
   - [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages `books`
   - It uses [`Cassandra`](https://cassandra.apache.org/) database as storage
@@ -63,7 +63,7 @@ Before running this example, all the steps described at [Start Environment](http
 
 ## Using book-service
 
-You can access `book-service` Swagger website at: http://localhost:9081/swagger-ui.html
+You can access `book-service` Swagger website at http://localhost:9081/swagger-ui.html
 
 ## Useful Links & Commands
 
