@@ -29,7 +29,7 @@ services:
 
   cassandra:
     build: cassandra
-    image: docker.mycompany.com/cassandra:3.11.9
+    image: docker.mycompany.com/cassandra:3.11.10
     container_name: cassandra
     restart: unless-stopped
     ports:
@@ -41,7 +41,7 @@ services:
       start_period: 10s
 
   vault:
-    image: vault:1.6.0
+    image: vault:1.6.2
     container_name: vault
     restart: unless-stopped
     ports:
@@ -56,7 +56,7 @@ services:
     command: "vault server -config=/my/vault/config/config.hcl"
 
   consul:
-    image: consul:1.9.0
+    image: consul:1.9.3
     container_name: consul
     restart: unless-stopped
     ports:
