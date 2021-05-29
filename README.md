@@ -40,7 +40,7 @@ In order to solve this problem, I have implemented some solutions for applicatio
   ./unseal-vault-enable-approle-databases.sh
   ```
 
-- Copy the environment variable shown in the end of the script execution. Export it into every terminal it's needed
+- At the end of the script execution, the `VAULT_ROOT_TOKEN` value will be shown. Export it into every terminal it's needed
   ```
   export VAULT_ROOT_TOKEN=...
   ```
@@ -48,8 +48,7 @@ In order to solve this problem, I have implemented some solutions for applicatio
 ## Shutdown
 
 - In a terminal, make sure you are in `springboot-vault-examples` root folder
-
-- To stop and remove docker-compose containers, networks and volumes, run
+- To stop and remove docker-compose containers, network and volumes, run
   ```
   docker-compose down -v
   ```

@@ -2,28 +2,27 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.0</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
 
     <groupId>com.mycompany</groupId>
     <artifactId>springboot-vault-examples</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
-
     <name>springboot-vault-examples</name>
     <description>Demo project for Spring Boot</description>
-
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.4.3</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
 
     <properties>
         <java.version>11</java.version>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
-        <springdoc.openapi.version>1.5.4</springdoc.openapi.version>
-        <jib.maven-plugin.version>2.7.1</jib.maven-plugin.version>
-        <docker.image.prefix>docker.mycompany.com</docker.image.prefix>
+        <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
+        <springdoc-openapi.version>1.5.9</springdoc-openapi.version>
+        <jib-maven-plugin.version>3.0.0</jib-maven-plugin.version>
+        <docker-image.prefix>ivanfranchin</docker-image.prefix>
     </properties>
 
     <modules>
@@ -34,21 +33,16 @@
     </modules>
 
     <dependencies>
-        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-
-        <!-- SpringDoc OpenApi -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
-            <version>${springdoc.openapi.version}</version>
+            <version>${springdoc-openapi.version}</version>
         </dependency>
-
-        <!-- MapStruct -->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
@@ -75,13 +69,16 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <annotationProcessorPaths>
-                        <!-- Lombok -->
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
                             <version>${lombok.version}</version>
                         </path>
-                        <!-- MapStruct -->
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok-mapstruct-binding</artifactId>
+                            <version>${lombok-mapstruct-binding.version}</version>
+                        </path>
                         <path>
                             <groupId>org.mapstruct</groupId>
                             <artifactId>mapstruct-processor</artifactId>
@@ -93,14 +90,35 @@
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
-                <version>${jib.maven-plugin.version}</version>
+                <version>${jib-maven-plugin.version}</version>
                 <configuration>
                     <to>
-                        <image>${docker.image.prefix}/${project.artifactId}:${project.version}</image>
+                        <image>${docker-image.prefix}/${project.artifactId}:${project.version}</image>
                     </to>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
+    <!-- The repositories below are needed because of spring-cloud-dependencies in
+         spring-cloud-vault-approle-mysql and spring-cloud-vault-approle-cassandra -->
+    <repositories>
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
 </project>

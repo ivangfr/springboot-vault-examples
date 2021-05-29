@@ -16,11 +16,16 @@
 
 ## Prerequisite
 
-Before running this example, all the steps described at [Start Environment](https://github.com/ivangfr/springboot-vault-examples#start-environment) section in the main README should be previously executed.
+Before running this example, all the steps described in [Start Environment](https://github.com/ivangfr/springboot-vault-examples#start-environment) section of the main README should be previously executed.
 
 ## Setup Vault-MySQL
 
-- Open a terminal and make sure you are inside `springboot-vault-examples` root folder
+- In a terminal, make sure you are inside `springboot-vault-examples` root folder
+
+- Export to `VAULT_ROOT_TOKEN` environment variable the value obtained while unsealing `Vault` described at [Start Environment](https://github.com/ivangfr/springboot-vault-examples#start-environment) section of the main README
+  ```
+  export VAULT_ROOT_TOKEN=...
+  ```
 
 - Run the following script
   ```
@@ -31,7 +36,7 @@ Before running this example, all the steps described at [Start Environment](http
 
 ### Running with Maven Wrapper
 
-- In a terminal, make sure you are inside `springboot-vault-examples` root folder
+- Open a new terminal and make sure you are inside `springboot-vault-examples` root folder
 
 - Run the following commands
   ```
@@ -43,7 +48,9 @@ Before running this example, all the steps described at [Start Environment](http
 
 ### Running as Docker Container
 
-- Go to the `springboot-vault-examples` root folder and build the docker image
+- Open a new terminal and make sure you are inside `springboot-vault-examples` root folder
+  
+- Build the Docker image
   ```
   ./mvnw clean compile jib:dockerBuild --projects spring-vault-approle-multi-datasources-mysql/restaurant-service
   ```
@@ -58,12 +65,12 @@ Before running this example, all the steps described at [Start Environment](http
   | `DISH_MYSQL_HOST`     | Specify host of the `MySQL` to use (default `localhost`)  |
   | `DISH_MYSQL_PORT`     | Specify port of the `MySQL` to use (default `3306`)       |
 
-- Run the docker container
+- Run the Docker container
   ```
-  docker run -d --rm --name restaurant-service -p 9083:8080 \
+  docker run --rm --name restaurant-service -p 9083:8080 \
     -e VAULT_HOST=vault -e CONSUL_HOST=consul -e CUSTOMER_MYSQL_HOST=mysql -e DISH_MYSQL_HOST=mysql-2 \
     --network springboot-vault-examples_default \
-    docker.mycompany.com/restaurant-service:1.0.0
+    ivanfranchin/restaurant-service:1.0.0
   ```
 
 ## Using restaurant-service
@@ -74,63 +81,72 @@ You can access `restaurant-service` Swagger website at http://localhost:9083/swa
 
 - **Vault**
 
-  > **Note:** In order to run some commands, you must have [`jq`](https://stedolan.github.io/jq) installed on you machine
+  > **Note:** In order to run some commands, you must have [`jq`](https://stedolan.github.io/jq) installed in your machine
 
-  1. List of active leases for `database/creds/customer-role` (the same can be done for `database/creds/dish-role`)
-     ```
-     curl -s -X LIST \
-       -H "X-Vault-Token: ${VAULT_ROOT_TOKEN}" \
-       http://localhost:8200/v1/sys/leases/lookup/database/creds/customer-role | jq .
-     ```
-     
-     The response will be something like
-     ```
-     {
-       "request_id": "16d2ec27-bb75-29a4-a01d-489c4f7a2a34",
-       "lease_id": "",
-       "renewable": false,
-       "lease_duration": 0,
-       "data": {
-         "keys": [
-           "4pUp7cHODXpdtsXadzgsL5aZ"
-         ]
-       },
-       "wrap_info": null,
-       "warnings": null,
-       "auth": null
-     }
-     ```
+  - Open a new terminal
+    
+  - Export to `VAULT_ROOT_TOKEN` environment variable the value obtained while unsealing `Vault` described at [Start Environment](https://github.com/ivangfr/springboot-vault-examples#start-environment) section of the main README
+    ```
+    export VAULT_ROOT_TOKEN=...
+    ```
 
-  1. See specific lease metadata
-     ```
-     curl -s -X PUT \
-       -H "X-Vault-Token: ${VAULT_ROOT_TOKEN}" \
-       -d '{ "lease_id": "database/creds/customer-role/4pUp7cHODXpdtsXadzgsL5aZ" }' \
-       http://localhost:8200/v1/sys/leases/lookup | jq .
-     ```
+  - List of active leases for `database/creds/customer-role` (the same can be done for `database/creds/dish-role`)
+    ```
+    curl -s -X LIST \
+      -H "X-Vault-Token: ${VAULT_ROOT_TOKEN}" \
+      http://localhost:8200/v1/sys/leases/lookup/database/creds/customer-role | jq .
+    ```
      
-     The response will be something like
-     ```
-     {
-       "request_id": "c020ab73-84db-406f-2dac-d169d7f2db51",
-       "lease_id": "",
-       "renewable": false,
-       "lease_duration": 0,
-       "data": {
-         "expire_time": "2019-10-05T22:22:32.4210957Z",
-         "id": "database/creds/customer-role/4pUp7cHODXpdtsXadzgsL5aZ",
-         "issue_time": "2019-10-05T22:19:32.3713442Z",
-         "last_renewal": "2019-10-05T22:20:32.4211219Z",
-         "renewable": true,
-         "ttl": 78
-       },
-       "wrap_info": null,
-       "warnings": null,
-       "auth": null
-     }
-     ``` 
+    The response will be something like
+    ```
+    {
+      "request_id": "16d2ec27-bb75-29a4-a01d-489c4f7a2a34",
+      "lease_id": "",
+      "renewable": false,
+      "lease_duration": 0,
+      "data": {
+        "keys": [
+          "4pUp7cHODXpdtsXadzgsL5aZ"
+        ]
+      },
+      "wrap_info": null,
+      "warnings": null,
+      "auth": null
+    }
+    ```
+
+  - See specific lease metadata
+    ```
+    curl -s -X PUT \
+      -H "X-Vault-Token: ${VAULT_ROOT_TOKEN}" \
+      -d '{ "lease_id": "database/creds/customer-role/4pUp7cHODXpdtsXadzgsL5aZ" }' \
+      http://localhost:8200/v1/sys/leases/lookup | jq .
+    ```
+     
+    The response will be something like
+    ```
+    {
+      "request_id": "c020ab73-84db-406f-2dac-d169d7f2db51",
+      "lease_id": "",
+      "renewable": false,
+      "lease_duration": 0,
+      "data": {
+        "expire_time": "2019-10-05T22:22:32.4210957Z",
+        "id": "database/creds/customer-role/4pUp7cHODXpdtsXadzgsL5aZ",
+        "issue_time": "2019-10-05T22:19:32.3713442Z",
+        "last_renewal": "2019-10-05T22:20:32.4211219Z",
+        "renewable": true,
+        "ttl": 78
+      },
+      "wrap_info": null,
+      "warnings": null,
+      "auth": null
+    }
+    ```
 
 - **MySQL**
+
+  - Open a new terminal
 
   - Connect to `MySQL` inside docker container
     ```
@@ -168,14 +184,8 @@ You can access `restaurant-service` Swagger website at http://localhost:9083/swa
 - **Consul**
 
   `Consul` can be accessed at http://localhost:8500
-  
+
 ## Shutdown
 
-- Stop application
-  - If the application was started with `Maven`, go to the terminals where it is running and press `Ctrl+C`
-  - If the application was started as a Docker container, run the command below
-    ```
-    docker stop restaurant-service
-    ```
-    
+- Stop application by going to the terminal where it is running and pressing `Ctrl+C`
 - Stop docker-compose containers by following the instruction in [Shutdown](https://github.com/ivangfr/springboot-vault-examples#shutdown) section in the main README.

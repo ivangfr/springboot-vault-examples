@@ -15,11 +15,16 @@
 
 ## Prerequisite
 
-Before running this example, all the steps described at [Start Environment](https://github.com/ivangfr/springboot-vault-examples#start-environment) section in the main README should be previously executed.
+Before running this example, all the steps described in [Start Environment](https://github.com/ivangfr/springboot-vault-examples#start-environment) section of the main README should be previously executed.
 
 ## Setup Vault-MySQL
 
-- Open a terminal and make sure you are inside `springboot-vault-examples` root folder
+- In a terminal, make sure you are inside `springboot-vault-examples` root folder
+  
+- Export to `VAULT_ROOT_TOKEN` environment variable the value obtained while unsealing `Vault` described at [Start Environment](https://github.com/ivangfr/springboot-vault-examples#start-environment) section of the main README
+  ```
+  export VAULT_ROOT_TOKEN=...
+  ```
 
 - Run the following script
   ```
@@ -30,7 +35,7 @@ Before running this example, all the steps described at [Start Environment](http
 
 ### Running with Maven Wrapper
 
-- In a terminal, make sure you are inside `springboot-vault-examples` root folder
+- Open a new terminal and make sure you are inside `springboot-vault-examples` root folder
 
 - Run the following command
   ```
@@ -41,7 +46,9 @@ Before running this example, all the steps described at [Start Environment](http
 
 ### Running as Docker Container
 
-- Go to the `springboot-vault-examples` root folder and build the docker image
+- Open a new terminal and make sure you are inside `springboot-vault-examples` root folder
+  
+- Build the Docker image
   ```
   ./mvnw clean compile jib:dockerBuild --projects spring-vault-approle-mysql/movie-service
   ```
@@ -54,12 +61,12 @@ Before running this example, all the steps described at [Start Environment](http
   | `MYSQL_HOST`         | Specify host of the `MySQL` to use (default `localhost`)  |
   | `MYSQL_PORT`         | Specify port of the `MySQL` to use (default `3306`)       |
 
-- Run the docker container
+- Run the Docker container
   ```
-  docker run -d --rm --name movie-service -p 9082:8080 \
+  docker run --rm --name movie-service -p 9082:8080 \
     -e VAULT_HOST=vault -e CONSUL_HOST=consul -e MYSQL_HOST=mysql \
     --network springboot-vault-examples_default \
-    docker.mycompany.com/movie-service:1.0.0
+    ivanfranchin/movie-service:1.0.0
   ```
 
 ## Using movie-service
@@ -70,63 +77,72 @@ You can access `movie-service` Swagger website at http://localhost:9082/swagger-
 
 - **Vault**
 
-  > **Note:** In order to run some commands, you must have [`jq`](https://stedolan.github.io/jq) installed on you machine
+  > **Note:** In order to run some commands, you must have [`jq`](https://stedolan.github.io/jq) installed in your machine
 
-  1. List of active leases for `database/creds/movie-role`
-     ```
-     curl -s -X LIST \
-       -H "X-Vault-Token: ${VAULT_ROOT_TOKEN}" \
-       http://localhost:8200/v1/sys/leases/lookup/database/creds/movie-role | jq .
-     ```
-     
-     The response will be something like
-     ```
-     {
-       "request_id": "5dbe3871-fc4d-a727-d77f-a4c9495e4d1a",
-       "lease_id": "",
-       "renewable": false,
-       "lease_duration": 0,
-       "data": {
-         "keys": [
-           "CCV6h8U59TuGNNrvSUPNndYh"
-         ]
-       },
-       "wrap_info": null,
-       "warnings": null,
-       "auth": null
-     }
-     ```
+  - Open a new terminal
+    
+  - Export to `VAULT_ROOT_TOKEN` environment variable the value obtained while unsealing `Vault` described at [Start Environment](https://github.com/ivangfr/springboot-vault-examples#start-environment) section of the main README
+    ```
+    export VAULT_ROOT_TOKEN=...
+    ```
 
-  1. See specific lease metadata
-     ```
-     curl -s -X PUT \
-       -H "X-Vault-Token: ${VAULT_ROOT_TOKEN}" \
-       -d '{ "lease_id": "database/creds/movie-role/CCV6h8U59TuGNNrvSUPNndYh" }' \
-       http://localhost:8200/v1/sys/leases/lookup | jq .
-     ```
+  - List of active leases for `database/creds/movie-role`
+    ```
+    curl -s -X LIST \
+      -H "X-Vault-Token: ${VAULT_ROOT_TOKEN}" \
+      http://localhost:8200/v1/sys/leases/lookup/database/creds/movie-role | jq .
+    ```
      
-     The response will be something like
-     ```
-     {
-       "request_id": "38c6c6fb-74f1-dd31-e89e-7e8a00f0f1f4",
-       "lease_id": "",
-       "renewable": false,
-       "lease_duration": 0,
-       "data": {
-         "expire_time": "2019-07-26T20:19:04.1710843Z",
-         "id": "database/creds/movie-role/CCV6h8U59TuGNNrvSUPNndYh",
-         "issue_time": "2019-07-26T20:17:04.1710687Z",
-         "last_renewal": null,
-         "renewable": true,
-         "ttl": 66
-       },
-       "wrap_info": null,
-       "warnings": null,
-       "auth": null
-     }
-     ```
+    The response will be something like
+    ```
+    {
+      "request_id": "5dbe3871-fc4d-a727-d77f-a4c9495e4d1a",
+      "lease_id": "",
+      "renewable": false,
+      "lease_duration": 0,
+      "data": {
+        "keys": [
+          "CCV6h8U59TuGNNrvSUPNndYh"
+        ]
+      },
+      "wrap_info": null,
+      "warnings": null,
+      "auth": null
+    }
+    ```
+
+  - See specific lease metadata
+    ```
+    curl -s -X PUT \
+      -H "X-Vault-Token: ${VAULT_ROOT_TOKEN}" \
+      -d '{ "lease_id": "database/creds/movie-role/CCV6h8U59TuGNNrvSUPNndYh" }' \
+      http://localhost:8200/v1/sys/leases/lookup | jq .
+    ```
+     
+    The response will be something like
+    ```
+    {
+      "request_id": "38c6c6fb-74f1-dd31-e89e-7e8a00f0f1f4",
+      "lease_id": "",
+      "renewable": false,
+      "lease_duration": 0,
+      "data": {
+        "expire_time": "2019-07-26T20:19:04.1710843Z",
+        "id": "database/creds/movie-role/CCV6h8U59TuGNNrvSUPNndYh",
+        "issue_time": "2019-07-26T20:17:04.1710687Z",
+        "last_renewal": null,
+        "renewable": true,
+        "ttl": 66
+      },
+      "wrap_info": null,
+      "warnings": null,
+      "auth": null
+    }
+    ```
 
 - **MySQL**
+
+  - Open a new terminal
 
   - Connect to `MySQL` inside docker container
     ```
@@ -165,11 +181,5 @@ You can access `movie-service` Swagger website at http://localhost:9082/swagger-
 
 ## Shutdown
 
-- Stop application
-  - If the application was started with `Maven`, go to the terminals where it is running and press `Ctrl+C`
-  - If the application was started as a Docker container, run the command below
-    ```
-    docker stop movie-service
-    ```
-    
+- Stop application by going to the terminal where it is running and pressing `Ctrl+C`
 - Stop docker-compose containers by following the instruction in [Shutdown](https://github.com/ivangfr/springboot-vault-examples#shutdown) section in the main README.
