@@ -100,25 +100,4 @@
         </plugins>
     </build>
 
-    <!-- The repositories below are needed because of spring-cloud-dependencies in
-         spring-cloud-vault-approle-mysql and spring-cloud-vault-approle-cassandra -->
-    <repositories>
-        <repository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshots</name>
-            <url>https://repo.spring.io/snapshot</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-        </repository>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
 </project>
