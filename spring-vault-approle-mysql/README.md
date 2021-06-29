@@ -181,5 +181,12 @@ You can access `movie-service` Swagger website at http://localhost:9082/swagger-
 
 ## Shutdown
 
-- Stop application by going to the terminal where it is running and pressing `Ctrl+C`
-- Stop docker-compose containers by following the instruction in [Shutdown](https://github.com/ivangfr/springboot-vault-examples#shutdown) section in the main README.
+- Go to the terminal where the application is running and pressing `Ctrl+C`
+- Stop the services present in `docker-compose.yml` as explained in [Shutdown](https://github.com/ivangfr/springboot-vault-examples#shutdown) section of the main README
+
+## Cleanup
+
+To remove the Docker image create by this example, go to a terminal and run the command below
+```
+docker rmi ivanfranchin/movie-service:1.0.0
+```

@@ -47,11 +47,17 @@ In order to solve this problem, I have implemented some solutions for applicatio
 
 ## Shutdown
 
-- In a terminal, make sure you are in `springboot-vault-examples` root folder
-- To stop and remove docker-compose containers, network and volumes, run
-  ```
-  docker-compose down -v
-  ```
+To stop and remove docker-compose containers, network and volumes, go to a terminal and, inside `springboot-vault-examples` root folder, run the command below
+```
+docker-compose down -v
+```
+
+## Cleanup
+
+To remove the Docker images created by this project, go to a terminal and, inside `springboot-vault-examples` root folder, run the following script
+```
+./remove-docker-images.sh
+```
 
 ## References
 

@@ -29,7 +29,6 @@ services:
 
   cassandra:
     build: cassandra
-    image: ivanfranchin/cassandra:3.11.10
     container_name: cassandra
     restart: unless-stopped
     ports:
