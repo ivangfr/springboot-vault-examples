@@ -24,5 +24,4 @@ public class BookServiceImpl implements BookService {
         book.setId(UUID.randomUUID());
         return bookRepository.save(book);
     }
-
 }

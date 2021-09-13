@@ -2,8 +2,8 @@ package com.mycompany.restaurantservice.dish.rest;
 
 import com.mycompany.restaurantservice.dish.mapper.DishMapper;
 import com.mycompany.restaurantservice.dish.model.Dish;
-import com.mycompany.restaurantservice.dish.rest.dto.CreateDishDto;
-import com.mycompany.restaurantservice.dish.rest.dto.DishDto;
+import com.mycompany.restaurantservice.dish.rest.dto.CreateDishRequest;
+import com.mycompany.restaurantservice.dish.rest.dto.DishResponse;
 import com.mycompany.restaurantservice.dish.service.DishService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
@@ -41,19 +41,18 @@ public class DishController {
     }
 
     @GetMapping
-    public List<DishDto> getDishes() {
+    public List<DishResponse> getDishes() {
         return dishService.getDishes()
                 .stream()
-                .map(dishMapper::toDishDto)
+                .map(dishMapper::toDishResponse)
                 .collect(Collectors.toList());
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public DishDto createDish(@Valid @RequestBody CreateDishDto createDishDto) {
-        Dish dish = dishMapper.toDish(createDishDto);
+    public DishResponse createDish(@Valid @RequestBody CreateDishRequest createDishRequest) {
+        Dish dish = dishMapper.toDish(createDishRequest);
         dish = dishService.saveDish(dish);
-        return dishMapper.toDishDto(dish);
+        return dishMapper.toDishResponse(dish);
     }
-
 }

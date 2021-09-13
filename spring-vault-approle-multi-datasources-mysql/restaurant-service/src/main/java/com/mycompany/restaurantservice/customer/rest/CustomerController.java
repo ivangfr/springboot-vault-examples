@@ -2,8 +2,8 @@ package com.mycompany.restaurantservice.customer.rest;
 
 import com.mycompany.restaurantservice.customer.mapper.CustomerMapper;
 import com.mycompany.restaurantservice.customer.model.Customer;
-import com.mycompany.restaurantservice.customer.rest.dto.CreateCustomerDto;
-import com.mycompany.restaurantservice.customer.rest.dto.CustomerDto;
+import com.mycompany.restaurantservice.customer.rest.dto.CreateCustomerRequest;
+import com.mycompany.restaurantservice.customer.rest.dto.CustomerResponse;
 import com.mycompany.restaurantservice.customer.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
@@ -41,19 +41,18 @@ public class CustomerController {
     }
 
     @GetMapping
-    public List<CustomerDto> getCustomers() {
+    public List<CustomerResponse> getCustomers() {
         return customerService.getCustomers()
                 .stream()
-                .map(customerMapper::toCustomerDto)
+                .map(customerMapper::toCustomerResponse)
                 .collect(Collectors.toList());
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public CustomerDto createCustomer(@Valid @RequestBody CreateCustomerDto createCustomerDto) {
-        Customer customer = customerMapper.toCustomer(createCustomerDto);
+    public CustomerResponse createCustomer(@Valid @RequestBody CreateCustomerRequest createCustomerRequest) {
+        Customer customer = customerMapper.toCustomer(createCustomerRequest);
         customer = customerService.saveCustomer(customer);
-        return customerMapper.toCustomerDto(customer);
+        return customerMapper.toCustomerResponse(customer);
     }
-
 }

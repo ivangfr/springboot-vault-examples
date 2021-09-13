@@ -1,15 +1,14 @@
 package com.mycompany.restaurantservice.dish.mapper;
 
 import com.mycompany.restaurantservice.dish.model.Dish;
-import com.mycompany.restaurantservice.dish.rest.dto.CreateDishDto;
-import com.mycompany.restaurantservice.dish.rest.dto.DishDto;
+import com.mycompany.restaurantservice.dish.rest.dto.CreateDishRequest;
+import com.mycompany.restaurantservice.dish.rest.dto.DishResponse;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface DishMapper {
 
-    Dish toDish(CreateDishDto createDishDto);
+    Dish toDish(CreateDishRequest createDishRequest);
 
-    DishDto toDishDto(Dish dish);
-
+    DishResponse toDishResponse(Dish dish);
 }

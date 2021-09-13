@@ -4,12 +4,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-public class CreateBookDto {
+public class CreateBookRequest {
 
     @Schema(example = "Spring Boot in a Nutshell")
     private String title;
 
     @Schema(example = "Ivan Franchin")
     private String author;
-
 }

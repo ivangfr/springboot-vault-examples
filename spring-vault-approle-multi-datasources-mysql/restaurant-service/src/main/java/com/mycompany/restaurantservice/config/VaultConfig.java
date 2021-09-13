@@ -46,5 +46,4 @@ public class VaultConfig extends AbstractVaultConfiguration {
 
         return new AppRoleAuthentication(options, restOperations());
     }
-
 }

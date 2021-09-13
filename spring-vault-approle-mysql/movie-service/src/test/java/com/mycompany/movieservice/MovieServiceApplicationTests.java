@@ -11,5 +11,4 @@ class MovieServiceApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }

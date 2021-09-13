@@ -41,7 +41,7 @@ public class DishDbConfig {
         String username = environment.getProperty("datasource.dish.username");
         log.info("==> datasource.dish.username: {}", username);
 
-        // jdbcUrl, username and password are set implicitly in the create below
+        // jdbcUrl, username and password are set implicitly in the "create" below
         return DataSourceBuilder.create().build();
     }
 

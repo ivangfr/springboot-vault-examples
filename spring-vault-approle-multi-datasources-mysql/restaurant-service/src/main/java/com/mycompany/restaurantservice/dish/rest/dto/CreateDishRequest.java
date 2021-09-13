@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Data
-public class CreateDishDto {
+public class CreateDishRequest {
 
     @Schema(example = "Pizza 4 Cheese")
     @NotBlank
@@ -17,5 +17,4 @@ public class CreateDishDto {
     @Schema(example = "5.90")
     @NotNull
     private BigDecimal price;
-
 }

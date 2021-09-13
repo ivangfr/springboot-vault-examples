@@ -43,7 +43,7 @@ public class CustomerDbConfig {
         String username = environment.getProperty("datasource.customer.username");
         log.info("==> datasource.customer.username: {}", username);
 
-        // jdbcUrl, username and password are set implicitly in the create below
+        // jdbcUrl, username and password are set implicitly in the "create" below
         return DataSourceBuilder.create().build();
     }
 

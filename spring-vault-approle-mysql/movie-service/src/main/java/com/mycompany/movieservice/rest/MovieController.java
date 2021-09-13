@@ -2,8 +2,8 @@ package com.mycompany.movieservice.rest;
 
 import com.mycompany.movieservice.mapper.MovieMapper;
 import com.mycompany.movieservice.model.Movie;
-import com.mycompany.movieservice.rest.dto.CreateMovieDto;
-import com.mycompany.movieservice.rest.dto.MovieDto;
+import com.mycompany.movieservice.rest.dto.CreateMovieRequest;
+import com.mycompany.movieservice.rest.dto.MovieResponse;
 import com.mycompany.movieservice.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
@@ -41,19 +41,18 @@ public class MovieController {
     }
 
     @GetMapping
-    public List<MovieDto> getMovies() {
+    public List<MovieResponse> getMovies() {
         return movieService.getMovies()
                 .stream()
-                .map(movieMapper::toMovieDto)
+                .map(movieMapper::toMovieResponse)
                 .collect(Collectors.toList());
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public MovieDto createMovie(@Valid @RequestBody CreateMovieDto createMovieDto) {
-        Movie movie = movieMapper.toMovie(createMovieDto);
+    public MovieResponse createMovie(@Valid @RequestBody CreateMovieRequest createMovieRequest) {
+        Movie movie = movieMapper.toMovie(createMovieRequest);
         movie = movieService.saveMovie(movie);
-        return movieMapper.toMovieDto(movie);
+        return movieMapper.toMovieResponse(movie);
     }
-
 }

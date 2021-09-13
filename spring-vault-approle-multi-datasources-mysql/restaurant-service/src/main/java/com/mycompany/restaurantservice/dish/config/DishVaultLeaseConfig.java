@@ -58,5 +58,4 @@ public class DishVaultLeaseConfig {
         hikariConfigMXBean.setUsername(username);
         hikariConfigMXBean.setPassword(password);
     }
-
 }

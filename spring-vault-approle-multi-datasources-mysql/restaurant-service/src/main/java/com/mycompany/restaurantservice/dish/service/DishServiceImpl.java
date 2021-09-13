@@ -22,5 +22,4 @@ public class DishServiceImpl implements DishService {
     public Dish saveDish(Dish dish) {
         return dishRepository.save(dish);
     }
-
 }

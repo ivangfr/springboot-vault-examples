@@ -6,7 +6,7 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
 @Data
-public class CreateStudentDto {
+public class CreateStudentRequest {
 
     @Schema(example = "Ivan")
     @NotBlank
@@ -19,5 +19,4 @@ public class CreateStudentDto {
     @Schema(example = "ivan.franchin@test.com")
     @NotBlank
     private String email;
-
 }

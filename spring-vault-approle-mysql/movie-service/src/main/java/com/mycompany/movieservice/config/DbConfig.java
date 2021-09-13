@@ -25,9 +25,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(
-        basePackageClasses = MovieRepository.class
-)
+@EnableJpaRepositories(basePackageClasses = MovieRepository.class)
 public class DbConfig {
 
     private final Environment environment;
@@ -38,7 +36,7 @@ public class DbConfig {
         String username = environment.getProperty("datasource.username");
         log.info("==> datasource.username: {}", username);
 
-        // jdbcUrl, username and password are set implicitly in the create below
+        // jdbcUrl, username and password are set implicitly in the "create" below
         return DataSourceBuilder.create().build();
     }
 
@@ -60,5 +58,4 @@ public class DbConfig {
     PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
     }
-
 }

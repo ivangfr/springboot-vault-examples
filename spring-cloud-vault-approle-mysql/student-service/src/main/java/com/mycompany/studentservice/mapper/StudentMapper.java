@@ -1,15 +1,14 @@
 package com.mycompany.studentservice.mapper;
 
 import com.mycompany.studentservice.model.Student;
-import com.mycompany.studentservice.rest.dto.CreateStudentDto;
-import com.mycompany.studentservice.rest.dto.StudentDto;
+import com.mycompany.studentservice.rest.dto.CreateStudentRequest;
+import com.mycompany.studentservice.rest.dto.StudentResponse;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface StudentMapper {
 
-    Student toStudent(CreateStudentDto createStudentDto);
+    Student toStudent(CreateStudentRequest createStudentRequest);
 
-    StudentDto toStudentDto(Student student);
-
+    StudentResponse toStudentResponse(Student student);
 }

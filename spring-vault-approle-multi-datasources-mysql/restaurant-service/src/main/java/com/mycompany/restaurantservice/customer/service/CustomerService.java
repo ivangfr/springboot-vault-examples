@@ -9,5 +9,4 @@ public interface CustomerService {
     List<Customer> getCustomers();
 
     Customer saveCustomer(Customer customer);
-
 }

@@ -22,5 +22,4 @@ public class MovieServiceImpl implements MovieService {
     public Movie saveMovie(Movie movie) {
         return movieRepository.save(movie);
     }
-
 }

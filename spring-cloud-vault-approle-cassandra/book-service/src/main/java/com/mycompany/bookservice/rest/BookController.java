@@ -2,8 +2,8 @@ package com.mycompany.bookservice.rest;
 
 import com.mycompany.bookservice.mapper.BookMapper;
 import com.mycompany.bookservice.model.Book;
-import com.mycompany.bookservice.rest.dto.BookDto;
-import com.mycompany.bookservice.rest.dto.CreateBookDto;
+import com.mycompany.bookservice.rest.dto.BookResponse;
+import com.mycompany.bookservice.rest.dto.CreateBookRequest;
 import com.mycompany.bookservice.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
@@ -41,19 +41,18 @@ public class BookController {
     }
 
     @GetMapping
-    public List<BookDto> getBooks() {
+    public List<BookResponse> getBooks() {
         return bookService.getBooks()
                 .stream()
-                .map(bookMapper::toBookDto)
+                .map(bookMapper::toBookResponse)
                 .collect(Collectors.toList());
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public BookDto createBook(@Valid @RequestBody CreateBookDto createBookDto) {
-        Book book = bookMapper.toBook(createBookDto);
+    public BookResponse createBook(@Valid @RequestBody CreateBookRequest createBookRequest) {
+        Book book = bookMapper.toBook(createBookRequest);
         book = bookService.saveBook(book);
-        return bookMapper.toBookDto(book);
+        return bookMapper.toBookResponse(book);
     }
-
 }

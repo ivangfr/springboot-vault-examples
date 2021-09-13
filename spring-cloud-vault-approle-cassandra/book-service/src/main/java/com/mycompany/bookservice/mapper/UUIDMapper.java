@@ -10,5 +10,4 @@ public class UUIDMapper {
     public String asString(UUID uuid) {
         return  uuid != null ? uuid.toString() : null;
     }
-
 }

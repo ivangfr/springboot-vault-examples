@@ -11,5 +11,4 @@ class StudentServiceApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }

@@ -30,7 +30,7 @@ In order to solve this problem, I have implemented some solutions for applicatio
   docker-compose up -d
   ```
 
-- Wait a bit until the containers are `Up (healthy)`. In order to check the status of the containers run
+- Wait for Docker containers to be with status `running (healthy)`. To check it, run
   ```
   docker-compose ps
   ```

@@ -9,5 +9,4 @@ public interface DishService {
     List<Dish> getDishes();
 
     Dish saveDish(Dish dish);
-
 }

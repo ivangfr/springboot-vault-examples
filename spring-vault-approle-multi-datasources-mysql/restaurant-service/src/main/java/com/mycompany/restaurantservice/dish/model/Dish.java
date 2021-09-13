@@ -24,5 +24,4 @@ public class Dish {
 
     @Column(nullable = false)
     private BigDecimal price;
-
 }

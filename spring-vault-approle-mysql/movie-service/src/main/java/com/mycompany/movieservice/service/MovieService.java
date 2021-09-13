@@ -9,5 +9,4 @@ public interface MovieService {
     List<Movie> getMovies();
 
     Movie saveMovie(Movie movie);
-
 }

@@ -2,8 +2,8 @@ package com.mycompany.studentservice.rest;
 
 import com.mycompany.studentservice.mapper.StudentMapper;
 import com.mycompany.studentservice.model.Student;
-import com.mycompany.studentservice.rest.dto.CreateStudentDto;
-import com.mycompany.studentservice.rest.dto.StudentDto;
+import com.mycompany.studentservice.rest.dto.CreateStudentRequest;
+import com.mycompany.studentservice.rest.dto.StudentResponse;
 import com.mycompany.studentservice.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
@@ -41,19 +41,18 @@ public class StudentController {
     }
 
     @GetMapping
-    public List<StudentDto> getStudents() {
+    public List<StudentResponse> getStudents() {
         return studentService.getStudents()
                 .stream()
-                .map(studentMapper::toStudentDto)
+                .map(studentMapper::toStudentResponse)
                 .collect(Collectors.toList());
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public StudentDto createStudent(@Valid @RequestBody CreateStudentDto createStudentDto) {
-        Student student = studentMapper.toStudent(createStudentDto);
+    public StudentResponse createStudent(@Valid @RequestBody CreateStudentRequest createStudentRequest) {
+        Student student = studentMapper.toStudent(createStudentRequest);
         student = studentService.saveStudent(student);
-        return studentMapper.toStudentDto(student);
+        return studentMapper.toStudentResponse(student);
     }
-
 }

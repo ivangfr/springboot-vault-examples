@@ -2,7 +2,7 @@ version: "3.8"
 services:
 
   mysql:
-    image: mysql:8.0.25
+    image: mysql:8.0.26
     container_name: mysql
     restart: unless-stopped
     environment:
@@ -12,10 +12,9 @@ services:
       - "3306:3306"
     healthcheck:
       test: "mysqladmin ping -u root -p$${MYSQL_ROOT_PASSWORD}"
-      start_period: 10s
 
   mysql-2:
-    image: mysql:8.0.25
+    image: mysql:8.0.26
     container_name: mysql-2
     restart: unless-stopped
     environment:
@@ -25,7 +24,6 @@ services:
       - "3307:3306"
     healthcheck:
       test: "mysqladmin ping -u root -p$${MYSQL_ROOT_PASSWORD}"
-      start_period: 10s
 
   cassandra:
     build: cassandra
@@ -37,10 +35,9 @@ services:
       - "9160:9160"
     healthcheck:
       test: ["CMD-SHELL", "[ $$(nodetool statusgossip) = running ]"]
-      start_period: 10s
 
   vault:
-    image: vault:1.7.2
+    image: vault:1.8.2
     container_name: vault
     restart: unless-stopped
     ports:
@@ -51,11 +48,10 @@ services:
       - ./vault:/my/vault
     healthcheck:
       test: "nc -z -v localhost 8200"
-      start_period: 10s
     command: "vault server -config=/my/vault/config/config.hcl"
 
   consul:
-    image: consul:1.9.5
+    image: consul:1.10.2
     container_name: consul
     restart: unless-stopped
     ports:
@@ -64,4 +60,3 @@ services:
       - "8600:53/udp"
     healthcheck:
       test: "curl -f http://localhost:8500/v1/status/leader || exit 1"
-      start_period: 10s

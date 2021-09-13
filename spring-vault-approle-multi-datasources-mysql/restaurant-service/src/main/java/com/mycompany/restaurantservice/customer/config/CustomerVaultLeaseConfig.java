@@ -58,5 +58,4 @@ public class CustomerVaultLeaseConfig {
         hikariConfigMXBean.setUsername(username);
         hikariConfigMXBean.setPassword(password);
     }
-
 }
