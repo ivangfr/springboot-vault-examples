@@ -19,7 +19,7 @@ In order to solve this problem, I have implemented some solutions for applicatio
 
 ## Prerequisites
 
-- [`Java 11+`](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
+- [`Java 11+`](https://www.oracle.com/java/technologies/downloads/#java11)
 - [`Docker`](https://www.docker.com/)
 - [`Docker-Compose`](https://docs.docker.com/compose/install/)
 
@@ -30,7 +30,7 @@ In order to solve this problem, I have implemented some solutions for applicatio
   docker-compose up -d
   ```
 
-- Wait for Docker containers to be with status `running (healthy)`. To check it, run
+- Wait for Docker containers to be up and running. To check it, run
   ```
   docker-compose ps
   ```

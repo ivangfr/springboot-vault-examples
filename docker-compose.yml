@@ -2,7 +2,7 @@ version: "3.8"
 services:
 
   mysql:
-    image: mysql:8.0.26
+    image: mysql:8.0.27
     container_name: mysql
     restart: unless-stopped
     environment:
@@ -14,7 +14,7 @@ services:
       test: "mysqladmin ping -u root -p$${MYSQL_ROOT_PASSWORD}"
 
   mysql-2:
-    image: mysql:8.0.26
+    image: mysql:8.0.27
     container_name: mysql-2
     restart: unless-stopped
     environment:
@@ -37,7 +37,7 @@ services:
       test: ["CMD-SHELL", "[ $$(nodetool statusgossip) = running ]"]
 
   vault:
-    image: vault:1.8.2
+    image: vault:1.9.0
     container_name: vault
     restart: unless-stopped
     ports:
@@ -46,12 +46,12 @@ services:
       - IPC_LOCK
     volumes:
       - ./vault:/my/vault
+    command: "vault server -config=/my/vault/config/config.hcl"
     healthcheck:
       test: "nc -z -v localhost 8200"
-    command: "vault server -config=/my/vault/config/config.hcl"
 
   consul:
-    image: consul:1.10.2
+    image: consul:1.10.4
     container_name: consul
     restart: unless-stopped
     ports:
