@@ -52,7 +52,7 @@ Before running this example, all the steps described in [Start Environment](http
   ./mvnw clean compile jib:dockerBuild --projects spring-cloud-vault-approle-cassandra/book-service
   ```
   | Environment Variable | Description                                                  |
-  | -------------------- | ------------------------------------------------------------ |
+  |----------------------|--------------------------------------------------------------|
   | `VAULT_HOST`         | Specify host of the `Vault` to use (default `localhost`)     |
   | `VAULT_PORT`         | Specify port of the `Vault` to use (default `8200`)          |
   | `CONSUL_HOST`        | Specify host of the `Consul` to use (default `localhost`)    |
