@@ -49,7 +49,7 @@ Before running this example, all the steps described in [Start Environment](http
   
 - Build the Docker image
   ```
-  ./mvnw clean compile jib:dockerBuild --projects spring-cloud-vault-approle-cassandra/book-service
+  ./docker-build.sh spring-cloud-vault-approle-cassandra
   ```
   | Environment Variable | Description                                                  |
   |----------------------|--------------------------------------------------------------|
@@ -168,5 +168,5 @@ You can access `book-service` Swagger website at http://localhost:9081/swagger-u
 
 To remove the Docker image create by this example, go to a terminal and run the command below
 ```
-docker rmi ivanfranchin/book-service:1.0.0
+./remove-docker-images.sh spring-cloud-vault-approle-cassandra
 ```

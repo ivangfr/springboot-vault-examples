@@ -36,7 +36,7 @@ public class DishDbConfig {
     private final Environment environment;
 
     @Bean(name = "dishDataSource")
-    @ConfigurationProperties(prefix = "datasource.dish")
+    @ConfigurationProperties("datasource.dish")
     DataSource dataSource() {
         String username = environment.getProperty("datasource.dish.username");
         log.info("==> datasource.dish.username: {}", username);

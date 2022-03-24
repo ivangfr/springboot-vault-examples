@@ -37,7 +37,7 @@ services:
       test: ["CMD-SHELL", "[ $$(nodetool statusgossip) = running ]"]
 
   vault:
-    image: vault:1.9.3
+    image: vault:1.10.0
     container_name: vault
     restart: unless-stopped
     ports:
@@ -51,7 +51,7 @@ services:
       test: "nc -z -v localhost 8200"
 
   consul:
-    image: consul:1.11.2
+    image: consul:1.11.4
     container_name: consul
     restart: unless-stopped
     ports:

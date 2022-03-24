@@ -56,7 +56,7 @@ docker-compose down -v
 
 To remove the Docker images created by this project, go to a terminal and, inside `springboot-vault-examples` root folder, run the following script
 ```
-./remove-docker-images.sh
+./remove-docker-images.sh all
 ```
 
 ## References

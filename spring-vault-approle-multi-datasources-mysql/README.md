@@ -52,7 +52,7 @@ Before running this example, all the steps described in [Start Environment](http
   
 - Build the Docker image
   ```
-  ./mvnw clean compile jib:dockerBuild --projects spring-vault-approle-multi-datasources-mysql/restaurant-service
+  ./docker-build.sh spring-vault-approle-multi-datasources-mysql
   ```
   | Environment Variable  | Description                                               |
   |-----------------------|-----------------------------------------------------------|
@@ -194,5 +194,5 @@ You can access `restaurant-service` Swagger website at http://localhost:9083/swa
 
 To remove the Docker image create by this example, go to a terminal and run the command below
 ```
-docker rmi ivanfranchin/restaurant-service:1.0.0
+./remove-docker-images.sh spring-vault-approle-multi-datasources-mysql
 ```

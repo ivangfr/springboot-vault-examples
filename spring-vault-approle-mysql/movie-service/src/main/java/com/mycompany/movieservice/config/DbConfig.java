@@ -31,7 +31,7 @@ public class DbConfig {
     private final Environment environment;
 
     @Bean
-    @ConfigurationProperties(prefix = "datasource")
+    @ConfigurationProperties("datasource")
     DataSource dataSource() {
         String username = environment.getProperty("datasource.username");
         log.info("==> datasource.username: {}", username);
