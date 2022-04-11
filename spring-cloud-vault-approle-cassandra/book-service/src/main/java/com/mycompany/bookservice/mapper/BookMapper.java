@@ -9,6 +9,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring", uses = UUIDMapper.class)
 public interface BookMapper {
 
+    @Mapping(target = "id", ignore = true)
     Book toBook(CreateBookRequest createBookRequest);
 
     @Mapping(target = "id")
