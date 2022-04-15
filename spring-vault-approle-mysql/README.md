@@ -146,7 +146,7 @@ You can access `movie-service` Swagger website at http://localhost:9082/swagger-
 
   - Connect to `MySQL` inside docker container
     ```
-    docker exec -it mysql mysql -uroot -psecret
+    docker exec -it -e MYSQL_PWD="secret" mysql mysql -uroot
     ```
 
   - List users
@@ -162,9 +162,9 @@ You can access `movie-service` Swagger website at http://localhost:9082/swagger-
   - Log all queries
     ```
     SET GLOBAL general_log = 'ON';
-    SET global log_output = 'table';
+    SET GLOBAL log_output = 'table';
     
-    SELECT event_time, SUBSTRING(user_host,1,20) as user_host, thread_id, command_type, SUBSTRING(argument,1,70) FROM mysql.general_log WHERE user_host LIKE 'v-approle-movie-%';
+    SELECT event_time, SUBSTRING(user_host,1,20) as user_host, thread_id, command_type, SUBSTRING(convert(argument using utf8),1,70) FROM mysql.general_log WHERE user_host LIKE 'v-approle-movie-%';
     ```
 
   - Create/Remove user
