@@ -150,9 +150,9 @@ You can access `restaurant-service` Swagger website at http://localhost:9083/swa
 
   - Connect to `MySQL` inside docker container
     ```
-    docker exec -it -e MYSQL_PWD="secret" mysql mysql -uroot
+    docker exec -it -e MYSQL_PWD=secret mysql mysql -uroot
     -- OR --
-    docker exec -it -e MYSQL_PWD="secret" mysql-2 mysql -uroot
+    docker exec -it -e MYSQL_PWD=secret mysql-2 mysql -uroot
     ```
 
   - List users

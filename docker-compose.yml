@@ -2,7 +2,7 @@ version: "3.8"
 services:
 
   mysql:
-    image: mysql:8.0.28
+    image: mysql:8.0.29
     container_name: mysql
     restart: unless-stopped
     environment:
@@ -14,7 +14,7 @@ services:
       test: "mysqladmin ping -u root -p$${MYSQL_ROOT_PASSWORD}"
 
   mysql-2:
-    image: mysql:8.0.28
+    image: mysql:8.0.29
     container_name: mysql-2
     restart: unless-stopped
     environment:
@@ -37,7 +37,7 @@ services:
       test: ["CMD-SHELL", "[ $$(nodetool statusgossip) = running ]"]
 
   vault:
-    image: vault:1.10.0
+    image: vault:1.10.3
     container_name: vault
     restart: unless-stopped
     ports:
@@ -51,7 +51,7 @@ services:
       test: "nc -z -v localhost 8200"
 
   consul:
-    image: consul:1.11.4
+    image: consul:1.12.1
     container_name: consul
     restart: unless-stopped
     ports:

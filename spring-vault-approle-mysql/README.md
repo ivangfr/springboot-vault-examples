@@ -146,7 +146,7 @@ You can access `movie-service` Swagger website at http://localhost:9082/swagger-
 
   - Connect to `MySQL` inside docker container
     ```
-    docker exec -it -e MYSQL_PWD="secret" mysql mysql -uroot
+    docker exec -it -e MYSQL_PWD=secret mysql mysql -uroot
     ```
 
   - List users
