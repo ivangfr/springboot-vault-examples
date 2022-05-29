@@ -16,27 +16,13 @@
 
 ## Prerequisite
 
-Before running this example, all the steps described in [Start Environment](https://github.com/ivangfr/springboot-vault-examples#start-environment) section of the main README should be previously executed.
-
-## Setup Vault-MySQL
-
-- In a terminal, make sure you are inside `springboot-vault-examples` root folder
-
-- Export to `VAULT_ROOT_TOKEN` environment variable the value obtained while unsealing `Vault` described at [Start Environment](https://github.com/ivangfr/springboot-vault-examples#start-environment) section of the main README
-  ```
-  export VAULT_ROOT_TOKEN=...
-  ```
-
-- Run the following script
-  ```
-  ./setup-spring-vault-approle-multi-datasources-mysql.sh
-  ```
+Before running this example, make sure the environment is initialized (see [Initialize Environment](https://github.com/ivangfr/springboot-vault-examples#initialize-environment) section in the main README)
 
 ## Start restaurant-service
 
 ### Running with Maven Wrapper
 
-- Open a new terminal and make sure you are inside `springboot-vault-examples` root folder
+- In a terminal, make sure you are inside `springboot-vault-examples` root folder
 
 - Run the following commands
   ```
@@ -48,7 +34,7 @@ Before running this example, all the steps described in [Start Environment](http
 
 ### Running as Docker Container
 
-- Open a new terminal and make sure you are inside `springboot-vault-examples` root folder
+- In a terminal, make sure you are inside `springboot-vault-examples` root folder
   
 - Build the Docker image
   ```
@@ -69,7 +55,7 @@ Before running this example, all the steps described in [Start Environment](http
   ```
   docker run --rm --name restaurant-service -p 9083:8080 \
     -e VAULT_HOST=vault -e CONSUL_HOST=consul -e CUSTOMER_MYSQL_HOST=mysql -e DISH_MYSQL_HOST=mysql-2 \
-    --network springboot-vault-examples_default \
+    --network springboot-vault-examples \
     ivanfranchin/restaurant-service:1.0.0
   ```
 
@@ -85,7 +71,7 @@ You can access `restaurant-service` Swagger website at http://localhost:9083/swa
 
   - Open a new terminal
     
-  - Export to `VAULT_ROOT_TOKEN` environment variable the value obtained while unsealing `Vault` described at [Start Environment](https://github.com/ivangfr/springboot-vault-examples#start-environment) section of the main README
+  - Export to `VAULT_ROOT_TOKEN` environment variable the value obtained while [initializing the environment](https://github.com/ivangfr/springboot-vault-examples#initialize-environment) described in the main README
     ```
     export VAULT_ROOT_TOKEN=...
     ```
@@ -148,38 +134,39 @@ You can access `restaurant-service` Swagger website at http://localhost:9083/swa
 
   - Open a new terminal
 
-  - Connect to `MySQL` inside docker container
+  - Connect to `MySQL monitor` inside docker container
     ```
     docker exec -it -e MYSQL_PWD=secret mysql mysql -uroot
     -- OR --
     docker exec -it -e MYSQL_PWD=secret mysql-2 mysql -uroot
     ```
+    > To exit `MySQL monitor`, type `exit`
 
-  - List users
-    ```
-    SELECT User, Host FROM mysql.user;
-    ```
+    - List users
+      ```
+      SELECT User, Host FROM mysql.user;
+      ```
 
-  - Show running process
-    ```
-    SELECT * FROM information_schema.processlist ORDER BY user;
-    ```
+    - Show running process
+      ```
+      SELECT * FROM information_schema.processlist ORDER BY user;
+      ```
 
-  - Log all queries
-    ```
-    SET GLOBAL general_log = 'ON';
-    SET GLOBAL log_output = 'table';
+    - Log all queries
+      ```
+      SET GLOBAL general_log = 'ON';
+      SET GLOBAL log_output = 'table';
     
-    SELECT event_time, SUBSTRING(user_host,1,20) as user_host, thread_id, command_type, SUBSTRING(convert(argument using utf8),1,70) FROM mysql.general_log WHERE user_host LIKE 'v-approle-customer-%';
-    ```
+      SELECT event_time, SUBSTRING(user_host,1,20) as user_host, thread_id, command_type, SUBSTRING(convert(argument using utf8),1,70) FROM mysql.general_log WHERE user_host LIKE 'v-approle-customer-%';
+      ```
 
-  - Create/Remove user
-    ```
-    CREATE USER 'newuser'@'%' IDENTIFIED BY 'password';
-    GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'%';
+    - Create/Remove user
+      ```
+      CREATE USER 'newuser'@'%' IDENTIFIED BY 'password';
+      GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'%';
     
-    DROP USER 'newuser'@'%';
-    ```
+      DROP USER 'newuser'@'%';
+      ```
 
 - **Consul**
 

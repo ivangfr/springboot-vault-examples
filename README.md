@@ -23,38 +23,29 @@ In order to solve this problem, I have implemented some solutions for applicatio
 - [`Docker`](https://www.docker.com/)
 - [`Docker-Compose`](https://docs.docker.com/compose/install/)
 
-## Start Environment
+## Initialize Environment
 
-- Open one terminal and inside `springboot-vault-examples` root folder run
-  ```
-  docker-compose up -d
-  ```
-
-- Wait for Docker containers to be up and running. To check it, run
-  ```
-  docker-compose ps
-  ```
-
-- Once all containers are up and running, run the script below to unseal `Vault` and enable `AppRole`
-  ```
-  ./unseal-vault-enable-approle-databases.sh
-  ```
-
-- At the end of the script execution, the `VAULT_ROOT_TOKEN` value will be shown. Export it into every terminal it's needed
-  ```
-  export VAULT_ROOT_TOKEN=...
-  ```
-
-## Shutdown
-
-To stop and remove docker-compose containers, network and volumes, go to a terminal and, inside `springboot-vault-examples` root folder, run the command below
+Open a terminal and, inside `springboot-vault-examples` root folder, run the following script
 ```
-docker-compose down -v
+./init-environment.sh
+```
+
+This script will:
+- start `Consul`, `Vault`, `MySQL`, and `Cassandra` Docker containers;
+- unseal `Vault` and enable `AppRole` in it;
+- setup Database `roles` and `policies` in Vault for the application so that they can access their databases using dynamically generated credentials;
+- setup `KV Secrets` in `Vault` for the application;
+
+## Shutdown Environment
+
+To stop and remove docker-compose containers, network and volumes, go to a terminal and, inside `springboot-vault-examples` root folder, run the script below
+```
+./shutdown-environment.sh
 ```
 
 ## Cleanup
 
-To remove the Docker images created by this project, go to a terminal and, inside `springboot-vault-examples` root folder, run the following script
+To remove all Docker images created by this project, go to a terminal and, inside `springboot-vault-examples` root folder, run the following script
 ```
 ./remove-docker-images.sh all
 ```

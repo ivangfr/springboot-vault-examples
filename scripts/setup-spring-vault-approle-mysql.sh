@@ -16,7 +16,7 @@ DATABASE_ROLE_POLICY="movie-policy"
 KV_ROLE_POLICY="kv-policy"
 
 echo
-echo "================"
+echo "==================="
 echo "-- Database (MySQL)"
 
 echo
@@ -35,7 +35,7 @@ echo "--> List of leases"
 curl -i -H "X-Vault-Token: ${VAULT_ROOT_TOKEN}" -X LIST ${VAULT_ADDR}/v1/sys/leases/lookup/database/creds/${DATABASE_ROLE}
 
 echo
-echo "================"
+echo "==================="
 echo "-- Static KV secret"
 
 echo "setting message KV secret ..."
@@ -44,7 +44,7 @@ curl -X POST -i -H "X-Vault-Token: ${VAULT_ROOT_TOKEN}" -d '{"message": "Hello f
 echo "--> setting KV secret policy '${KV_ROLE_POLICY}' ..."
 curl -X POST -i -H "X-Vault-Token:${VAULT_ROOT_TOKEN}" -d '{"policy":"path \"secret/*\" {policy=\"read\"}"}' ${VAULT_ADDR}/v1/sys/policy/${KV_ROLE_POLICY}
 
-echo "================"
+echo "===================================="
 echo "-- AppRole (login without secret-id)"
 
 echo

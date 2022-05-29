@@ -7,21 +7,21 @@ fi
 
 VAULT_ADDR=http://localhost:8200
 
-CUSTOM_ROLE_ID="book-service-role-id"
-DATABASE_USER="book-user"
+CUSTOM_ROLE_ID="student-service-role-id"
+DATABASE_USER="student-user"
 
-DATABASE_ROLE="book-role"
-DATABASE_ROLE_POLICY="book-policy"
+DATABASE_ROLE="student-role"
+DATABASE_ROLE_POLICY="student-policy"
 
 KV_ROLE_POLICY="kv-policy"
 
 echo
-echo "================"
-echo "-- Database (Cassandra)"
+echo "==================="
+echo "-- Database (MySQL)"
 
 echo
 echo "--> creating Database role '${DATABASE_ROLE}' ..."
-curl -X POST -i -H "X-Vault-Token:${VAULT_ROOT_TOKEN}" -d '{"db_name": "cassandra", "creation_statements":"CREATE USER '"'"'{{username}}'"'"' WITH PASSWORD '"'"'{{password}}'"'"' NOSUPERUSER; GRANT ALL PERMISSIONS ON ALL KEYSPACES TO {{username}}"}, "default_ttl": "2m", "max_ttl": "10m"' ${VAULT_ADDR}/v1/database/roles/${DATABASE_ROLE}
+curl -X POST -i -H "X-Vault-Token:${VAULT_ROOT_TOKEN}" -d '{"db_name": "mysql", "creation_statements":"CREATE USER '"'"'{{name}}'"'"'@'"'"'%'"'"' IDENTIFIED BY '"'"'{{password}}'"'"'; GRANT ALL ON *.* TO '"'"'{{name}}'"'"'@'"'"'%'"'"';"}, "default_ttl": "2m", "max_ttl": "10m"' ${VAULT_ADDR}/v1/database/roles/${DATABASE_ROLE}
 #-- Note. Setting the 'default_ttl' and 'max_ttl' in the command above does not work! In order to test shorter times, change 'config.hcl' file.
 
 echo "--> setting Database policy '${DATABASE_ROLE_POLICY}' ..."
@@ -35,16 +35,16 @@ echo "--> List of leases"
 curl -i -H "X-Vault-Token: ${VAULT_ROOT_TOKEN}" -X LIST ${VAULT_ADDR}/v1/sys/leases/lookup/database/creds/${DATABASE_ROLE}
 
 echo
-echo "================"
+echo "==================="
 echo "-- Static KV secret"
 
 echo "setting message KV secret ..."
-curl -X POST -i -H "X-Vault-Token: ${VAULT_ROOT_TOKEN}" -d '{"message": "Hello from book-service"}' ${VAULT_ADDR}/v1/secret/book-service
+curl -X POST -i -H "X-Vault-Token: ${VAULT_ROOT_TOKEN}" -d '{"message": "Hello from student-service"}' ${VAULT_ADDR}/v1/secret/student-service
 
 echo "--> setting KV secret policy '${KV_ROLE_POLICY}' ..."
 curl -X POST -i -H "X-Vault-Token:${VAULT_ROOT_TOKEN}" -d '{"policy":"path \"secret/*\" {policy=\"read\"}"}' ${VAULT_ADDR}/v1/sys/policy/${KV_ROLE_POLICY}
 
-echo "================"
+echo "===================================="
 echo "-- AppRole (login without secret-id)"
 
 echo
@@ -64,10 +64,10 @@ CLIENT_TOKEN=$(curl -X POST -s -d '{"role_id":"'${ROLE_ID}'"}' ${VAULT_ADDR}/v1/
 echo "CLIENT_TOKEN=${CLIENT_TOKEN}"
 
 echo
-echo "--> testing Cassandra role '${DATABASE_ROLE}' with CLIENT_TOKEN ..."
+echo "--> testing MySQL role '${DATABASE_ROLE}' with CLIENT_TOKEN ..."
 curl -i -H "X-Vault-Token:${CLIENT_TOKEN}" ${VAULT_ADDR}/v1/database/creds/${DATABASE_ROLE}
 echo
 
 echo "--> testing message KV secret ..."
-curl -i -H "X-Vault-Token:${CLIENT_TOKEN}" ${VAULT_ADDR}/v1/secret/book-service
+curl -i -H "X-Vault-Token:${CLIENT_TOKEN}" ${VAULT_ADDR}/v1/secret/student-service
 echo

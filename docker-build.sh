@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source my-functions.sh
+source scripts/my-functions.sh
 
 check_script_input_parameter $1
 

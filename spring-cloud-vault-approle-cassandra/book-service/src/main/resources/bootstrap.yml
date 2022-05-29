@@ -14,4 +14,3 @@ spring:
       database:
         enabled: true
         role: book-role
-      connection-timeout: 20000

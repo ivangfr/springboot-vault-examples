@@ -14,27 +14,13 @@
 
 ## Prerequisite
 
-Before running this example, all the steps described in [Start Environment](https://github.com/ivangfr/springboot-vault-examples#start-environment) section of the main README should be previously executed.
-
-## Setup Vault-Cassandra
-
-- In a terminal, make sure you are inside `springboot-vault-examples` root folder
-
-- Export to `VAULT_ROOT_TOKEN` environment variable the value obtained while unsealing `Vault` described at [Start Environment](https://github.com/ivangfr/springboot-vault-examples#start-environment) section of the main README
-  ```
-  export VAULT_ROOT_TOKEN=...
-  ```
-
-- Run the following script
-  ```
-  ./setup-spring-cloud-vault-approle-cassandra.sh
-  ```
+Before running this example, make sure the environment is initialized (see [Initialize Environment](https://github.com/ivangfr/springboot-vault-examples#initialize-environment) section in the main README)
 
 ## Start book-service
 
 ### Running with Maven Wrapper
 
-- Open a new terminal and make sure you are inside `springboot-vault-examples` root folder
+- In a terminal, make sure you are inside `springboot-vault-examples` root folder
 
 - Run the following command
   ```
@@ -45,7 +31,7 @@ Before running this example, all the steps described in [Start Environment](http
 
 ### Running as Docker Container
 
-- Open a new terminal and make sure you are inside `springboot-vault-examples` root folder
+- In a terminal, make sure you are inside `springboot-vault-examples` root folder
   
 - Build the Docker image
   ```
@@ -64,7 +50,7 @@ Before running this example, all the steps described in [Start Environment](http
   ```
   docker run --rm --name book-service -p 9081:8080 \
     -e VAULT_HOST=vault -e CONSUL_HOST=consul -e CASSANDRA_HOST=cassandra \
-    --network springboot-vault-examples_default \
+    --network springboot-vault-examples \
     ivanfranchin/book-service:1.0.0
   ```
 
@@ -80,7 +66,7 @@ You can access `book-service` Swagger website at http://localhost:9081/swagger-u
 
   - Open a new terminal
     
-  - Export to `VAULT_ROOT_TOKEN` environment variable the value obtained while unsealing `Vault` described at [Start Environment](https://github.com/ivangfr/springboot-vault-examples#start-environment) section of the main README
+  - Export to `VAULT_ROOT_TOKEN` environment variable the value obtained while [initializing the environment](https://github.com/ivangfr/springboot-vault-examples#initialize-environment) described in the main README
     ```
     export VAULT_ROOT_TOKEN=...
     ```
@@ -143,17 +129,16 @@ You can access `book-service` Swagger website at http://localhost:9081/swagger-u
 
   - Open a new terminal
 
-  - Connect to `Cassandra` inside docker container and list books
+  - Connect to `cqlsh` inside docker container and list books
     ```
-    docker exec -it cassandra cqlsh -ucassandra -pcassandra
-    USE mycompany;
-    SELECT * FROM books;
+    docker exec -it cassandra cqlsh -ucassandra -pcassandra -k mycompany
     ```
+    > To exit `cqlsh`, type `exit`
 
-  - List users
-    ```
-    LIST USERS;
-    ```
+    - List users
+      ```
+      LIST USERS;
+      ```
 
 - **Consul**
 
