@@ -57,13 +57,13 @@ Before running this example, make sure the environment is initialized (see [Init
 
 ## Using movie-service
 
-You can access `movie-service` Swagger website at http://localhost:9082/swagger-ui.html
+You can access `movie-service` Swagger website at http://localhost:9082/swagger-ui/index.html
 
 ## Useful Links & Commands
 
 - **Vault**
 
-  > **Note:** In order to run some commands, you must have [`jq`](https://stedolan.github.io/jq) installed in your machine
+  > **Note**: In order to run some commands, you must have [`jq`](https://stedolan.github.io/jq) installed in your machine
 
   - Open a new terminal
     
@@ -169,7 +169,7 @@ You can access `movie-service` Swagger website at http://localhost:9082/swagger-
 ## Shutdown
 
 - Go to the terminal where the application is running and pressing `Ctrl+C`
-- Stop the services present in `docker-compose.yml` as explained in [Shutdown](https://github.com/ivangfr/springboot-vault-examples#shutdown) section of the main README
+- Stop the services present in `docker-compose.yml` as explained in [Shutdown Environment](https://github.com/ivangfr/springboot-vault-examples#shutdown-environment) section of the main README
 
 ## Cleanup
 
