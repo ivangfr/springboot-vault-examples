@@ -56,7 +56,7 @@ Before running this example, make sure the environment is initialized (see [Init
 
 ## Using book-service
 
-You can access `book-service` Swagger website at http://localhost:9081/swagger-ui/index.html
+You can access `book-service` Swagger website at http://localhost:9081/swagger-ui.html
 
 ## Useful Links & Commands
 
@@ -66,9 +66,9 @@ You can access `book-service` Swagger website at http://localhost:9081/swagger-u
 
   - Open a new terminal
     
-  - Export to `VAULT_ROOT_TOKEN` environment variable the value obtained while [initializing the environment](https://github.com/ivangfr/springboot-vault-examples#initialize-environment) described in the main README
+  - Set to `VAULT_ROOT_TOKEN` environment variable the value obtained while [initializing the environment](https://github.com/ivangfr/springboot-vault-examples#initialize-environment) described in the main README
     ```
-    export VAULT_ROOT_TOKEN=...
+    VAULT_ROOT_TOKEN=...
     ```
 
   - List of active leases for `database/creds/book-role`

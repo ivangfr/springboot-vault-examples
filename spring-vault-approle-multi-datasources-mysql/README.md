@@ -61,7 +61,7 @@ Before running this example, make sure the environment is initialized (see [Init
 
 ## Using restaurant-service
 
-You can access `restaurant-service` Swagger website at http://localhost:9083/swagger-ui/index.html
+You can access `restaurant-service` Swagger website at http://localhost:9083/swagger-ui.html
 
 ## Useful Links & Commands
 
@@ -71,9 +71,9 @@ You can access `restaurant-service` Swagger website at http://localhost:9083/swa
 
   - Open a new terminal
     
-  - Export to `VAULT_ROOT_TOKEN` environment variable the value obtained while [initializing the environment](https://github.com/ivangfr/springboot-vault-examples#initialize-environment) described in the main README
+  - Set to `VAULT_ROOT_TOKEN` environment variable the value obtained while [initializing the environment](https://github.com/ivangfr/springboot-vault-examples#initialize-environment) described in the main README
     ```
-    export VAULT_ROOT_TOKEN=...
+    VAULT_ROOT_TOKEN=...
     ```
 
   - List of active leases for `database/creds/customer-role` (the same can be done for `database/creds/dish-role`)

@@ -57,7 +57,7 @@ Before running this example, make sure the environment is initialized (see [Init
 
 ## Using student-service
 
-You can access `student-service` Swagger website at http://localhost:9080/swagger-ui/index.html
+You can access `student-service` Swagger website at http://localhost:9080/swagger-ui.html
 
 ## Useful Links & Commands
 
@@ -67,9 +67,9 @@ You can access `student-service` Swagger website at http://localhost:9080/swagge
 
   - Open a new terminal
     
-  - Export to `VAULT_ROOT_TOKEN` environment variable the value obtained while [initializing the environment](https://github.com/ivangfr/springboot-vault-examples#initialize-environment) described in the main README
+  - Set to `VAULT_ROOT_TOKEN` environment variable the value obtained while [initializing the environment](https://github.com/ivangfr/springboot-vault-examples#initialize-environment) described in the main README
     ```
-    export VAULT_ROOT_TOKEN=...
+    VAULT_ROOT_TOKEN=...
     ```
 
   - List of active leases for `database/creds/student-role`

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ -z "$VAULT_ROOT_TOKEN" ]; then
-  echo "WARNING: export to VAULT_ROOT_TOKEN environment variable the root token generated while running the script unseal-vault-enable-approle-databases.sh!"
+  echo "WARNING: set to VAULT_ROOT_TOKEN environment variable, the root token generated while running the script unseal-vault-enable-approle-databases.sh!"
   exit 1
 fi
 
