@@ -5,6 +5,7 @@ import com.ivanfranchin.bookservice.model.Book;
 import com.ivanfranchin.bookservice.rest.dto.BookResponse;
 import com.ivanfranchin.bookservice.rest.dto.CreateBookRequest;
 import com.ivanfranchin.bookservice.service.BookService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RequiredArgsConstructor

@@ -2,10 +2,9 @@
 
 source scripts/my-functions.sh
 
-MYSQL_VERSION="8.0.31"
-CASSANDRA_VERSION="4.0.6"
-VAULT_VERSION="1.12.1"
-CONSUL_VERSION="1.13.3"
+MYSQL_VERSION="8.0.32"
+VAULT_VERSION="1.12.3"
+CONSUL_VERSION="1.14.4"
 
 echo
 echo "Starting environment"

@@ -5,6 +5,7 @@ import com.ivanfranchin.restaurantservice.dish.model.Dish;
 import com.ivanfranchin.restaurantservice.dish.rest.dto.CreateDishRequest;
 import com.ivanfranchin.restaurantservice.dish.rest.dto.DishResponse;
 import com.ivanfranchin.restaurantservice.dish.service.DishService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RequiredArgsConstructor

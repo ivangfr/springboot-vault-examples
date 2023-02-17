@@ -13,16 +13,16 @@ import java.util.List;
 @Configuration
 public class CassandraConfig {
 
-    @Value("${spring.data.cassandra.local-datacenter}")
+    @Value("${spring.cassandra.local-datacenter}")
     private String localDatacenter;
 
-    @Value("${spring.data.cassandra.contact-points}")
+    @Value("${spring.cassandra.contact-points}")
     private String contactPoints;
 
-    @Value("${spring.data.cassandra.port}")
+    @Value("${spring.cassandra.port}")
     private int port;
 
-    @Value("${spring.data.cassandra.keyspace-name}")
+    @Value("${spring.cassandra.keyspace-name}")
     private String keyspaceName;
 
     @Value("${spring.datasource.username}")

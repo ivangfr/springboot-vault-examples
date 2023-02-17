@@ -2,6 +2,7 @@ package com.ivanfranchin.restaurantservice.customer.config;
 
 import com.ivanfranchin.restaurantservice.customer.model.Customer;
 import com.ivanfranchin.restaurantservice.customer.repository.CustomerRepository;
+import jakarta.persistence.EntityManagerFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,7 +19,6 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
@@ -68,5 +68,4 @@ public class CustomerDbConfig {
             @Qualifier("customerEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
     }
-
 }
