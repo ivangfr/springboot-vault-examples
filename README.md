@@ -12,10 +12,12 @@ In order to solve this problem, I have implemented some solutions for applicatio
 
 ## Examples
 
-- ### [spring-cloud-vault-approle-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-cloud-vault-approle-mysql) **(with lease rotation)**
-- ### [spring-cloud-vault-approle-cassandra](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-cloud-vault-approle-cassandra)
-- ### [spring-vault-approle-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-vault-approle-mysql) **(with lease rotation)**
-- ### [spring-vault-approle-multi-datasources-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-vault-approle-multi-datasources-mysql) **(with lease rotation)**
+| Example                                                                                                                                                                                  | Diagram                                                                             |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| [spring-cloud-vault-approle-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-cloud-vault-approle-mysql) **(with lease rotation)**                          | ![project-diagram](documentation/spring-cloud-vault-approle-mysql.jpeg)             |
+| [spring-cloud-vault-approle-cassandra](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-cloud-vault-approle-cassandra)                                            | ![project-diagram](documentation/spring-cloud-vault-approle-cassandra.jpeg)         |
+| [spring-vault-approle-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-vault-approle-mysql) **(with lease rotation)**                                      | ![project-diagram](documentation/spring-vault-approle-mysql.jpeg)                   |
+| [spring-vault-approle-multi-datasources-mysql](https://github.com/ivangfr/springboot-vault-examples/tree/master/spring-vault-approle-multi-datasources-mysql) **(with lease rotation)**  | ![project-diagram](documentation/spring-vault-approle-multi-datasources-mysql.jpeg) |
 
 ## Prerequisites
 

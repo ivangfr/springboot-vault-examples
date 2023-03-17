@@ -82,8 +82,6 @@ docker run -d --rm --name cassandra \
   -p 9042:9042 \
   -p 7199:7199 \
   -p 9160:9160 \
-  -e "MYSQL_ROOT_PASSWORD=secret" \
-  -e "MYSQL_DATABASE=exampledb" \
   --network=springboot-vault-examples \
   springboot-vault-examples_cassandra:latest
 

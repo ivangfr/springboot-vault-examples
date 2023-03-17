@@ -1,6 +1,10 @@
 # springboot-vault-examples
 ## `> spring-vault-approle-mysql`
 
+## Project Diagram
+
+![project-diagram](../documentation/spring-vault-approle-mysql.jpeg)
+
 ## Application
 
 - ### movie-service

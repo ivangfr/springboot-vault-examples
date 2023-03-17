@@ -1,6 +1,10 @@
 # springboot-vault-examples
 ## `> spring-cloud-vault-approle-cassandra`
 
+## Project Diagram
+
+![project-diagram](../documentation/spring-cloud-vault-approle-cassandra.jpeg)
+
 ## Application
 
 - ### book-service

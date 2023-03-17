@@ -1,6 +1,10 @@
 # springboot-vault-examples
 ## `> spring-cloud-vault-approle-mysql`
 
+## Project Diagram
+
+![project-diagram](../documentation/spring-cloud-vault-approle-mysql.jpeg)
+
 ## Application
 
 - ### student-service

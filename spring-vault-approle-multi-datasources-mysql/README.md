@@ -1,6 +1,10 @@
 # springboot-vault-examples
 ## `> spring-vault-approle-multi-datasources-mysql`
 
+## Project Diagram
+
+![project-diagram](../documentation/spring-vault-approle-multi-datasources-mysql.jpeg)
+
 ## Application
 
 - ### restaurant-service
