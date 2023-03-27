@@ -24,6 +24,7 @@ docker run -d --rm --name consul \
   -p 8500:8500 \
   -p 8600:53/udp \
   --network=springboot-vault-examples \
+  --health-cmd="curl -f http://localhost:8500/v1/status/leader || exit 1" \
   consul:${CONSUL_VERSION}
 
 echo
@@ -37,8 +38,7 @@ docker run -d --rm --name vault \
   --cap-add=IPC_LOCK \
   -v ${PWD}/docker/vault:/my/vault \
   --network=springboot-vault-examples \
-  vault:${VAULT_VERSION} \
-  vault server -config=/my/vault/config/config.hcl
+  vault:${VAULT_VERSION} vault server -config=/my/vault/config/config.hcl
 
 echo
 wait_for_container_log "consul" "Node info in sync"
@@ -55,6 +55,7 @@ docker run -d --rm --name mysql \
   -e "MYSQL_ROOT_PASSWORD=secret" \
   -e "MYSQL_DATABASE=exampledb" \
   --network=springboot-vault-examples \
+  --health-cmd="mysqladmin ping -u root -p$${MYSQL_ROOT_PASSWORD}" \
   mysql:${MYSQL_VERSION}
 
 echo
@@ -66,6 +67,7 @@ docker run -d --rm --name mysql-2 \
   -e "MYSQL_ROOT_PASSWORD=secret" \
   -e "MYSQL_DATABASE=exampledb" \
   --network=springboot-vault-examples \
+  --health-cmd="mysqladmin ping -u root -p$${MYSQL_ROOT_PASSWORD}" \
   mysql:${MYSQL_VERSION}
 
 echo
@@ -83,6 +85,7 @@ docker run -d --rm --name cassandra \
   -p 7199:7199 \
   -p 9160:9160 \
   --network=springboot-vault-examples \
+  --health-cmd="cqlsh -ucassandra -pcassandra < /dev/null" \
   springboot-vault-examples_cassandra:latest
 
 echo
