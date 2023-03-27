@@ -70,4 +70,3 @@ echo
 
 echo "--> testing message KV secret ..."
 curl -i -H "X-Vault-Token:${CLIENT_TOKEN}" ${VAULT_ADDR}/v1/secret/movie-service
-echo

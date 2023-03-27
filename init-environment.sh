@@ -3,8 +3,8 @@
 source scripts/my-functions.sh
 
 MYSQL_VERSION="8.0.32"
-VAULT_VERSION="1.12.3"
-CONSUL_VERSION="1.14.4"
+VAULT_VERSION="1.13.0"
+CONSUL_VERSION="1.15.1"
 
 echo
 echo "Starting environment"
@@ -104,6 +104,7 @@ source scripts/setup-spring-cloud-vault-approle-cassandra.sh
 source scripts/setup-spring-vault-approle-mysql.sh
 source scripts/setup-spring-vault-approle-multi-datasources-mysql.sh
 
+echo
 echo "*********************************************"
 echo "VAULT_ROOT_TOKEN=${VAULT_ROOT_TOKEN}"
 echo "*********************************************"

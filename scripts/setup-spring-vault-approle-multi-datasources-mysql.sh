@@ -95,4 +95,3 @@ curl -i -H "X-Vault-Token:${CLIENT_TOKEN}" ${VAULT_ADDR}/v1/database/creds/${DIS
 
 echo "--> testing message KV secret ..."
 curl -i -H "X-Vault-Token:${CLIENT_TOKEN}" ${VAULT_ADDR}/v1/secret/restaurant-service
-echo
