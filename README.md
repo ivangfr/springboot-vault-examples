@@ -23,7 +23,6 @@ In order to solve this problem, I have implemented some solutions for applicatio
 
 - [`Java 17+`](https://www.oracle.com/java/technologies/downloads/#java17)
 - [`Docker`](https://www.docker.com/)
-- [`Docker-Compose`](https://docs.docker.com/compose/install/)
 
 ## Initialize Environment
 
@@ -40,7 +39,7 @@ This script will:
 
 ## Shutdown Environment
 
-To stop and remove docker-compose containers, network and volumes, go to a terminal and, inside `springboot-vault-examples` root folder, run the script below
+To shut down the environment, go to a terminal and, inside `springboot-vault-examples` root folder, run the script below
 ```
 ./shutdown-environment.sh
 ```

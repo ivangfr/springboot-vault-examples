@@ -179,7 +179,7 @@ You can access `restaurant-service` Swagger website at http://localhost:9083/swa
 ## Shutdown
 
 - Go to the terminal where the application is running and pressing `Ctrl+C`
-- Stop the services present in `docker-compose.yml` as explained in [Shutdown Environment](https://github.com/ivangfr/springboot-vault-examples#shutdown-environment) section of the main README
+- Stop the services started using the `init-environment` script as explained in [Shutdown Environment](https://github.com/ivangfr/springboot-vault-examples#shutdown-environment) section of the main README
 
 ## Cleanup
 
