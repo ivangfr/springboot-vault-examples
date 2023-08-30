@@ -1,6 +1,6 @@
 # springboot-vault-examples
 
-The goal of this project is play with [`Vault`](https://www.vaultproject.io). For it, we will implement some applications that rely on `Vault` to store/retrieve secrets. The credentials to access databases are generated dynamically by [`Vault`](https://www.vaultproject.io) that uses [`Consul`](https://www.consul.io) as backend.
+The goal of this project is to explore the capabilities of [`Vault`](https://www.vaultproject.io). To achieve this, we will develop applications that utilize `Vault` for storing and retrieving secrets. `Vault` dynamically generates credentials for accessing databases and relies on [`Consul`](https://www.consul.io) as the backend. The authentication method employed in `Vault` is `AppRole`.
 
 ## Proof-of-Concepts & Articles
 
