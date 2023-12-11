@@ -2,9 +2,9 @@
 
 source scripts/my-functions.sh
 
-MYSQL_VERSION="8.1.0"
-VAULT_VERSION="1.13.3"
-CONSUL_VERSION="1.15.4"
+MYSQL_VERSION="8.2.0"
+VAULT_VERSION="1.15.2"
+CONSUL_VERSION="1.17.0"
 
 echo
 echo "Starting environment"
@@ -25,7 +25,7 @@ docker run -d --rm --name consul \
   -p 8600:53/udp \
   --network=springboot-vault-examples \
   --health-cmd="curl -f http://localhost:8500/v1/status/leader || exit 1" \
-  consul:${CONSUL_VERSION}
+  hashicorp/consul:${CONSUL_VERSION}
 
 echo
 echo "Starting vault container"
@@ -38,7 +38,7 @@ docker run -d --rm --name vault \
   --cap-add=IPC_LOCK \
   -v ${PWD}/docker/vault:/my/vault \
   --network=springboot-vault-examples \
-  vault:${VAULT_VERSION} vault server -config=/my/vault/config/config.hcl
+  hashicorp/vault:${VAULT_VERSION} vault server -config=/my/vault/config/config.hcl
 
 echo
 wait_for_container_log "consul" "Node info in sync"
