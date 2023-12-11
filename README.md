@@ -6,6 +6,12 @@ The goal of this project is to explore the capabilities of [`Vault`](https://www
 
 On [ivangfr.github.io](https://ivangfr.github.io), I have compiled my Proof-of-Concepts (PoCs) and articles. You can easily search for the technology you are interested in by using the filter. Who knows, perhaps I have already implemented a PoC or written an article about what you are looking for.
 
+## Additional Readings
+
+- \[**Medium**\] [**Using HashiCorp Vault & Spring Cloud Vault to handle Spring Boot App Key/Value Secrets**](https://medium.com/@ivangfr/using-hashicorp-vault-spring-cloud-vault-to-handle-spring-boot-app-key-value-secrets-926b81d0173b)
+- \[**Medium**\] [**Using HashiCorp Vault & Spring Cloud Vault to obtain Dynamic MySQL Credentials**](https://medium.com/@ivangfr/using-hashicorp-vault-spring-cloud-vault-to-obtain-dynamic-mysql-credentials-5726f4fa53c2)
+- \[**Medium**\] [**How to Rotate Expired Spring Cloud Vault Relational DB Credentials Without Restarting the App**](https://medium.com/@ivangfr/how-to-rotate-expired-spring-cloud-vault-relational-db-credentials-without-restarting-the-app-66976fbb4bbe)
+
 ## Lease Rotation
 
 One of the problems faced by many people when using `Vault` is about rotating the lease obtained for some backend databases. When a [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application requests a lease from `Vault` using, for instance, the library [`Spring Cloud Vault`](https://cloud.spring.io/spring-cloud-vault/spring-cloud-vault.html), the library itself **is able to automatically renew** the lease from time to time (`default_lease_ttl`).
