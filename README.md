@@ -31,12 +31,12 @@ In order to solve this problem, I have implemented some solutions for applicatio
 
 ## Prerequisites
 
-- [`Java 17+`](https://www.oracle.com/java/technologies/downloads/#java17)
-- [`Docker`](https://www.docker.com/)
+- [`Java 21+`](https://www.oracle.com/java/technologies/downloads/#java21)
+- Some containerization tool [`Docker`](https://www.docker.com), [`Podman`](https://podman.io), etc.
 
 ## Initialize Environment
 
-Open a terminal and, inside `springboot-vault-examples` root folder, run the following script
+Open a terminal and, inside the `springboot-vault-examples` root folder, run the following script:
 ```
 ./init-environment.sh
 ```
@@ -44,24 +44,19 @@ Open a terminal and, inside `springboot-vault-examples` root folder, run the fol
 This script will:
 - start `Consul`, `Vault`, `MySQL`, and `Cassandra` Docker containers;
 - unseal `Vault` and enable `AppRole` in it;
-- setup Database `roles` and `policies` in Vault for the application so that they can access their databases using dynamically generated credentials;
+- setup Database `roles` and `policies` in `Vault` for the application so that they can access their databases using dynamically generated credentials;
 - setup `KV Secrets` in `Vault` for the application;
 
 ## Shutdown Environment
 
-To shut down the environment, go to a terminal and, inside `springboot-vault-examples` root folder, run the script below
+To shut down the environment, go to a terminal and, inside the `springboot-vault-examples` root folder, run the script below:
 ```
 ./shutdown-environment.sh
 ```
 
 ## Cleanup
 
-To remove all Docker images created by this project, go to a terminal and, inside `springboot-vault-examples` root folder, run the following script
+To remove all Docker images created by this project, go to a terminal and, inside the `springboot-vault-examples` root folder, run the following script:
 ```
 ./remove-docker-images.sh all
 ```
-
-## References
-
-- https://github.com/spring-cloud/spring-cloud-vault/issues/85
-- https://blog.ruanbekker.com/blog/2019/05/07/use-the-vault-api-to-provision-app-keys-and-create-kv-pairs/

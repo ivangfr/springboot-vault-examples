@@ -2,9 +2,9 @@
 
 source scripts/my-functions.sh
 
-MYSQL_VERSION="9.0.1"
-VAULT_VERSION="1.17.3"
-CONSUL_VERSION="1.19.1"
+MYSQL_VERSION="9.1.0"
+VAULT_VERSION="1.18.2"
+CONSUL_VERSION="1.20.1"
 
 echo
 echo "Starting environment"

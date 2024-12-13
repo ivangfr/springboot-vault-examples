@@ -9,24 +9,24 @@
 
 - ### book-service
 
-  - [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages `books`
+  - [`Spring Boot`](https://docs.spring.io/spring-boot/index.html) application that manages `books`
   - It uses [`Cassandra`](https://cassandra.apache.org/) database as storage
-  - It uses [`Spring Cloud Vault`](https://cloud.spring.io/spring-cloud-vault/spring-cloud-vault.html)
+  - It uses [`Spring Cloud Vault`](https://cloud.spring.io/spring-cloud-vault/reference/html/)
   - Credentials to access `Cassandra` is generated dynamically by [`Vault`](https://www.vaultproject.io)
   - **Leases are renewed but NOT rotated**
   - `AppRole` is the `Vault` authentication method used
 
 ## Prerequisite
 
-Before running this example, make sure the environment is initialized (see [Initialize Environment](https://github.com/ivangfr/springboot-vault-examples#initialize-environment) section in the main README)
+Before running this example, make sure the environment is initialized (see [Initialize Environment](https://github.com/ivangfr/springboot-vault-examples#initialize-environment) section in the main README).
 
 ## Start book-service
 
 ### Running with Maven Wrapper
 
-- In a terminal, make sure you are inside `springboot-vault-examples` root folder
+- In a terminal, make sure you are inside the `springboot-vault-examples` root folder;
 
-- Run the following command
+- Run the following command:
   ```
   ./mvnw clean spring-boot:run \
     --projects spring-cloud-vault-approle-cassandra/book-service \
@@ -35,9 +35,9 @@ Before running this example, make sure the environment is initialized (see [Init
 
 ### Running as Docker Container
 
-- In a terminal, make sure you are inside `springboot-vault-examples` root folder
+- In a terminal, make sure you are inside the `springboot-vault-examples` root folder;
   
-- Build the Docker image
+- Build the Docker image:
   ```
   ./docker-build.sh spring-cloud-vault-approle-cassandra
   ```
@@ -50,7 +50,7 @@ Before running this example, make sure the environment is initialized (see [Init
   | `CASSANDRA_HOST`     | Specify host of the `Cassandra` to use (default `localhost`) |
   | `CASSANDRA_PORT`     | Specify port of the `Cassandra` to use (default `9042`)      |
 
-- Run the Docker container
+- Run the Docker container:
   ```
   docker run --rm --name book-service -p 9081:8080 \
     -e VAULT_HOST=vault -e CONSUL_HOST=consul -e CASSANDRA_HOST=cassandra \
@@ -66,11 +66,11 @@ You can access `book-service` Swagger website at http://localhost:9081/swagger-u
 
 - **Vault**
 
-  > **Note**: In order to run some commands, you must have [`jq`](https://stedolan.github.io/jq) installed in your machine
+  > **Note**: In order to run some commands, you must have [`jq`](https://jqlang.github.io/jq/) installed in your machine.
 
   - Open a new terminal
     
-  - Set to `VAULT_ROOT_TOKEN` environment variable the value obtained while [initializing the environment](https://github.com/ivangfr/springboot-vault-examples#initialize-environment) described in the main README
+  - Set to `VAULT_ROOT_TOKEN` environment variable the value obtained while [initializing the environment](https://github.com/ivangfr/springboot-vault-examples#initialize-environment) described in the main README.
     ```
     VAULT_ROOT_TOKEN=...
     ```
@@ -82,7 +82,7 @@ You can access `book-service` Swagger website at http://localhost:9081/swagger-u
       http://localhost:8200/v1/sys/leases/lookup/database/creds/book-role | jq .
     ```
      
-    The response will be something like
+    The response will be something like:
     ```
     {
       "request_id": "c56d60d7-6792-7822-3e4d-b51ef8bea4ce",
@@ -108,7 +108,7 @@ You can access `book-service` Swagger website at http://localhost:9081/swagger-u
       http://localhost:8200/v1/sys/leases/lookup | jq .
     ```
      
-    The response will be something like
+    The response will be something like:
     ```
     {
       "request_id": "4b7ee3f4-f891-f34f-5d5c-22ef2600fb55",
@@ -150,12 +150,12 @@ You can access `book-service` Swagger website at http://localhost:9081/swagger-u
 
 ## Shutdown
 
-- Go to the terminal where the application is running and pressing `Ctrl+C`
-- Stop the services started using the `init-environment` script as explained in [Shutdown Environment](https://github.com/ivangfr/springboot-vault-examples#shutdown-environment) section of the main README
+- Go to the terminal where the application is running and pressing `Ctrl+C`;
+- Stop the services started using the `init-environment` script as explained in [Shutdown Environment](https://github.com/ivangfr/springboot-vault-examples#shutdown-environment) section of the main README.
 
 ## Cleanup
 
-To remove the Docker image create by this example, go to a terminal and run the command below
+To remove the Docker image create by this example, go to a terminal and run the command below:
 ```
 ./remove-docker-images.sh spring-cloud-vault-approle-cassandra
 ```

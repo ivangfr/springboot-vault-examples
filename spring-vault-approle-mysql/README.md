@@ -9,9 +9,9 @@
 
 - ### movie-service
 
-  - [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages `movies`
+  - [`Spring Boot`](https://docs.spring.io/spring-boot/index.html) application that manages `movies`
   - It uses [`MySQL`](https://www.mysql.com/) database as storage
-  - It uses [`Spring Vault`](https://docs.spring.io/spring-vault/docs/2.1.3.RELEASE/reference/html/#_document_structure)
+  - It uses [`Spring Vault`](https://docs.spring.io/spring-vault/reference/)
   - It uses [`Hikari`](https://github.com/brettwooldridge/HikariCP) JDBC connection pool
   - Credentials to access `MySQL` is generated dynamically by [`Vault`](https://www.vaultproject.io)
   - **Leases are renewed and rotated**
@@ -19,15 +19,15 @@
 
 ## Prerequisite
 
-Before running this example, make sure the environment is initialized (see [Initialize Environment](https://github.com/ivangfr/springboot-vault-examples#initialize-environment) section in the main README)
+Before running this example, make sure the environment is initialized (see [Initialize Environment](https://github.com/ivangfr/springboot-vault-examples#initialize-environment) section in the main README).
 
 ## Start movie-service
 
 ### Running with Maven Wrapper
 
-- In a terminal, make sure you are inside `springboot-vault-examples` root folder
+- In a terminal, make sure you are inside the `springboot-vault-examples` root folder;
 
-- Run the following command
+- Run the following command:
   ```
   ./mvnw clean spring-boot:run \
     --projects spring-vault-approle-mysql/movie-service \
@@ -36,9 +36,9 @@ Before running this example, make sure the environment is initialized (see [Init
 
 ### Running as Docker Container
 
-- In a terminal, make sure you are inside `springboot-vault-examples` root folder
+- In a terminal, make sure you are inside the `springboot-vault-examples` root folder;
   
-- Build the Docker image
+- Build the Docker image:
   ```
   ./docker-build.sh spring-vault-approle-mysql
   ```
@@ -51,7 +51,7 @@ Before running this example, make sure the environment is initialized (see [Init
   | `MYSQL_HOST`         | Specify host of the `MySQL` to use (default `localhost`)  |
   | `MYSQL_PORT`         | Specify port of the `MySQL` to use (default `3306`)       |
 
-- Run the Docker container
+- Run the Docker container:
   ```
   docker run --rm --name movie-service -p 9082:8080 \
     -e VAULT_HOST=vault -e CONSUL_HOST=consul -e MYSQL_HOST=mysql \
@@ -67,7 +67,7 @@ You can access `movie-service` Swagger website at http://localhost:9082/swagger-
 
 - **Vault**
 
-  > **Note**: In order to run some commands, you must have [`jq`](https://stedolan.github.io/jq) installed in your machine
+  > **Note**: In order to run some commands, you must have [`jq`](https://jqlang.github.io/jq/) installed in your machine.
 
   - Open a new terminal
     
@@ -83,7 +83,7 @@ You can access `movie-service` Swagger website at http://localhost:9082/swagger-
       http://localhost:8200/v1/sys/leases/lookup/database/creds/movie-role | jq .
     ```
      
-    The response will be something like
+    The response will be something like:
     ```
     {
       "request_id": "5dbe3871-fc4d-a727-d77f-a4c9495e4d1a",
@@ -109,7 +109,7 @@ You can access `movie-service` Swagger website at http://localhost:9082/swagger-
       http://localhost:8200/v1/sys/leases/lookup | jq .
     ```
      
-    The response will be something like
+    The response will be something like:
     ```
     {
       "request_id": "38c6c6fb-74f1-dd31-e89e-7e8a00f0f1f4",
@@ -172,12 +172,12 @@ You can access `movie-service` Swagger website at http://localhost:9082/swagger-
 
 ## Shutdown
 
-- Go to the terminal where the application is running and pressing `Ctrl+C`
-- Stop the services started using the `init-environment` script as explained in [Shutdown Environment](https://github.com/ivangfr/springboot-vault-examples#shutdown-environment) section of the main README
+- Go to the terminal where the application is running and pressing `Ctrl+C`;
+- Stop the services started using the `init-environment` script as explained in [Shutdown Environment](https://github.com/ivangfr/springboot-vault-examples#shutdown-environment) section of the main README.
 
 ## Cleanup
 
-To remove the Docker image create by this example, go to a terminal and run the command below
+To remove the Docker image create by this example, go to a terminal and run the command below:
 ```
 ./remove-docker-images.sh spring-vault-approle-mysql
 ```

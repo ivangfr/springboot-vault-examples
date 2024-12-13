@@ -9,10 +9,10 @@
 
 - ### restaurant-service
 
-  - [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application that manages `dishes` and `customers`
+  - [`Spring Boot`](https://docs.spring.io/spring-boot/index.html) application that manages `dishes` and `customers`
   - It uses [`MySQL`](https://www.mysql.com/) database as storage
   - It connects to two `MySQL` instances. One stores `dishes` information and another `customers`
-  - It uses [`Spring Vault`](https://docs.spring.io/spring-vault/docs/2.1.3.RELEASE/reference/html/#_document_structure)
+  - It uses [`Spring Vault`](https://docs.spring.io/spring-vault/reference/)
   - It uses [`Hikari`](https://github.com/brettwooldridge/HikariCP) JDBC connection pool
   - Credentials to access `MySQL` is generated dynamically by [`Vault`](https://www.vaultproject.io)
   - **Leases are renewed and rotated**
@@ -20,15 +20,15 @@
 
 ## Prerequisite
 
-Before running this example, make sure the environment is initialized (see [Initialize Environment](https://github.com/ivangfr/springboot-vault-examples#initialize-environment) section in the main README)
+Before running this example, make sure the environment is initialized (see [Initialize Environment](https://github.com/ivangfr/springboot-vault-examples#initialize-environment) section in the main README).
 
 ## Start restaurant-service
 
 ### Running with Maven Wrapper
 
-- In a terminal, make sure you are inside `springboot-vault-examples` root folder
+- In a terminal, make sure you are inside the `springboot-vault-examples` root folder;
 
-- Run the following commands
+- Run the following commands:
   ```
   export DISH_MYSQL_PORT=3307 && \
   ./mvnw clean spring-boot:run \
@@ -38,9 +38,9 @@ Before running this example, make sure the environment is initialized (see [Init
 
 ### Running as Docker Container
 
-- In a terminal, make sure you are inside `springboot-vault-examples` root folder
+- In a terminal, make sure you are inside the `springboot-vault-examples` root folder;
   
-- Build the Docker image
+- Build the Docker image:
   ```
   ./docker-build.sh spring-vault-approle-multi-datasources-mysql
   ```
@@ -71,7 +71,7 @@ You can access `restaurant-service` Swagger website at http://localhost:9083/swa
 
 - **Vault**
 
-  > **Note**: In order to run some commands, you must have [`jq`](https://stedolan.github.io/jq) installed in your machine
+  > **Note**: In order to run some commands, you must have [`jq`](https://jqlang.github.io/jq/) installed in your machine.
 
   - Open a new terminal
     
@@ -87,7 +87,7 @@ You can access `restaurant-service` Swagger website at http://localhost:9083/swa
       http://localhost:8200/v1/sys/leases/lookup/database/creds/customer-role | jq .
     ```
      
-    The response will be something like
+    The response will be something like:
     ```
     {
       "request_id": "16d2ec27-bb75-29a4-a01d-489c4f7a2a34",
@@ -113,7 +113,7 @@ You can access `restaurant-service` Swagger website at http://localhost:9083/swa
       http://localhost:8200/v1/sys/leases/lookup | jq .
     ```
      
-    The response will be something like
+    The response will be something like:
     ```
     {
       "request_id": "c020ab73-84db-406f-2dac-d169d7f2db51",
@@ -178,12 +178,12 @@ You can access `restaurant-service` Swagger website at http://localhost:9083/swa
 
 ## Shutdown
 
-- Go to the terminal where the application is running and pressing `Ctrl+C`
-- Stop the services started using the `init-environment` script as explained in [Shutdown Environment](https://github.com/ivangfr/springboot-vault-examples#shutdown-environment) section of the main README
+- Go to the terminal where the application is running and pressing `Ctrl+C`;
+- Stop the services started using the `init-environment` script as explained in [Shutdown Environment](https://github.com/ivangfr/springboot-vault-examples#shutdown-environment) section of the main README.
 
 ## Cleanup
 
-To remove the Docker image create by this example, go to a terminal and run the command below
+To remove the Docker image create by this example, go to a terminal and run the command below:
 ```
 ./remove-docker-images.sh spring-vault-approle-multi-datasources-mysql
 ```

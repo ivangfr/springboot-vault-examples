@@ -5,37 +5,35 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.2</version>
+        <version>3.4.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-
     <groupId>com.ivanfranchin</groupId>
     <artifactId>springboot-vault-examples</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
     <name>springboot-vault-examples</name>
     <description>Demo project for Spring Boot</description>
-
+    <url/>
+    <licenses>
+        <license/>
+    </licenses>
+    <developers>
+        <developer/>
+    </developers>
+    <scm>
+        <connection/>
+        <developerConnection/>
+        <tag/>
+        <url/>
+    </scm>
     <properties>
-        <java.version>17</java.version>
-        <springdoc-openapi.version>2.6.0</springdoc-openapi.version>
-        <jib-maven-plugin.version>3.4.3</jib-maven-plugin.version>
+        <java.version>21</java.version>
+        <springdoc-openapi.version>2.7.0</springdoc-openapi.version>
+        <jib-maven-plugin.version>3.4.4</jib-maven-plugin.version>
         <docker-image.prefix>ivanfranchin</docker-image.prefix>
     </properties>
-
-    <modules>
-        <module>spring-cloud-vault-approle-mysql/student-service</module>
-        <module>spring-cloud-vault-approle-cassandra/book-service</module>
-        <module>spring-vault-approle-mysql/movie-service</module>
-        <module>spring-vault-approle-multi-datasources-mysql/restaurant-service</module>
-    </modules>
-
     <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
@@ -45,18 +43,6 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
@@ -69,5 +55,12 @@
             </plugin>
         </plugins>
     </build>
+
+    <modules>
+        <module>spring-cloud-vault-approle-mysql/student-service</module>
+        <module>spring-cloud-vault-approle-cassandra/book-service</module>
+        <module>spring-vault-approle-mysql/movie-service</module>
+        <module>spring-vault-approle-multi-datasources-mysql/restaurant-service</module>
+    </modules>
 
 </project>
