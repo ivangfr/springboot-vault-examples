@@ -43,7 +43,7 @@ public class CustomerDbConfig {
     @Primary
     @Bean(name = "customerDataSource")
     @ConfigurationProperties("datasource.customer")
-    public DataSource dataSource() {
+    DataSource dataSource() {
         String username = environment.getProperty("datasource.customer.username");
         log.info("==> datasource.customer.username: {}", username);
 
@@ -53,8 +53,8 @@ public class CustomerDbConfig {
 
     @Primary
     @Bean(name = "customerEntityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder,
-                                                                       @Qualifier("customerDataSource") DataSource dataSource) {
+    LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder,
+                                                                @Qualifier("customerDataSource") DataSource dataSource) {
         Map<String, String> properties = new HashMap<>();
         properties.put("hibernate.hbm2ddl.auto", environment.getProperty("spring.jpa.hibernate.ddl-auto"));
         properties.put("hibernate.show-sql", environment.getProperty("spring.jpa.show-sql"));
@@ -68,7 +68,7 @@ public class CustomerDbConfig {
 
     @Primary
     @Bean(name = "customerTransactionManager")
-    public PlatformTransactionManager transactionManager(
+    PlatformTransactionManager transactionManager(
             @Qualifier("customerEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
     }

@@ -36,7 +36,7 @@ public class DbConfig {
 
     @Bean
     @ConfigurationProperties("datasource")
-    public DataSource dataSource() {
+    DataSource dataSource() {
         String username = environment.getProperty("datasource.username");
         log.info("==> datasource.username: {}", username);
 
@@ -45,8 +45,8 @@ public class DbConfig {
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder,
-                                                                       DataSource dataSource) {
+    LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder,
+                                                                DataSource dataSource) {
         Map<String, String> properties = new HashMap<>();
         properties.put("hibernate.hbm2ddl.auto", environment.getProperty("spring.jpa.hibernate.ddl-auto"));
         properties.put("hibernate.show-sql", environment.getProperty("spring.jpa.show-sql"));
@@ -59,7 +59,7 @@ public class DbConfig {
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+    PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
     }
 }

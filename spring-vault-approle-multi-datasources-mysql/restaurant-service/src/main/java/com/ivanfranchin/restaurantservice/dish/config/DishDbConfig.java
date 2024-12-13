@@ -41,7 +41,7 @@ public class DishDbConfig {
 
     @Bean(name = "dishDataSource")
     @ConfigurationProperties("datasource.dish")
-    public DataSource dataSource() {
+    DataSource dataSource() {
         String username = environment.getProperty("datasource.dish.username");
         log.info("==> datasource.dish.username: {}", username);
 
@@ -50,8 +50,8 @@ public class DishDbConfig {
     }
 
     @Bean(name = "dishEntityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder,
-                                                                       @Qualifier("dishDataSource") DataSource dataSource) {
+    LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder,
+                                                                @Qualifier("dishDataSource") DataSource dataSource) {
         Map<String, String> properties = new HashMap<>();
         properties.put("hibernate.hbm2ddl.auto", environment.getProperty("spring.jpa.hibernate.ddl-auto"));
         properties.put("hibernate.show-sql", environment.getProperty("spring.jpa.show-sql"));
@@ -64,7 +64,7 @@ public class DishDbConfig {
     }
 
     @Bean(name = "dishTransactionManager")
-    public PlatformTransactionManager transactionManager(
+    PlatformTransactionManager transactionManager(
             @Qualifier("dishEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
     }
