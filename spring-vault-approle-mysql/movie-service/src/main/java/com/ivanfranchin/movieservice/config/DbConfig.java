@@ -3,8 +3,8 @@ package com.ivanfranchin.movieservice.config;
 import com.ivanfranchin.movieservice.model.Movie;
 import com.ivanfranchin.movieservice.repository.MovieRepository;
 import jakarta.persistence.EntityManagerFactory;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
@@ -21,14 +21,18 @@ import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
-@Slf4j
-@RequiredArgsConstructor
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackageClasses = MovieRepository.class)
 public class DbConfig {
 
+    private static final Logger log = LoggerFactory.getLogger(DbConfig.class);
+
     private final Environment environment;
+
+    public DbConfig(Environment environment) {
+        this.environment = environment;
+    }
 
     @Bean
     @ConfigurationProperties("datasource")

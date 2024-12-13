@@ -14,8 +14,8 @@ public class DishMapperImpl implements DishMapper {
             return null;
         }
         Dish dish = new Dish();
-        dish.setName(createDishRequest.getName());
-        dish.setPrice(createDishRequest.getPrice());
+        dish.setName(createDishRequest.name());
+        dish.setPrice(createDishRequest.price());
         return dish;
     }
 

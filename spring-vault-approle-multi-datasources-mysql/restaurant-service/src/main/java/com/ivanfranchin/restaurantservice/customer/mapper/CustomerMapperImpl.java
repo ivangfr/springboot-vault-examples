@@ -14,8 +14,8 @@ public class CustomerMapperImpl implements CustomerMapper {
             return null;
         }
         Customer customer = new Customer();
-        customer.setName(createCustomerRequest.getName());
-        customer.setEmail(createCustomerRequest.getEmail());
+        customer.setName(createCustomerRequest.name());
+        customer.setEmail(createCustomerRequest.email());
         return customer;
     }
 

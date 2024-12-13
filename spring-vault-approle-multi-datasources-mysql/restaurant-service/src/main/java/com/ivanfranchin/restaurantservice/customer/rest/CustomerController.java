@@ -6,7 +6,6 @@ import com.ivanfranchin.restaurantservice.customer.rest.dto.CreateCustomerReques
 import com.ivanfranchin.restaurantservice.customer.rest.dto.CustomerResponse;
 import com.ivanfranchin.restaurantservice.customer.service.CustomerService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/customers")
 public class CustomerController {
@@ -26,6 +24,12 @@ public class CustomerController {
     private final CustomerService customerService;
     private final Environment environment;
     private final CustomerMapper customerMapper;
+
+    public CustomerController(CustomerService customerService, Environment environment, CustomerMapper customerMapper) {
+        this.customerService = customerService;
+        this.environment = environment;
+        this.customerMapper = customerMapper;
+    }
 
     @GetMapping("/dbcredentials")
     public String getDBCredentials() {

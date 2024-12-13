@@ -4,8 +4,8 @@ import com.zaxxer.hikari.HikariConfigMXBean;
 import com.zaxxer.hikari.HikariDataSource;
 import com.zaxxer.hikari.HikariPoolMXBean;
 import jakarta.annotation.PostConstruct;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
@@ -13,17 +13,23 @@ import org.springframework.core.env.Environment;
 import org.springframework.vault.core.lease.SecretLeaseContainer;
 import org.springframework.vault.core.lease.event.SecretLeaseCreatedEvent;
 
-@Slf4j
-@RequiredArgsConstructor
 @Configuration
 public class VaultLeaseConfig {
 
-    @Value("${datasource.vault-creds-path}")
-    private String vaultCredsPath;
+    private static final Logger log = LoggerFactory.getLogger(VaultLeaseConfig.class);
 
     private final ApplicationContext applicationContext;
     private final Environment environment;
     private final SecretLeaseContainer leaseContainer;
+
+    public VaultLeaseConfig(ApplicationContext applicationContext, Environment environment, SecretLeaseContainer leaseContainer) {
+        this.applicationContext = applicationContext;
+        this.environment = environment;
+        this.leaseContainer = leaseContainer;
+    }
+
+    @Value("${datasource.vault-creds-path}")
+    private String vaultCredsPath;
 
     @PostConstruct
     private void postConstruct() {

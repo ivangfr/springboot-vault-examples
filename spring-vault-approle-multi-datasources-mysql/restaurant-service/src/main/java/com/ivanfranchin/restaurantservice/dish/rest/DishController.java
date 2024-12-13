@@ -6,7 +6,6 @@ import com.ivanfranchin.restaurantservice.dish.rest.dto.CreateDishRequest;
 import com.ivanfranchin.restaurantservice.dish.rest.dto.DishResponse;
 import com.ivanfranchin.restaurantservice.dish.service.DishService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/dishes")
 public class DishController {
@@ -26,6 +24,12 @@ public class DishController {
     private final DishService dishService;
     private final Environment environment;
     private final DishMapper dishMapper;
+
+    public DishController(DishService dishService, Environment environment, DishMapper dishMapper) {
+        this.dishService = dishService;
+        this.environment = environment;
+        this.dishMapper = dishMapper;
+    }
 
     @GetMapping("/dbcredentials")
     public String getDBCredentials() {

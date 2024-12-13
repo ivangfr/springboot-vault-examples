@@ -6,7 +6,6 @@ import com.ivanfranchin.movieservice.rest.dto.CreateMovieRequest;
 import com.ivanfranchin.movieservice.rest.dto.MovieResponse;
 import com.ivanfranchin.movieservice.service.MovieService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/movies")
 public class MovieController {
@@ -26,6 +24,12 @@ public class MovieController {
     private final MovieService movieService;
     private final Environment environment;
     private final MovieMapper movieMapper;
+
+    public MovieController(MovieService movieService, Environment environment, MovieMapper movieMapper) {
+        this.movieService = movieService;
+        this.environment = environment;
+        this.movieMapper = movieMapper;
+    }
 
     @GetMapping("/dbcredentials")
     public String getDBCredentials() {

@@ -3,8 +3,8 @@ package com.ivanfranchin.restaurantservice.customer.config;
 import com.ivanfranchin.restaurantservice.customer.model.Customer;
 import com.ivanfranchin.restaurantservice.customer.repository.CustomerRepository;
 import jakarta.persistence.EntityManagerFactory;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -23,8 +23,6 @@ import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
-@Slf4j
-@RequiredArgsConstructor
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
@@ -34,7 +32,13 @@ import java.util.Map;
 )
 public class CustomerDbConfig {
 
+    private static final Logger log = LoggerFactory.getLogger(CustomerDbConfig.class);
+
     private final Environment environment;
+
+    public CustomerDbConfig(Environment environment) {
+        this.environment = environment;
+    }
 
     @Primary
     @Bean(name = "customerDataSource")

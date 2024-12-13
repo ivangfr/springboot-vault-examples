@@ -14,9 +14,9 @@ public class StudentMapperImpl implements StudentMapper {
             return null;
         }
         Student student = new Student();
-        student.setFirstName(createStudentRequest.getFirstName());
-        student.setLastName(createStudentRequest.getLastName());
-        student.setEmail(createStudentRequest.getEmail());
+        student.setFirstName(createStudentRequest.firstName());
+        student.setLastName(createStudentRequest.lastName());
+        student.setEmail(createStudentRequest.email());
         return student;
     }
 

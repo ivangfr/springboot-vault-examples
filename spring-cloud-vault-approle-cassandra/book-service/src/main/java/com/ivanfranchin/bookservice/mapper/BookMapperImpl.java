@@ -14,8 +14,8 @@ public class BookMapperImpl implements BookMapper {
             return null;
         }
         Book book = new Book();
-        book.setAuthor(createBookRequest.getAuthor());
-        book.setTitle(createBookRequest.getTitle());
+        book.setAuthor(createBookRequest.author());
+        book.setTitle(createBookRequest.title());
         return book;
     }
 

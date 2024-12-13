@@ -4,8 +4,8 @@ import com.zaxxer.hikari.HikariConfigMXBean;
 import com.zaxxer.hikari.HikariDataSource;
 import com.zaxxer.hikari.HikariPoolMXBean;
 import jakarta.annotation.PostConstruct;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
@@ -14,16 +14,21 @@ import org.springframework.vault.core.lease.domain.RequestedSecret;
 import org.springframework.vault.core.lease.event.SecretLeaseCreatedEvent;
 import org.springframework.vault.core.lease.event.SecretLeaseExpiredEvent;
 
-@Slf4j
-@RequiredArgsConstructor
 @Configuration
 public class VaultLeaseConfig {
 
-    @Value("${spring.cloud.vault.database.role}")
-    private String databaseRole;
+    private static final Logger log = LoggerFactory.getLogger(VaultLeaseConfig.class);
 
     private final ApplicationContext applicationContext;
     private final SecretLeaseContainer leaseContainer;
+
+    public VaultLeaseConfig(ApplicationContext applicationContext, SecretLeaseContainer leaseContainer) {
+        this.applicationContext = applicationContext;
+        this.leaseContainer = leaseContainer;
+    }
+
+    @Value("${spring.cloud.vault.database.role}")
+    private String databaseRole;
 
     @PostConstruct
     private void postConstruct() {

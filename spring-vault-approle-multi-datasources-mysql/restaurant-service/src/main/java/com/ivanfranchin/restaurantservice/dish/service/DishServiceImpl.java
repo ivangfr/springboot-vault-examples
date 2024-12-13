@@ -2,16 +2,18 @@ package com.ivanfranchin.restaurantservice.dish.service;
 
 import com.ivanfranchin.restaurantservice.dish.model.Dish;
 import com.ivanfranchin.restaurantservice.dish.repository.DishRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @Service
 public class DishServiceImpl implements DishService {
 
     private final DishRepository dishRepository;
+
+    public DishServiceImpl(DishRepository dishRepository) {
+        this.dishRepository = dishRepository;
+    }
 
     @Override
     public List<Dish> getDishes() {

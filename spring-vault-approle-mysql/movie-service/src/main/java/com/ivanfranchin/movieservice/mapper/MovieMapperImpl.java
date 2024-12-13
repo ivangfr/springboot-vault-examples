@@ -14,7 +14,7 @@ public class MovieMapperImpl implements MovieMapper {
             return null;
         }
         Movie movie = new Movie();
-        movie.setTitle(createMovieRequest.getTitle());
+        movie.setTitle(createMovieRequest.title());
         return movie;
     }
 
