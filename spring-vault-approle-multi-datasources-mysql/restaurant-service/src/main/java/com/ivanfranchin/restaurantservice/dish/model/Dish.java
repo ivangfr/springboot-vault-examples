@@ -23,6 +23,14 @@ public class Dish {
     @Column(nullable = false)
     private BigDecimal price;
 
+    public Dish() {
+    }
+
+    public Dish(String name, BigDecimal price) {
+        this.name = name;
+        this.price = price;
+    }
+
     public Long getId() {
         return id;
     }

@@ -1,10 +1,9 @@
 package com.ivanfranchin.studentservice.rest;
 
-import com.ivanfranchin.studentservice.mapper.StudentMapper;
 import com.ivanfranchin.studentservice.model.Student;
+import com.ivanfranchin.studentservice.repository.StudentRepository;
 import com.ivanfranchin.studentservice.rest.dto.CreateStudentRequest;
 import com.ivanfranchin.studentservice.rest.dto.StudentResponse;
-import com.ivanfranchin.studentservice.service.StudentService;
 import jakarta.validation.Valid;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -21,14 +20,12 @@ import java.util.List;
 @RequestMapping("/api/students")
 public class StudentController {
 
-    private final StudentService studentService;
+    private final StudentRepository studentRepository;
     private final Environment environment;
-    private final StudentMapper studentMapper;
 
-    public StudentController(StudentService studentService, Environment environment, StudentMapper studentMapper) {
-        this.studentService = studentService;
+    public StudentController(StudentRepository studentRepository, Environment environment) {
+        this.studentRepository = studentRepository;
         this.environment = environment;
-        this.studentMapper = studentMapper;
     }
 
     @GetMapping("/dbcredentials")
@@ -45,17 +42,24 @@ public class StudentController {
 
     @GetMapping
     public List<StudentResponse> getStudents() {
-        return studentService.getStudents()
+        return studentRepository.findAll()
                 .stream()
-                .map(studentMapper::toStudentResponse)
+                .map(this::toStudentResponse)
                 .toList();
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public StudentResponse createStudent(@Valid @RequestBody CreateStudentRequest createStudentRequest) {
-        Student student = studentMapper.toStudent(createStudentRequest);
-        student = studentService.saveStudent(student);
-        return studentMapper.toStudentResponse(student);
+        Student student = studentRepository.save(toStudent(createStudentRequest));
+        return toStudentResponse(student);
+    }
+
+    public Student toStudent(CreateStudentRequest createStudentRequest) {
+        return new Student(createStudentRequest.firstName(), createStudentRequest.lastName(), createStudentRequest.email());
+    }
+
+    public StudentResponse toStudentResponse(Student student) {
+        return new StudentResponse(student.getId(), student.getFirstName(), student.getLastName(), student.getEmail());
     }
 }

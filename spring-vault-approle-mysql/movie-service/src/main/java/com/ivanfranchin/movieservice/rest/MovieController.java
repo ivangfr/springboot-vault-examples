@@ -1,10 +1,9 @@
 package com.ivanfranchin.movieservice.rest;
 
-import com.ivanfranchin.movieservice.mapper.MovieMapper;
 import com.ivanfranchin.movieservice.model.Movie;
+import com.ivanfranchin.movieservice.repository.MovieRepository;
 import com.ivanfranchin.movieservice.rest.dto.CreateMovieRequest;
 import com.ivanfranchin.movieservice.rest.dto.MovieResponse;
-import com.ivanfranchin.movieservice.service.MovieService;
 import jakarta.validation.Valid;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -21,14 +20,12 @@ import java.util.List;
 @RequestMapping("/api/movies")
 public class MovieController {
 
-    private final MovieService movieService;
+    private final MovieRepository movieRepository;
     private final Environment environment;
-    private final MovieMapper movieMapper;
 
-    public MovieController(MovieService movieService, Environment environment, MovieMapper movieMapper) {
-        this.movieService = movieService;
+    public MovieController(MovieRepository movieRepository, Environment environment) {
+        this.movieRepository = movieRepository;
         this.environment = environment;
-        this.movieMapper = movieMapper;
     }
 
     @GetMapping("/dbcredentials")
@@ -45,17 +42,24 @@ public class MovieController {
 
     @GetMapping
     public List<MovieResponse> getMovies() {
-        return movieService.getMovies()
+        return movieRepository.findAll()
                 .stream()
-                .map(movieMapper::toMovieResponse)
+                .map(this::toMovieResponse)
                 .toList();
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public MovieResponse createMovie(@Valid @RequestBody CreateMovieRequest createMovieRequest) {
-        Movie movie = movieMapper.toMovie(createMovieRequest);
-        movie = movieService.saveMovie(movie);
-        return movieMapper.toMovieResponse(movie);
+        Movie movie = movieRepository.save(toMovie(createMovieRequest));
+        return toMovieResponse(movie);
+    }
+
+    public Movie toMovie(CreateMovieRequest createMovieRequest) {
+        return new Movie(createMovieRequest.title());
+    }
+
+    public MovieResponse toMovieResponse(Movie movie) {
+        return new MovieResponse(movie.getId(), movie.getTitle());
     }
 }

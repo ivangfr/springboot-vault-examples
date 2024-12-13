@@ -1,10 +1,9 @@
 package com.ivanfranchin.bookservice.rest;
 
-import com.ivanfranchin.bookservice.mapper.BookMapper;
 import com.ivanfranchin.bookservice.model.Book;
+import com.ivanfranchin.bookservice.repository.BookRepository;
 import com.ivanfranchin.bookservice.rest.dto.BookResponse;
 import com.ivanfranchin.bookservice.rest.dto.CreateBookRequest;
-import com.ivanfranchin.bookservice.service.BookService;
 import jakarta.validation.Valid;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -16,19 +15,18 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/books")
 public class BookController {
 
-    private final BookService bookService;
+    private final BookRepository bookRepository;
     private final Environment environment;
-    private final BookMapper bookMapper;
 
-    public BookController(BookService bookService, Environment environment, BookMapper bookMapper) {
-        this.bookService = bookService;
+    public BookController(BookRepository bookRepository, Environment environment) {
+        this.bookRepository = bookRepository;
         this.environment = environment;
-        this.bookMapper = bookMapper;
     }
 
     @GetMapping("/dbcredentials")
@@ -45,17 +43,25 @@ public class BookController {
 
     @GetMapping
     public List<BookResponse> getBooks() {
-        return bookService.getBooks()
+        return bookRepository.findAll()
                 .stream()
-                .map(bookMapper::toBookResponse)
+                .map(this::toBookResponse)
                 .toList();
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public BookResponse createBook(@Valid @RequestBody CreateBookRequest createBookRequest) {
-        Book book = bookMapper.toBook(createBookRequest);
-        book = bookService.saveBook(book);
-        return bookMapper.toBookResponse(book);
+        Book book = toBook(createBookRequest);
+        book = bookRepository.save(book);
+        return toBookResponse(book);
+    }
+
+    public Book toBook(CreateBookRequest createBookRequest) {
+        return new Book(UUID.randomUUID(), createBookRequest.title(), createBookRequest.author());
+    }
+
+    public BookResponse toBookResponse(Book book) {
+        return new BookResponse(book.getId().toString(), book.getTitle(), book.getAuthor());
     }
 }
