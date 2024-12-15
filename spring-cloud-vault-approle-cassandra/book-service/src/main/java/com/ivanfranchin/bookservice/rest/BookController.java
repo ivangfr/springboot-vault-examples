@@ -57,11 +57,11 @@ public class BookController {
         return toBookResponse(book);
     }
 
-    public Book toBook(CreateBookRequest createBookRequest) {
+    private Book toBook(CreateBookRequest createBookRequest) {
         return new Book(UUID.randomUUID(), createBookRequest.title(), createBookRequest.author());
     }
 
-    public BookResponse toBookResponse(Book book) {
+    private BookResponse toBookResponse(Book book) {
         return new BookResponse(book.getId().toString(), book.getTitle(), book.getAuthor());
     }
 }

@@ -55,11 +55,11 @@ public class MovieController {
         return toMovieResponse(movie);
     }
 
-    public Movie toMovie(CreateMovieRequest createMovieRequest) {
+    private Movie toMovie(CreateMovieRequest createMovieRequest) {
         return new Movie(createMovieRequest.title());
     }
 
-    public MovieResponse toMovieResponse(Movie movie) {
+    private MovieResponse toMovieResponse(Movie movie) {
         return new MovieResponse(movie.getId(), movie.getTitle());
     }
 }

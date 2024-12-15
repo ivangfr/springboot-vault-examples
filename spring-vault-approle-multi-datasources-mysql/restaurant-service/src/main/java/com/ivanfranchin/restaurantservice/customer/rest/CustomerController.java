@@ -55,11 +55,11 @@ public class CustomerController {
         return toCustomerResponse(customer);
     }
 
-    public Customer toCustomer(CreateCustomerRequest createCustomerRequest) {
+    private Customer toCustomer(CreateCustomerRequest createCustomerRequest) {
         return new Customer(createCustomerRequest.name(), createCustomerRequest.email());
     }
 
-    public CustomerResponse toCustomerResponse(Customer customer) {
+    private CustomerResponse toCustomerResponse(Customer customer) {
         return new CustomerResponse(customer.getId(), customer.getName(), customer.getEmail());
     }
 }

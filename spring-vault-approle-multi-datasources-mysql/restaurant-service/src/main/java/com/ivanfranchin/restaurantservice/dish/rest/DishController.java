@@ -55,11 +55,11 @@ public class DishController {
         return toDishResponse(dish);
     }
 
-    public Dish toDish(CreateDishRequest createDishRequest) {
+    private Dish toDish(CreateDishRequest createDishRequest) {
         return new Dish(createDishRequest.name(), createDishRequest.price());
     }
 
-    public DishResponse toDishResponse(Dish dish) {
+    private DishResponse toDishResponse(Dish dish) {
         return new DishResponse(dish.getId(), dish.getName(), dish.getPrice());
     }
 }

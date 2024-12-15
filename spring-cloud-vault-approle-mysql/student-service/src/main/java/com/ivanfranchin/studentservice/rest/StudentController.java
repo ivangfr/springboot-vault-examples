@@ -55,11 +55,11 @@ public class StudentController {
         return toStudentResponse(student);
     }
 
-    public Student toStudent(CreateStudentRequest createStudentRequest) {
+    private Student toStudent(CreateStudentRequest createStudentRequest) {
         return new Student(createStudentRequest.firstName(), createStudentRequest.lastName(), createStudentRequest.email());
     }
 
-    public StudentResponse toStudentResponse(Student student) {
+    private StudentResponse toStudentResponse(Student student) {
         return new StudentResponse(student.getId(), student.getFirstName(), student.getLastName(), student.getEmail());
     }
 }
