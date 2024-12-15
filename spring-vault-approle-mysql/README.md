@@ -40,7 +40,7 @@ Before running this example, make sure the environment is initialized (see [Init
   
 - Build the Docker image:
   ```
-  ./docker-build.sh spring-vault-approle-mysql
+  ./build-docker-images.sh spring-vault-approle-mysql
   ```
   | Environment Variable | Description                                               |
   |----------------------|-----------------------------------------------------------|

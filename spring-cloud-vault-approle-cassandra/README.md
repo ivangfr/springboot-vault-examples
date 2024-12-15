@@ -39,7 +39,7 @@ Before running this example, make sure the environment is initialized (see [Init
   
 - Build the Docker image:
   ```
-  ./docker-build.sh spring-cloud-vault-approle-cassandra
+  ./build-docker-images.sh spring-cloud-vault-approle-cassandra
   ```
   | Environment Variable | Description                                                  |
   |----------------------|--------------------------------------------------------------|

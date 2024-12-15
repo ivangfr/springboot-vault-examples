@@ -42,7 +42,7 @@ Before running this example, make sure the environment is initialized (see [Init
   
 - Build the Docker image:
   ```
-  ./docker-build.sh spring-vault-approle-multi-datasources-mysql
+  ./build-docker-images.sh spring-vault-approle-multi-datasources-mysql
   ```
   | Environment Variable  | Description                                               |
   |-----------------------|-----------------------------------------------------------|
