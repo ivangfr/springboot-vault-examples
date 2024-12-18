@@ -44,22 +44,14 @@ public class MovieController {
     public List<MovieResponse> getMovies() {
         return movieRepository.findAll()
                 .stream()
-                .map(this::toMovieResponse)
+                .map(MovieResponse::from)
                 .toList();
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public MovieResponse createMovie(@Valid @RequestBody CreateMovieRequest createMovieRequest) {
-        Movie movie = movieRepository.save(toMovie(createMovieRequest));
-        return toMovieResponse(movie);
-    }
-
-    private Movie toMovie(CreateMovieRequest createMovieRequest) {
-        return new Movie(createMovieRequest.title());
-    }
-
-    private MovieResponse toMovieResponse(Movie movie) {
-        return new MovieResponse(movie.getId(), movie.getTitle());
+        Movie movie = movieRepository.save(Movie.from(createMovieRequest));
+        return MovieResponse.from(movie);
     }
 }

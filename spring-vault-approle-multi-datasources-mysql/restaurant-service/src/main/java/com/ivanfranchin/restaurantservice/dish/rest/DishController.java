@@ -44,22 +44,14 @@ public class DishController {
     public List<DishResponse> getDishes() {
         return dishRepository.findAll()
                 .stream()
-                .map(this::toDishResponse)
+                .map(DishResponse::from)
                 .toList();
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public DishResponse createDish(@Valid @RequestBody CreateDishRequest createDishRequest) {
-        Dish dish = dishRepository.save(toDish(createDishRequest));
-        return toDishResponse(dish);
-    }
-
-    private Dish toDish(CreateDishRequest createDishRequest) {
-        return new Dish(createDishRequest.name(), createDishRequest.price());
-    }
-
-    private DishResponse toDishResponse(Dish dish) {
-        return new DishResponse(dish.getId(), dish.getName(), dish.getPrice());
+        Dish dish = dishRepository.save(Dish.from(createDishRequest));
+        return DishResponse.from(dish);
     }
 }

@@ -1,5 +1,6 @@
 package com.ivanfranchin.movieservice.model;
 
+import com.ivanfranchin.movieservice.rest.dto.CreateMovieRequest;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,5 +34,9 @@ public class Movie {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public static Movie from(CreateMovieRequest createMovieRequest) {
+        return new Movie(createMovieRequest.title());
     }
 }

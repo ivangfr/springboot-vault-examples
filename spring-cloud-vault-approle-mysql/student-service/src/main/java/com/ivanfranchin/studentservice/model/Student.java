@@ -1,5 +1,6 @@
 package com.ivanfranchin.studentservice.model;
 
+import com.ivanfranchin.studentservice.rest.dto.CreateStudentRequest;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -59,5 +60,9 @@ public class Student {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public static Student from(CreateStudentRequest createStudentRequest) {
+        return new Student(createStudentRequest.firstName(), createStudentRequest.lastName(), createStudentRequest.email());
     }
 }

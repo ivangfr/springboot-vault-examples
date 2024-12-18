@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/books")
@@ -45,23 +44,15 @@ public class BookController {
     public List<BookResponse> getBooks() {
         return bookRepository.findAll()
                 .stream()
-                .map(this::toBookResponse)
+                .map(BookResponse::from)
                 .toList();
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public BookResponse createBook(@Valid @RequestBody CreateBookRequest createBookRequest) {
-        Book book = toBook(createBookRequest);
+        Book book = Book.from(createBookRequest);
         book = bookRepository.save(book);
-        return toBookResponse(book);
-    }
-
-    private Book toBook(CreateBookRequest createBookRequest) {
-        return new Book(UUID.randomUUID(), createBookRequest.title(), createBookRequest.author());
-    }
-
-    private BookResponse toBookResponse(Book book) {
-        return new BookResponse(book.getId().toString(), book.getTitle(), book.getAuthor());
+        return BookResponse.from(book);
     }
 }

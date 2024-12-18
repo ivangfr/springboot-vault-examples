@@ -1,5 +1,6 @@
 package com.ivanfranchin.bookservice.model;
 
+import com.ivanfranchin.bookservice.rest.dto.CreateBookRequest;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
@@ -44,5 +45,9 @@ public class Book {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public static Book from(CreateBookRequest createBookRequest) {
+        return new Book(UUID.randomUUID(), createBookRequest.title(), createBookRequest.author());
     }
 }

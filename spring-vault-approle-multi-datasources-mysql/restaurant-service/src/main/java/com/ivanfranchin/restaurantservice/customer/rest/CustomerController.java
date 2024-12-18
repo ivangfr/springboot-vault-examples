@@ -44,22 +44,14 @@ public class CustomerController {
     public List<CustomerResponse> getCustomers() {
         return customerRepository.findAll()
                 .stream()
-                .map(this::toCustomerResponse)
+                .map(CustomerResponse::from)
                 .toList();
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public CustomerResponse createCustomer(@Valid @RequestBody CreateCustomerRequest createCustomerRequest) {
-        Customer customer = customerRepository.save(toCustomer(createCustomerRequest));
-        return toCustomerResponse(customer);
-    }
-
-    private Customer toCustomer(CreateCustomerRequest createCustomerRequest) {
-        return new Customer(createCustomerRequest.name(), createCustomerRequest.email());
-    }
-
-    private CustomerResponse toCustomerResponse(Customer customer) {
-        return new CustomerResponse(customer.getId(), customer.getName(), customer.getEmail());
+        Customer customer = customerRepository.save(Customer.from(createCustomerRequest));
+        return CustomerResponse.from(customer);
     }
 }

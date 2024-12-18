@@ -1,5 +1,6 @@
 package com.ivanfranchin.restaurantservice.dish.model;
 
+import com.ivanfranchin.restaurantservice.dish.rest.dto.CreateDishRequest;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -49,5 +50,9 @@ public class Dish {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public static Dish from(CreateDishRequest createDishRequest) {
+        return new Dish(createDishRequest.name(), createDishRequest.price());
     }
 }

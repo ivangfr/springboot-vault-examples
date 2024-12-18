@@ -44,22 +44,14 @@ public class StudentController {
     public List<StudentResponse> getStudents() {
         return studentRepository.findAll()
                 .stream()
-                .map(this::toStudentResponse)
+                .map(StudentResponse::from)
                 .toList();
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public StudentResponse createStudent(@Valid @RequestBody CreateStudentRequest createStudentRequest) {
-        Student student = studentRepository.save(toStudent(createStudentRequest));
-        return toStudentResponse(student);
-    }
-
-    private Student toStudent(CreateStudentRequest createStudentRequest) {
-        return new Student(createStudentRequest.firstName(), createStudentRequest.lastName(), createStudentRequest.email());
-    }
-
-    private StudentResponse toStudentResponse(Student student) {
-        return new StudentResponse(student.getId(), student.getFirstName(), student.getLastName(), student.getEmail());
+        Student student = studentRepository.save(Student.from(createStudentRequest));
+        return StudentResponse.from(student);
     }
 }
