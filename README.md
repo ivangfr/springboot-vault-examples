@@ -14,11 +14,11 @@ On [ivangfr.github.io](https://ivangfr.github.io), I have compiled my Proof-of-C
 
 ## Lease Rotation
 
-One of the problems faced by many people when using `Vault` is about rotating the lease obtained for some backend databases. When a [`Spring Boot`](https://docs.spring.io/spring-boot/index.html) application requests a lease from `Vault` using, for instance, the library [`Spring Cloud Vault`](https://cloud.spring.io/spring-cloud-vault/reference/html/), the library itself **is able to automatically renew** the lease from time to time (`default_lease_ttl`).
+Many people encounter issues when using `Vault`, particularly with rotating the lease for backend databases. When a [`Spring Boot`](https://docs.spring.io/spring-boot/index.html) application requests a lease from `Vault` through the [`Spring Cloud Vault`](https://cloud.spring.io/spring-cloud-vault/reference/html/) library, the library **can automatically renew** the lease periodically (based on `default_lease_ttl`).
 
-However, when the maximum expiration time of a lease is reached (`max_lease_ttl`), it means that the lease cannot be renewed anymore, and a new lease is required. In this situation, `Spring Cloud Vault` library **cannot rotate** it, leaving the application without connection to database.
+However, once the maximum lease expiration time (`max_lease_ttl`) is reached, the lease cannot be renewed, and a new lease is needed. In this case, the `Spring Cloud Vault` library **cannot rotate** the lease, which may leave the application unable to connect to the database.
 
-In order to solve this problem, I have implemented some solutions for applications that use `Spring Cloud Vault` or [`Spring Vault`](https://docs.spring.io/spring-vault/reference/). Please, have a look at the examples below.  
+To address this issue, we have developed solutions for applications using `Spring Cloud Vault` or [`Spring Vault`](https://docs.spring.io/spring-vault/reference/). Please see the examples below.
 
 ## Examples
 
