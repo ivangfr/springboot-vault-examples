@@ -1,6 +1,6 @@
 package com.ivanfranchin.restaurantservice.customer.model;
 
-import com.ivanfranchin.restaurantservice.customer.rest.dto.CreateCustomerRequest;
+import com.ivanfranchin.restaurantservice.customer.dto.CreateCustomerRequest;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

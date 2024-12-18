@@ -1,7 +1,7 @@
 package com.ivanfranchin.restaurantservice.customer.config;
 
 import com.ivanfranchin.restaurantservice.customer.model.Customer;
-import com.ivanfranchin.restaurantservice.customer.repository.CustomerRepository;
+import com.ivanfranchin.restaurantservice.customer.CustomerRepository;
 import jakarta.persistence.EntityManagerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

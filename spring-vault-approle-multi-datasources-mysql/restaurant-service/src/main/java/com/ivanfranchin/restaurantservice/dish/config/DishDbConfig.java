@@ -1,7 +1,7 @@
 package com.ivanfranchin.restaurantservice.dish.config;
 
 import com.ivanfranchin.restaurantservice.dish.model.Dish;
-import com.ivanfranchin.restaurantservice.dish.repository.DishRepository;
+import com.ivanfranchin.restaurantservice.dish.DishRepository;
 import jakarta.persistence.EntityManagerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

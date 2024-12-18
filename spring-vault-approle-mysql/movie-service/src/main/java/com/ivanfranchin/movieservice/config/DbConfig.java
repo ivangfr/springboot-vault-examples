@@ -1,7 +1,7 @@
 package com.ivanfranchin.movieservice.config;
 
-import com.ivanfranchin.movieservice.model.Movie;
-import com.ivanfranchin.movieservice.repository.MovieRepository;
+import com.ivanfranchin.movieservice.movie.model.Movie;
+import com.ivanfranchin.movieservice.movie.MovieRepository;
 import jakarta.persistence.EntityManagerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
