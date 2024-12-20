@@ -13,9 +13,7 @@ spring:
       port: ${CONSUL_PORT:8500}
 
 springdoc:
-  show-actuator: true
   swagger-ui:
-    groups-order: DESC
     disable-swagger-default-url: true
 
 logging:
