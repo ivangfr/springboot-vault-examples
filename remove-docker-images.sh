@@ -39,6 +39,6 @@ fi
 if [ "$1" = "all" ];
 then
 
-  docker rmi springboot-vault-examples_cassandra
+  docker rmi ivanfranchin/springboot-vault-examples_cassandra
 
 fi

@@ -67,7 +67,7 @@ You can access `movie-service` Swagger website at http://localhost:9082/swagger-
 
 - **Vault**
 
-  > **Note**: In order to run some commands, you must have [`jq`](https://jqlang.github.io/jq/) installed in your machine.
+  > **Note**: In order to run some commands, you must have [`jq`](https://jqlang.org/) installed in your machine.
 
   - Open a new terminal
     

@@ -2,9 +2,9 @@
 
 source scripts/my-functions.sh
 
-MYSQL_VERSION="9.1.0"
-VAULT_VERSION="1.18.2"
-CONSUL_VERSION="1.20.1"
+MYSQL_VERSION="9.4.0"
+VAULT_VERSION="1.20.2"
+CONSUL_VERSION="1.21.4"
 
 echo
 echo "Starting environment"
@@ -74,7 +74,7 @@ echo
 echo "Building cassandra image"
 echo "------------------------"
 
-docker build -t springboot-vault-examples_cassandra:latest docker/cassandra
+docker build -t ivanfranchin/springboot-vault-examples_cassandra:latest docker/cassandra
 
 echo
 echo "Starting cassandra container"
@@ -86,7 +86,7 @@ docker run -d --rm --name cassandra \
   -p 9160:9160 \
   --network=springboot-vault-examples \
   --health-cmd="cqlsh -ucassandra -pcassandra < /dev/null" \
-  springboot-vault-examples_cassandra:latest
+  ivanfranchin/springboot-vault-examples_cassandra:latest
 
 echo
 wait_for_container_log "mysql" "port: 3306"
