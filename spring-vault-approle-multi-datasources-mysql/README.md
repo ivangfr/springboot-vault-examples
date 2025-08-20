@@ -26,10 +26,10 @@ Before running this example, make sure the environment is initialized (see [Init
 
 ### Running with Maven Wrapper
 
-- In a terminal, make sure you are inside the `springboot-vault-examples` root folder;
+- In a terminal, make sure you are inside the `springboot-vault-examples` root folder.
 
 - Run the following commands:
-  ```
+  ```bash
   export DISH_MYSQL_PORT=3307 && \
   ./mvnw clean spring-boot:run \
     --projects spring-vault-approle-multi-datasources-mysql/restaurant-service \
@@ -38,10 +38,10 @@ Before running this example, make sure the environment is initialized (see [Init
 
 ### Running as Docker Container
 
-- In a terminal, make sure you are inside the `springboot-vault-examples` root folder;
+- In a terminal, make sure you are inside the `springboot-vault-examples` root folder.
   
 - Build the Docker image:
-  ```
+  ```bash
   ./build-docker-images.sh spring-vault-approle-multi-datasources-mysql
   ```
   | Environment Variable  | Description                                               |
@@ -56,7 +56,7 @@ Before running this example, make sure the environment is initialized (see [Init
   | `DISH_MYSQL_PORT`     | Specify port of the `MySQL` to use (default `3306`)       |
 
 - Run the Docker container
-  ```
+  ```bash
   docker run --rm --name restaurant-service -p 9083:8080 \
     -e VAULT_HOST=vault -e CONSUL_HOST=consul -e CUSTOMER_MYSQL_HOST=mysql -e DISH_MYSQL_HOST=mysql-2 \
     --network springboot-vault-examples \
@@ -76,19 +76,19 @@ You can access `restaurant-service` Swagger website at http://localhost:9083/swa
   - Open a new terminal
     
   - Set to `VAULT_ROOT_TOKEN` environment variable the value obtained while [initializing the environment](https://github.com/ivangfr/springboot-vault-examples#initialize-environment) described in the main README
-    ```
+    ```bash
     VAULT_ROOT_TOKEN=...
     ```
 
   - List of active leases for `database/creds/customer-role` (the same can be done for `database/creds/dish-role`)
-    ```
+    ```bash
     curl -s -X LIST \
       -H "X-Vault-Token: ${VAULT_ROOT_TOKEN}" \
       http://localhost:8200/v1/sys/leases/lookup/database/creds/customer-role | jq .
     ```
      
     The response will be something like:
-    ```
+    ```json
     {
       "request_id": "16d2ec27-bb75-29a4-a01d-489c4f7a2a34",
       "lease_id": "",
@@ -106,7 +106,7 @@ You can access `restaurant-service` Swagger website at http://localhost:9083/swa
     ```
 
   - See specific lease metadata
-    ```
+    ```bash
     curl -s -X PUT \
       -H "X-Vault-Token: ${VAULT_ROOT_TOKEN}" \
       -d '{ "lease_id": "database/creds/customer-role/4pUp7cHODXpdtsXadzgsL5aZ" }' \
@@ -114,7 +114,7 @@ You can access `restaurant-service` Swagger website at http://localhost:9083/swa
     ```
      
     The response will be something like:
-    ```
+    ```json
     {
       "request_id": "c020ab73-84db-406f-2dac-d169d7f2db51",
       "lease_id": "",
@@ -139,7 +139,7 @@ You can access `restaurant-service` Swagger website at http://localhost:9083/swa
   - Open a new terminal
 
   - Connect to `MySQL monitor` inside docker container
-    ```
+    ```bash
     docker exec -it -e MYSQL_PWD=secret mysql mysql -uroot
     -- OR --
     docker exec -it -e MYSQL_PWD=secret mysql-2 mysql -uroot
@@ -147,17 +147,17 @@ You can access `restaurant-service` Swagger website at http://localhost:9083/swa
     > To exit `MySQL monitor`, type `exit`
 
     - List users
-      ```
+      ```bash
       SELECT User, Host FROM mysql.user;
       ```
 
     - Show running process
-      ```
+      ```bash
       SELECT * FROM information_schema.processlist ORDER BY user;
       ```
 
     - Log all queries
-      ```
+      ```bash
       SET GLOBAL general_log = 'ON';
       SET GLOBAL log_output = 'table';
     
@@ -165,7 +165,7 @@ You can access `restaurant-service` Swagger website at http://localhost:9083/swa
       ```
 
     - Create/Remove user
-      ```
+      ```bash
       CREATE USER 'newuser'@'%' IDENTIFIED BY 'password';
       GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'%';
     
@@ -178,12 +178,12 @@ You can access `restaurant-service` Swagger website at http://localhost:9083/swa
 
 ## Shutdown
 
-- Go to the terminal where the application is running and pressing `Ctrl+C`;
+- Go to the terminal where the application is running and pressing `Ctrl+C`.
 - Stop the services started using the `init-environment` script as explained in [Shutdown Environment](https://github.com/ivangfr/springboot-vault-examples#shutdown-environment) section of the main README.
 
 ## Cleanup
 
-To remove the Docker image create by this example, go to a terminal and run the command below:
-```
+To remove the Docker image created by this example, go to a terminal and run the command below:
+```bash
 ./remove-docker-images.sh spring-vault-approle-multi-datasources-mysql
 ```

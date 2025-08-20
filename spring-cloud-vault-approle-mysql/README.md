@@ -25,10 +25,10 @@ Before running this example, make sure the environment is initialized (see [Init
 
 ### Running with Maven Wrapper
 
-- In a terminal, make sure you are inside the `springboot-vault-examples` root folder;
+- In a terminal, make sure you are inside the `springboot-vault-examples` root folder.
 
 - Run the following command:
-  ```
+  ```bash
   ./mvnw clean spring-boot:run \
     --projects spring-cloud-vault-approle-mysql/student-service \
     -Dspring-boot.run.jvmArguments="-Dserver.port=9080"
@@ -36,10 +36,10 @@ Before running this example, make sure the environment is initialized (see [Init
 
 ### Running as Docker Container
 
-- In a terminal, make sure you are inside the `springboot-vault-examples` root folder;
+- In a terminal, make sure you are inside the `springboot-vault-examples` root folder.
   
 - Build the Docker image:
-  ```
+  ```bash
   ./build-docker-images.sh spring-cloud-vault-approle-mysql
   ```
   | Environment Variable | Description                                               |
@@ -52,7 +52,7 @@ Before running this example, make sure the environment is initialized (see [Init
   | `MYSQL_PORT`         | Specify port of the `MySQL` to use (default `3306`)       |
 
 - Run the Docker container:
-  ```
+  ```bash
   docker run --rm --name student-service -p 9080:8080 \
     -e VAULT_HOST=vault -e CONSUL_HOST=consul -e MYSQL_HOST=mysql \
     --network springboot-vault-examples \
@@ -72,19 +72,19 @@ You can access `student-service` Swagger website at http://localhost:9080/swagge
   - Open a new terminal
     
   - Set to `VAULT_ROOT_TOKEN` environment variable the value obtained while [initializing the environment](https://github.com/ivangfr/springboot-vault-examples#initialize-environment) described in the main README
-    ```
+    ```bash
     VAULT_ROOT_TOKEN=...
     ```
 
   - List of active leases for `database/creds/student-role`
-    ```
+    ```bash
     curl -s -X LIST \
       -H "X-Vault-Token: ${VAULT_ROOT_TOKEN}" \
       http://localhost:8200/v1/sys/leases/lookup/database/creds/student-role | jq .
     ```
      
     The response will be something like:
-    ```
+    ```json
     {
       "request_id": "ef6db810-2431-3d86-41fe-edd72b01356c",
       "lease_id": "",
@@ -102,7 +102,7 @@ You can access `student-service` Swagger website at http://localhost:9080/swagge
     ```
 
   - See specific lease metadata
-    ```
+    ```bash
     curl -s -X PUT \
       -H "X-Vault-Token: ${VAULT_ROOT_TOKEN}" \
       -d '{ "lease_id": "database/creds/student-role/2RXJje2dzEOgClBVAO4O9dbx" }' \
@@ -110,7 +110,7 @@ You can access `student-service` Swagger website at http://localhost:9080/swagge
     ```
      
     The response will be something like:
-    ```
+    ```json
     {
       "request_id": "51c08c58-4151-50e7-a757-f9e7f23addb5",
       "lease_id": "",
@@ -135,23 +135,23 @@ You can access `student-service` Swagger website at http://localhost:9080/swagge
   - Open a new terminal
 
   - Connect to `MySQL monitor` inside docker container
-    ```
+    ```bash
     docker exec -it -e MYSQL_PWD=secret mysql mysql -uroot
     ```
     > To exit `MySQL monitor`, type `exit`
 
     - List users
-      ```
+      ```bash
       SELECT User, Host FROM mysql.user;
       ```
 
     - Show running process
-      ```
+      ```bash
       SELECT * FROM information_schema.processlist ORDER BY user;
       ```
 
     - Log all queries
-      ```
+      ```bash
       SET GLOBAL general_log = 'ON';
       SET GLOBAL log_output = 'table';
     
@@ -159,7 +159,7 @@ You can access `student-service` Swagger website at http://localhost:9080/swagge
       ```
 
     - Create/Remove user
-      ```
+      ```bash
       CREATE USER 'newuser'@'%' IDENTIFIED BY 'password';
       GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'%';
     
@@ -172,12 +172,12 @@ You can access `student-service` Swagger website at http://localhost:9080/swagge
 
 ## Shutdown
 
-- Go to the terminal where the application is running and pressing `Ctrl+C`;
+- Go to the terminal where the application is running and pressing `Ctrl+C`.
 - Stop the services started using the `init-environment` script as explained in [Shutdown Environment](https://github.com/ivangfr/springboot-vault-examples#shutdown-environment) section of the main README.
 
 ## Cleanup
 
-To remove the Docker image create by this example, go to a terminal and run the command below:
-```
+To remove the Docker image created by this example, go to a terminal and run the command below:
+```bash
 ./remove-docker-images.sh spring-cloud-vault-approle-mysql
 ```

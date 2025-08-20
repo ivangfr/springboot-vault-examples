@@ -1,6 +1,6 @@
 # springboot-vault-examples
 
-The goal of this project is to explore the capabilities of [`Vault`](https://www.vaultproject.io). To achieve this, we will develop applications that utilize `Vault` for storing and retrieving secrets. `Vault` dynamically generates credentials for accessing databases and relies on [`Consul`](https://www.consul.io) as the backend. The authentication method employed in `Vault` is `AppRole`.
+The goal of this project is to explore the capabilities of [`Vault`](https://www.vaultproject.io). To achieve this, we will develop applications that utilize `Vault` to store and retrieve secrets. `Vault` dynamically generates credentials for accessing databases and relies on [`Consul`](https://www.consul.io) as the backend. The authentication method employed in `Vault` is `AppRole`.
 
 ## Proof-of-Concepts & Articles
 
@@ -31,32 +31,32 @@ To address this issue, we have developed solutions for applications using `Sprin
 
 ## Prerequisites
 
-- [`Java 21+`](https://www.oracle.com/java/technologies/downloads/#java21)
-- Some containerization tool [`Docker`](https://www.docker.com), [`Podman`](https://podman.io), etc.
+- [`Java 21`](https://www.oracle.com/java/technologies/downloads/#java21) or higher.
+- A containerization tool (e.g., [`Docker`](https://www.docker.com), [`Podman`](https://podman.io), etc.)
 
 ## Initialize Environment
 
 Open a terminal and, inside the `springboot-vault-examples` root folder, run the following script:
-```
+```bash
 ./init-environment.sh
 ```
 
 This script will:
-- start `Consul`, `Vault`, `MySQL`, and `Cassandra` Docker containers;
-- unseal `Vault` and enable `AppRole` in it;
-- setup Database `roles` and `policies` in `Vault` for the application so that they can access their databases using dynamically generated credentials;
-- setup `KV Secrets` in `Vault` for the application;
+- start `Consul`, `Vault`, `MySQL`, and `Cassandra` Docker containers.
+- unseal `Vault` and enable `AppRole` in it.
+- set up Database `roles` and `policies` in `Vault` for the applications so that they can access their databases using dynamically generated credentials.
+- set up `KV Secrets` in `Vault` for the application.
 
 ## Shutdown Environment
 
 To shut down the environment, go to a terminal and, inside the `springboot-vault-examples` root folder, run the script below:
-```
+```bash
 ./shutdown-environment.sh
 ```
 
 ## Cleanup
 
 To remove all Docker images created by this project, go to a terminal and, inside the `springboot-vault-examples` root folder, run the following script:
-```
+```bash
 ./remove-docker-images.sh all
 ```

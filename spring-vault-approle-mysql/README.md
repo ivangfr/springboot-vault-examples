@@ -25,10 +25,10 @@ Before running this example, make sure the environment is initialized (see [Init
 
 ### Running with Maven Wrapper
 
-- In a terminal, make sure you are inside the `springboot-vault-examples` root folder;
+- In a terminal, make sure you are inside the `springboot-vault-examples` root folder.
 
 - Run the following command:
-  ```
+  ```bash
   ./mvnw clean spring-boot:run \
     --projects spring-vault-approle-mysql/movie-service \
     -Dspring-boot.run.jvmArguments="-Dserver.port=9082"
@@ -36,10 +36,10 @@ Before running this example, make sure the environment is initialized (see [Init
 
 ### Running as Docker Container
 
-- In a terminal, make sure you are inside the `springboot-vault-examples` root folder;
+- In a terminal, make sure you are inside the `springboot-vault-examples` root folder.
   
 - Build the Docker image:
-  ```
+  ```bash
   ./build-docker-images.sh spring-vault-approle-mysql
   ```
   | Environment Variable | Description                                               |
@@ -52,7 +52,7 @@ Before running this example, make sure the environment is initialized (see [Init
   | `MYSQL_PORT`         | Specify port of the `MySQL` to use (default `3306`)       |
 
 - Run the Docker container:
-  ```
+  ```bash
   docker run --rm --name movie-service -p 9082:8080 \
     -e VAULT_HOST=vault -e CONSUL_HOST=consul -e MYSQL_HOST=mysql \
     --network springboot-vault-examples \
@@ -72,19 +72,19 @@ You can access `movie-service` Swagger website at http://localhost:9082/swagger-
   - Open a new terminal
     
   - Set to `VAULT_ROOT_TOKEN` environment variable the value obtained while [initializing the environment](https://github.com/ivangfr/springboot-vault-examples#initialize-environment) described in the main README
-    ```
+    ```bash
     VAULT_ROOT_TOKEN=...
     ```
 
   - List of active leases for `database/creds/movie-role`
-    ```
+    ```bash
     curl -s -X LIST \
       -H "X-Vault-Token: ${VAULT_ROOT_TOKEN}" \
       http://localhost:8200/v1/sys/leases/lookup/database/creds/movie-role | jq .
     ```
      
     The response will be something like:
-    ```
+    ```json
     {
       "request_id": "5dbe3871-fc4d-a727-d77f-a4c9495e4d1a",
       "lease_id": "",
@@ -102,7 +102,7 @@ You can access `movie-service` Swagger website at http://localhost:9082/swagger-
     ```
 
   - See specific lease metadata
-    ```
+    ```bash
     curl -s -X PUT \
       -H "X-Vault-Token: ${VAULT_ROOT_TOKEN}" \
       -d '{ "lease_id": "database/creds/movie-role/CCV6h8U59TuGNNrvSUPNndYh" }' \
@@ -110,7 +110,7 @@ You can access `movie-service` Swagger website at http://localhost:9082/swagger-
     ```
      
     The response will be something like:
-    ```
+    ```json
     {
       "request_id": "38c6c6fb-74f1-dd31-e89e-7e8a00f0f1f4",
       "lease_id": "",
@@ -135,23 +135,23 @@ You can access `movie-service` Swagger website at http://localhost:9082/swagger-
   - Open a new terminal
 
   - Connect to `MySQL monitor` inside docker container
-    ```
+    ```bash
     docker exec -it -e MYSQL_PWD=secret mysql mysql -uroot
     ```
     > To exit `MySQL monitor`, type `exit`
 
     - List users
-      ```
+      ```bash
       SELECT User, Host FROM mysql.user;
       ```
 
     - Show running process
-      ```
+      ```bash
       SELECT * FROM information_schema.processlist ORDER BY user;
       ```
 
     - Log all queries
-      ```
+      ```bash
       SET GLOBAL general_log = 'ON';
       SET GLOBAL log_output = 'table';
     
@@ -159,7 +159,7 @@ You can access `movie-service` Swagger website at http://localhost:9082/swagger-
       ```
 
     - Create/Remove user
-      ```
+      ```bash
       CREATE USER 'newuser'@'%' IDENTIFIED BY 'password';
       GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'%';
     
@@ -172,12 +172,12 @@ You can access `movie-service` Swagger website at http://localhost:9082/swagger-
 
 ## Shutdown
 
-- Go to the terminal where the application is running and pressing `Ctrl+C`;
+- Go to the terminal where the application is running and pressing `Ctrl+C`.
 - Stop the services started using the `init-environment` script as explained in [Shutdown Environment](https://github.com/ivangfr/springboot-vault-examples#shutdown-environment) section of the main README.
 
 ## Cleanup
 
-To remove the Docker image create by this example, go to a terminal and run the command below:
-```
+To remove the Docker image created by this example, go to a terminal and run the command below:
+```bash
 ./remove-docker-images.sh spring-vault-approle-mysql
 ```
