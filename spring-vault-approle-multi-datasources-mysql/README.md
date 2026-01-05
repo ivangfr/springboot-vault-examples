@@ -147,17 +147,17 @@ You can access `restaurant-service` Swagger website at http://localhost:9083/swa
     > To exit `MySQL monitor`, type `exit`
 
     - List users
-      ```bash
+      ```sql
       SELECT User, Host FROM mysql.user;
       ```
 
     - Show running process
-      ```bash
+      ```sql
       SELECT * FROM information_schema.processlist ORDER BY user;
       ```
 
     - Log all queries
-      ```bash
+      ```sql
       SET GLOBAL general_log = 'ON';
       SET GLOBAL log_output = 'table';
     
@@ -165,7 +165,7 @@ You can access `restaurant-service` Swagger website at http://localhost:9083/swa
       ```
 
     - Create/Remove user
-      ```bash
+      ```sql
       CREATE USER 'newuser'@'%' IDENTIFIED BY 'password';
       GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'%';
     
