@@ -21,8 +21,7 @@ echo "-- Database (MySQL)"
 
 echo
 echo "--> creating Database role '${DATABASE_ROLE}' ..."
-curl -X POST -i -H "X-Vault-Token:${VAULT_ROOT_TOKEN}" -d '{"db_name": "mysql", "creation_statements":"CREATE USER '"'"'{{name}}'"'"'@'"'"'%'"'"' IDENTIFIED BY '"'"'{{password}}'"'"'; GRANT ALL ON *.* TO '"'"'{{name}}'"'"'@'"'"'%'"'"';"}, "default_ttl": "2m", "max_ttl": "10m"' ${VAULT_ADDR}/v1/database/roles/${DATABASE_ROLE}
-#-- Note. Setting the 'default_ttl' and 'max_ttl' in the command above does not work! In order to test shorter times, change 'config.hcl' file.
+curl -X POST -i -H "X-Vault-Token: ${VAULT_ROOT_TOKEN}" -d '{"db_name": "mysql", "creation_statements": "CREATE USER '\''{{name}}'\''@'\''%'\'' IDENTIFIED BY '\''{{password}}'\''; GRANT ALL ON *.* TO '\''{{name}}'\''@'\''%'\'';", "default_ttl": "2m", "max_ttl": "5m"}' ${VAULT_ADDR}/v1/database/roles/${DATABASE_ROLE}
 
 echo "--> setting Database policy '${DATABASE_ROLE_POLICY}' ..."
 curl -X POST -i -H "X-Vault-Token:${VAULT_ROOT_TOKEN}" -d '{"policy":"path \"database/creds/'${DATABASE_ROLE}'\" {policy=\"read\"} path \"sys/renew/database/creds/*\" {capabilities=[\"update\"]}"}' ${VAULT_ADDR}/v1/sys/policy/${DATABASE_ROLE_POLICY}

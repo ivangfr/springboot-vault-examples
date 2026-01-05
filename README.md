@@ -31,7 +31,7 @@ To address this issue, we have developed solutions for applications using `Sprin
 
 ## Prerequisites
 
-- [`Java 21`](https://www.oracle.com/java/technologies/downloads/#java21) or higher.
+- [`Java 25`](https://www.oracle.com/java/technologies/downloads/#java25) or higher.
 - A containerization tool (e.g., [`Docker`](https://www.docker.com), [`Podman`](https://podman.io), etc.)
 
 ## Initialize Environment

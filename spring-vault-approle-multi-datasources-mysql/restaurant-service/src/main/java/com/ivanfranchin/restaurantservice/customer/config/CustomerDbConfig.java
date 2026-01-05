@@ -1,14 +1,14 @@
 package com.ivanfranchin.restaurantservice.customer.config;
 
-import com.ivanfranchin.restaurantservice.customer.model.Customer;
 import com.ivanfranchin.restaurantservice.customer.CustomerRepository;
+import com.ivanfranchin.restaurantservice.customer.model.Customer;
 import jakarta.persistence.EntityManagerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
-import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
+import org.springframework.boot.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;

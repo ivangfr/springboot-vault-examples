@@ -33,10 +33,10 @@ then
   echo "spring-vault-approle-mysql"
   echo "--------------------------"
 
-  ./mvnw clean compile jib:dockerBuild \
+  ./mvnw clean spring-boot:build-image \
     --projects "$MOVIE_SERVICE_PROJECT_NAME" \
     -DskipTests="$SKIP_TESTS" \
-    -Dimage="$MOVIE_SERVICE_DOCKER_IMAGE_NAME"
+    -Dspring-boot.build-image.imageName="$MOVIE_SERVICE_DOCKER_IMAGE_NAME"
 
 fi
 
@@ -49,10 +49,10 @@ then
   echo "spring-vault-approle-multi-datasources-mysql"
   echo "--------------------------------------------"
 
-  ./mvnw clean compile jib:dockerBuild \
+  ./mvnw clean spring-boot:build-image \
     --projects "$RESTAURANT_SERVICE_PROJECT_NAME" \
     -DskipTests="$SKIP_TESTS" \
-    -Dimage="$RESTAURANT_SERVICE_DOCKER_IMAGE_NAME"
+    -Dspring-boot.build-image.imageName="$RESTAURANT_SERVICE_DOCKER_IMAGE_NAME"
 
 fi
 
@@ -65,10 +65,10 @@ then
   echo "spring-cloud-vault-approle-mysql"
   echo "--------------------------------"
 
-  ./mvnw clean compile jib:dockerBuild \
+  ./mvnw clean spring-boot:build-image \
     --projects "$STUDENT_SERVICE_PROJECT_NAME" \
     -DskipTests="$SKIP_TESTS" \
-    -Dimage="$STUDENT_SERVICE_DOCKER_IMAGE_NAME"
+    -Dspring-boot.build-image.imageName="$STUDENT_SERVICE_DOCKER_IMAGE_NAME"
 
 fi
 
@@ -81,9 +81,9 @@ then
   echo "spring-cloud-vault-approle-cassandra"
   echo "------------------------------------"
 
-  ./mvnw clean compile jib:dockerBuild \
+  ./mvnw clean spring-boot:build-image \
     --projects "$BOOK_SERVICE_PROJECT_NAME" \
     -DskipTests="$SKIP_TESTS" \
-    -Dimage="$BOOK_SERVICE_DOCKER_IMAGE_NAME"
+    -Dspring-boot.build-image.imageName="$BOOK_SERVICE_DOCKER_IMAGE_NAME"
 
 fi

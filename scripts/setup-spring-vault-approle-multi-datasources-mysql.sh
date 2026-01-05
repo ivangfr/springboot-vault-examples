@@ -24,8 +24,7 @@ echo "-- Database (MySQL)"
 
 echo
 echo "--> creating Database role '${CUSTOMER_DATABASE_ROLE}' ..."
-curl -X POST -i -H "X-Vault-Token:${VAULT_ROOT_TOKEN}" -d '{"db_name": "mysql", "creation_statements":"CREATE USER '"'"'{{name}}'"'"'@'"'"'%'"'"' IDENTIFIED BY '"'"'{{password}}'"'"'; GRANT ALL ON *.* TO '"'"'{{name}}'"'"'@'"'"'%'"'"';"}, "default_ttl": "2m", "max_ttl": "10m"' ${VAULT_ADDR}/v1/database/roles/${CUSTOMER_DATABASE_ROLE}
-#-- Note. Setting the 'default_ttl' and 'max_ttl' in the command above does not work! In order to test shorter times, change 'config.hcl' file.
+curl -X POST -i -H "X-Vault-Token:${VAULT_ROOT_TOKEN}" -d '{"db_name": "mysql", "creation_statements":"CREATE USER '\''{{name}}'\''@'\''%'\'' IDENTIFIED BY '\''{{password}}'\''; GRANT ALL ON *.* TO '\''{{name}}'\''@'\''%'\'';", "default_ttl": "2m", "max_ttl": "5m"}' ${VAULT_ADDR}/v1/database/roles/${CUSTOMER_DATABASE_ROLE}
 
 echo "--> setting Database policy '${CUSTOMER_DATABASE_ROLE_POLICY}' ..."
 curl -X POST -i -H "X-Vault-Token:${VAULT_ROOT_TOKEN}" -d '{"policy":"path \"database/creds/'${CUSTOMER_DATABASE_ROLE}'\" {policy=\"read\"} path \"sys/renew/database/creds/*\" {capabilities=[\"update\"]}"}' ${VAULT_ADDR}/v1/sys/policy/${CUSTOMER_DATABASE_ROLE_POLICY}
@@ -43,8 +42,7 @@ echo "-- Database (MySQL-2)"
 
 echo
 echo "--> creating Database role '${DISH_DATABASE_ROLE}' ..."
-curl -X POST -i -H "X-Vault-Token:${VAULT_ROOT_TOKEN}" -d '{"db_name": "mysql-2", "creation_statements":"CREATE USER '"'"'{{name}}'"'"'@'"'"'%'"'"' IDENTIFIED BY '"'"'{{password}}'"'"'; GRANT ALL ON *.* TO '"'"'{{name}}'"'"'@'"'"'%'"'"';"}, "default_ttl": "2m", "max_ttl": "10m"' ${VAULT_ADDR}/v1/database/roles/${DISH_DATABASE_ROLE}
-#-- Note. Setting the 'default_ttl' and 'max_ttl' in the command above does not work! In order to test shorter times, change 'config.hcl' file.
+curl -X POST -i -H "X-Vault-Token:${VAULT_ROOT_TOKEN}" -d '{"db_name": "mysql-2", "creation_statements":"CREATE USER '\''{{name}}'\''@'\''%'\'' IDENTIFIED BY '\''{{password}}'\''; GRANT ALL ON *.* TO '\''{{name}}'\''@'\''%'\'';", "default_ttl": "2m", "max_ttl": "5m"}' ${VAULT_ADDR}/v1/database/roles/${DISH_DATABASE_ROLE}
 
 echo "--> setting Database policy '${DISH_DATABASE_ROLE_POLICY}' ..."
 curl -X POST -i -H "X-Vault-Token:${VAULT_ROOT_TOKEN}" -d '{"policy":"path \"database/creds/'${DISH_DATABASE_ROLE}'\" {policy=\"read\"} path \"sys/renew/database/creds/*\" {capabilities=[\"update\"]}"}' ${VAULT_ADDR}/v1/sys/policy/${DISH_DATABASE_ROLE_POLICY}

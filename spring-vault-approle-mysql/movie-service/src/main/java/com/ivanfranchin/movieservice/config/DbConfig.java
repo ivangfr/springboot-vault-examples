@@ -1,13 +1,13 @@
 package com.ivanfranchin.movieservice.config;
 
-import com.ivanfranchin.movieservice.movie.model.Movie;
 import com.ivanfranchin.movieservice.movie.MovieRepository;
+import com.ivanfranchin.movieservice.movie.model.Movie;
 import jakarta.persistence.EntityManagerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
-import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
+import org.springframework.boot.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
